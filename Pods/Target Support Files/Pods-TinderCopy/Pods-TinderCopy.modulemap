@@ -1,0 +1,6 @@
+framework module Pods_TinderCopy {
+  umbrella header "Pods-TinderCopy-umbrella.h"
+
+  export *
+  module * { export * }
+}
