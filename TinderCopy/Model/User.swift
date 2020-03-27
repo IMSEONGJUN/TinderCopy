@@ -28,9 +28,11 @@ struct User : ProducesCardViewModel {
         self.age = userDictionary["age"] as? Int
         self.profession = userDictionary["profession"] as? String
         self.name = userDictionary["fullName"] as? String
+        
         self.imageUrl1 = userDictionary["imageUrl1"] as? String
         self.imageUrl2 = userDictionary["imageUrl2"] as? String
         self.imageUrl3 = userDictionary["imageUrl3"] as? String
+        
         self.uid = userDictionary["uid"] as? String
         self.minSeekingAge = userDictionary["minSeekingAge"] as? Int
         self.maxSeekingAge = userDictionary["maxSeekingAge"] as? Int

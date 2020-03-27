@@ -61,7 +61,7 @@ extension UIViewController {
         
     }
     
-    func switchToHomeVC() {
+    func switchToHomeViewAfterLogin() {
         if #available(iOS 13.0, *) {
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 let window = UIWindow(windowScene: windowScene)
@@ -82,5 +82,11 @@ extension UIViewController {
             appDelegate.window = window
         }
         
+    }
+    
+    func loginCheck() {
+        if Auth.auth().currentUser != nil {
+            switchToHomeViewAfterLogin()
+        }
     }
 }

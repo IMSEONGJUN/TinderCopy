@@ -51,10 +51,10 @@ class HomeViewController: UIViewController {
         hud.textLabel.text = "Fetching Users"
         hud.show(in: view)
         
-//        let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)
-//        let query = Firestore.firestore().collection("users").whereField("age", isLessThan: 31).whereField("age", isGreaterThan: 18).whereField("friends", arrayContains: "Chris")
+//      let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)
+//      let query = Firestore.firestore().collection("users").whereField("age", isLessThan: 31).whereField("age", isGreaterThan:        18).whereField("friends", arrayContains: "Chris")
        
-        // Filtering data using user's minAge, maxAge
+    //  Filtering data using user's minAge, maxAge
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge)
                                                              .whereField("age", isLessThanOrEqualTo: maxAge)
         query.getDocuments { (snapshot, error) in
@@ -65,8 +65,10 @@ class HomeViewController: UIViewController {
             }
             print("after")
             snapshot?.documents.forEach({ (documentSnapshot) in
+                
                 let userDictionary = documentSnapshot.data()
                 let user = User(userDictionary: userDictionary)
+                guard self.user?.uid != user.uid else { return }
                 self.cardViewModels.append(user.toCardViewModel())
                 self.lastFetchedUser = user
                 self.setupCardFromUser(user: user)

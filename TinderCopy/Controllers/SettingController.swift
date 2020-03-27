@@ -137,8 +137,27 @@ class SettingController: UITableViewController {
         let imagePicker = CustomImagePickerController()
         imagePicker.delegate = self
         imagePicker.imageButton = button
-        imagePicker.sourceType = .savedPhotosAlbum
-        present(imagePicker, animated: true)
+        
+        let alert = UIAlertController(title: "Select ImageSource", message: "", preferredStyle: .actionSheet)
+        
+        let takePhoto = UIAlertAction(title: "Take photo", style: .default) { (_) in
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
+            imagePicker.sourceType = .camera
+            imagePicker.videoQuality = .typeHigh
+            self.present(imagePicker, animated: true)
+        }
+        
+        let album = UIAlertAction(title: "Photo Album", style: .default) { (_) in
+            imagePicker.sourceType = .savedPhotosAlbum
+            self.present(imagePicker, animated: true)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(takePhoto)
+        alert.addAction(album)
+        alert.addAction(cancel)
+        self.present(alert, animated: true)
     }
     
     @objc private func didTapLogoutButton() {
@@ -286,17 +305,22 @@ class SettingController: UITableViewController {
 }
 
 extension SettingController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let selectedImage = info[.originalImage] as? UIImage
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        guard let selectedImage = info[.originalImage] as? UIImage else { return }
         guard let imagePicker = picker as? CustomImagePickerController else { return }
-        
-        imagePicker.imageButton.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        
+        imagePicker.imageButton.setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
         picker.dismiss(animated: true)
         
+        uploadSelectedImage(picker: imagePicker, image: selectedImage)
+        
+    }
+    
+    func uploadSelectedImage(picker: CustomImagePickerController, image: UIImage) {
         let filename = UUID().uuidString
         let ref = Storage.storage().reference(withPath: "/images/\(filename)")
-        guard let uploadData = selectedImage?.jpegData(compressionQuality: 0.75) else { return }
+        guard let uploadData = image.jpegData(compressionQuality: 0.75) else { return }
         
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Uploading image..."
@@ -317,16 +341,14 @@ extension SettingController: UIImagePickerControllerDelegate, UINavigationContro
                 }
                 
                 print("Finished getting download URL:", url?.absoluteString ?? "")
-                if imagePicker.imageButton == self.image1Button {
+                if picker.imageButton == self.image1Button {
                     self.user?.imageUrl1 = url?.absoluteString
-                } else if imagePicker.imageButton == self.image2Button {
+                } else if picker.imageButton == self.image2Button {
                     self.user?.imageUrl2 = url?.absoluteString
                 } else {
                     self.user?.imageUrl3 = url?.absoluteString
                 }
-                
             }
-            
         }
     }
 }

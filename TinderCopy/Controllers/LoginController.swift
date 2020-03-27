@@ -62,10 +62,17 @@ class LoginController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         setupGradientLayer()
         configureUI()
-        setLoginViewModel()
+        setupDismissTapGesture()
+        setLoginViewModelObserver()
     }
     
-    private func setLoginViewModel() {
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        print("viewWillLayoutSubviews")
+        gradientLayer.frame = view.bounds
+    }
+    
+    private func setLoginViewModelObserver() {
         loginViewModel.bindableIsFormValid.bind { [unowned self] (isFormValid) in
             guard let isFormValid = isFormValid else { return }
         
@@ -120,12 +127,15 @@ class LoginController: UIViewController {
         backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
+    private func setupDismissTapGesture() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
+    }
+    
     @objc private func didTapGotoRegistrationButton() {
         navigationController?.popViewController(animated: true)
     }
     
     @objc private func didTapLoginButton() {
-        
         loginViewModel.performLogin { (err) in
             self.hud.dismiss()
             if let err = err {
@@ -133,7 +143,7 @@ class LoginController: UIViewController {
                 return
             }
             
-            self.switchToHomeVC()
+            self.switchToHomeViewAfterLogin()
         }
     }
     

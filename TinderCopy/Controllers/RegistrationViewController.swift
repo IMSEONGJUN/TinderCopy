@@ -106,7 +106,7 @@ class RegistrationViewController: UIViewController {
     // Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
+        loginCheck()
         navigationController?.setNavigationBarHidden(true, animated: false)
         setupGradientLayer()
         setupLayout()
@@ -214,8 +214,27 @@ class RegistrationViewController: UIViewController {
     @objc private func didTapSelectPhoto() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .savedPhotosAlbum
-        present(imagePicker, animated: true)
+        
+        let alert = UIAlertController(title: "Select ImageSource", message: "", preferredStyle: .actionSheet)
+        
+        let takePhoto = UIAlertAction(title: "Take photo", style: .default) { (_) in
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
+            imagePicker.sourceType = .camera
+            imagePicker.videoQuality = .typeHigh
+            self.present(imagePicker, animated: true)
+        }
+        
+        let album = UIAlertAction(title: "Photo Album", style: .default) { (_) in
+            imagePicker.sourceType = .savedPhotosAlbum
+            self.present(imagePicker, animated: true)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(takePhoto)
+        alert.addAction(album)
+        alert.addAction(cancel)
+        self.present(alert, animated: true)
     }
     
     @objc private func didTapRegisterButton() {
@@ -223,6 +242,7 @@ class RegistrationViewController: UIViewController {
         registrationViewModel.performRegistration { [weak self] (error) in
             guard let error = error else { return }
             self?.showHUDWithError(error: error)
+            self?.switchToHomeViewAfterLogin()
         }
     }
     
