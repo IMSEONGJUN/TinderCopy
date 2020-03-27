@@ -26,6 +26,7 @@
 		CEA335582407702D002AFECE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA335572407702D002AFECE /* CustomTextField.swift */; };
 		CEB95A5124151F6900E6198B /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB95A5024151F6900E6198B /* SettingController.swift */; };
 		CEB95A5624153F3200E6198B /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB95A5524153F3200E6198B /* SettingCell.swift */; };
+		CEC4B835242DD18100A97B64 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4B834242DD18100A97B64 /* LoginViewModel.swift */; };
 		CECDDDD9240D5712007560F2 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECDDDD8240D5712007560F2 /* RegistrationViewModel.swift */; };
 		CEE1550123F0486F00BA2993 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1550023F0486F00BA2993 /* AppDelegate.swift */; };
 		CEE1550323F0486F00BA2993 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1550223F0486F00BA2993 /* SceneDelegate.swift */; };
@@ -56,6 +57,7 @@
 		CEA335572407702D002AFECE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		CEB95A5024151F6900E6198B /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		CEB95A5524153F3200E6198B /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		CEC4B834242DD18100A97B64 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CECDDDD8240D5712007560F2 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		CEE154FD23F0486F00BA2993 /* TinderCopy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinderCopy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE1550023F0486F00BA2993 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				CEA33550240562BF002AFECE /* CardViewModel.swift */,
 				CECDDDD8240D5712007560F2 /* RegistrationViewModel.swift */,
+				CEC4B834242DD18100A97B64 /* LoginViewModel.swift */,
 				CE6406EA240F9C6600D57CAA /* Bindable.swift */,
 			);
 			path = ViewModels;
@@ -326,6 +329,7 @@
 			files = (
 				CEB95A5124151F6900E6198B /* SettingController.swift in Sources */,
 				CEA3355324064F70002AFECE /* Advertiser.swift in Sources */,
+				CEC4B835242DD18100A97B64 /* LoginViewModel.swift in Sources */,
 				CE31EC3E241A5D0C00F12EA4 /* UIViewController+Ext.swift in Sources */,
 				CE3FE6CC2416973E002B3281 /* UINavigationController+Ext.swift in Sources */,
 				CE8B9B7B23F3185700944CF4 /* CardView.swift in Sources */,

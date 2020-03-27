@@ -87,6 +87,16 @@ class RegistrationViewController: UIViewController {
         return stackView
     }()
     
+    private let goToLoginPageButton: UIButton = {
+       let btn = UIButton()
+        btn.setTitle("Go to Login Page", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(didTapGotoLoginButton), for: .touchUpInside)
+        return btn
+    }()
+    
     private var registrationViewModel = RegistraionViewModel()
     
     private let gradientLayer = CAGradientLayer()
@@ -97,6 +107,7 @@ class RegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
+        navigationController?.setNavigationBarHidden(true, animated: false)
         setupGradientLayer()
         setupLayout()
         setupDismissTapGesture()
@@ -115,22 +126,32 @@ class RegistrationViewController: UIViewController {
         
     }
     
+    override func viewDidLayoutSubviews() {
+        print("viewDidLayoutSubviews")
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
     // Setup
     private func setupLayout() {
-          view.addSubview(overallStackView)
-    
-          overallStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60).isActive = true
-          overallStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60).isActive = true
-          overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-          
-          selectPhotoButton.heightAnchor.constraint(equalToConstant: 275).isActive = true
-          selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
-          
-          registerButton.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor).isActive = true
+        view.addSubview(overallStackView)
+        view.addSubview(goToLoginPageButton)
+        
+        overallStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60).isActive = true
+        overallStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60).isActive = true
+        overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        selectPhotoButton.heightAnchor.constraint(equalToConstant: 275).isActive = true
+        selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
+        
+        registerButton.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor).isActive = true
+        
+        goToLoginPageButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        goToLoginPageButton.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        goToLoginPageButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
     }
     
     private func setupGradientLayer() {
@@ -167,7 +188,7 @@ class RegistrationViewController: UIViewController {
         }
         
         registrationViewModel.bindableImage.bind { [unowned self] (image) in
-            self.selectPhotoButton.setImage(image?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal),
+            self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal),
                                             for: .normal)
         }
         
@@ -185,6 +206,10 @@ class RegistrationViewController: UIViewController {
     
     
     // Action Handler
+    @objc private func didTapGotoLoginButton() {
+        let loginVC = LoginController()
+        navigationController?.pushViewController(loginVC, animated: true)
+    }
     
     @objc private func didTapSelectPhoto() {
         let imagePicker = UIImagePickerController()
@@ -245,6 +270,7 @@ class RegistrationViewController: UIViewController {
     
     // Called whenever Device Orientation Changed
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        print("Orientation changed")
         if self.traitCollection.verticalSizeClass == .compact {
             overallStackView.axis = .horizontal
         } else {
@@ -256,7 +282,7 @@ class RegistrationViewController: UIViewController {
 
 extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
+    
         let image = info[.originalImage] as? UIImage
         registrationViewModel.bindableImage.value = image
         picker.dismiss(animated: true)

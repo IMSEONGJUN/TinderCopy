@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     private var cardViewModels = [CardViewModel]()
     
     private var lastFetchedUser: User?
-    private var user : User?
+    var user : User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
         setupUser()
     }
     
-    private func setupUser() {
+    func setupUser() {
         fetchCurrentUser { [weak self] (result) in
             guard let self = self else { return }
             switch result {

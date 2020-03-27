@@ -44,7 +44,7 @@ class SettingController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(didTapCancelButton))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(didTapSaveButton)),
-            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(didTapCancelButton)),
+            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(didTapLogoutButton)),
         ]
     }
     
@@ -139,6 +139,10 @@ class SettingController: UITableViewController {
         imagePicker.imageButton = button
         imagePicker.sourceType = .savedPhotosAlbum
         present(imagePicker, animated: true)
+    }
+    
+    @objc private func didTapLogoutButton() {
+        doLogoutThisUser()
     }
     
     // MARK: - UITableView DataSource
