@@ -9,52 +9,29 @@
 import UIKit
 import SDWebImage
 
+protocol CardViewDelegate: class {
+    func didTapShowUserDetailButton()
+}
+
 class CardView: UIView {
 
     var cardViewModel: CardViewModel! {
         didSet{
-            let imageName = cardViewModel.imageNames.first ?? ""
-            if let url = URL(string: imageName) {
-                imageView.sd_setImage(with: url)
-            }
-            
-            informationLabel.attributedText = cardViewModel.attributedString
-            informationLabel.textAlignment = cardViewModel.textAlignment
-            
-            (0..<cardViewModel.imageNames.count).forEach { (_) in
-                let barView = UIView()
-                barView.backgroundColor = barDeselectedColor
-                barsStackView.addArrangedSubview(barView)
-            }
-            
-            barsStackView.arrangedSubviews.first?.backgroundColor = .white
-            
-            setupImageIndexObserver()
+            reConfigureCardView(cardViewModel: cardViewModel)
         }
     }
-    
-    private func setupImageIndexObserver() {
-        cardViewModel.imageIndexObserver = {[weak self] (imageUrl, imageIndex) in
-            guard let self = self else { return }
-            
-            if let url = URL(string: imageUrl ?? "") {
-                self.imageView.sd_setImage(with: url)
-            }
-            self.barsStackView.arrangedSubviews.forEach({$0.backgroundColor = self.barDeselectedColor})
-            self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
-        }
-    }
-    
+
     private let barsStackView = UIStackView()
     private let imageView = UIImageView()
     private let informationLabel = UILabel()
     private let gradientLayer = CAGradientLayer()
+    private let goToUserDetailButton = UIButton()
     
     let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
     
-    // Configurations
     private let threshold: CGFloat = 100
     
+    weak var delegate: CardViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,6 +42,7 @@ class CardView: UIView {
         configureGradientLayer()
         configureBarsStackView() 
         configureInformationLabel()
+        configureGoToUserDetailButton()
         configurePanGesture()
         configureTapGesture()
     }
@@ -78,6 +56,24 @@ class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func reConfigureCardView(cardViewModel: CardViewModel) {
+        let imageName = cardViewModel.imageNames.first ?? ""
+        if let url = URL(string: imageName) {
+            imageView.sd_setImage(with: url)
+        }
+        
+        informationLabel.attributedText = cardViewModel.attributedString
+        informationLabel.textAlignment = cardViewModel.textAlignment
+        
+        (0..<cardViewModel.imageNames.count).forEach { (_) in
+            let barView = UIView()
+            barView.backgroundColor = barDeselectedColor
+            barsStackView.addArrangedSubview(barView)
+        }
+        barsStackView.arrangedSubviews.first?.backgroundColor = .white
+        setupImageIndexObserver()
+    }
+    
     private func configureBarsStackView() {
         addSubview(barsStackView)
         barsStackView.layout.top(equalTo: self.topAnchor, constant: 8)
@@ -86,8 +82,9 @@ class CardView: UIView {
                             .height(equalToconstant: 4)
         barsStackView.axis = .horizontal
         barsStackView.distribution = .fillEqually
+        barsStackView.spacing = 5
     }
-    
+
     private func configureImageView() {
         addSubview(imageView)
         imageView.contentMode = .scaleToFill
@@ -110,6 +107,17 @@ class CardView: UIView {
         informationLabel.textColor = .white
     }
     
+    private func configureGoToUserDetailButton() {
+        addSubview(goToUserDetailButton)
+        goToUserDetailButton.setImage(#imageLiteral(resourceName: "info_icon").withRenderingMode(.alwaysOriginal), for: .normal)
+        goToUserDetailButton.addTarget(self, action: #selector(didTapUserDetailButton), for: .touchUpInside)
+        goToUserDetailButton.layout
+                            .trailing(equalTo: self.trailingAnchor, constant: -16)
+                            .bottom(equalTo: self.bottomAnchor, constant: -25)
+                            .width(equalToconstant: 45)
+                            .height(equalToconstant: 45)
+    }
+    
     private func configurePanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         addGestureRecognizer(panGesture)
@@ -120,6 +128,21 @@ class CardView: UIView {
         addGestureRecognizer(tapGesture)
     }
     
+    private func setupImageIndexObserver() {
+        cardViewModel.imageIndexObserver = {[weak self] (imageUrl, imageIndex) in
+            guard let self = self else { return }
+            
+            if let url = URL(string: imageUrl ?? "") {
+                self.imageView.sd_setImage(with: url)
+            }
+            self.barsStackView.arrangedSubviews.forEach({$0.backgroundColor = self.barDeselectedColor})
+            self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
+        }
+    }
+    
+    @objc private func didTapUserDetailButton() {
+        self.delegate?.didTapShowUserDetailButton()
+    }
     
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         let tapLocation = gesture.location(in: nil)
@@ -162,7 +185,7 @@ class CardView: UIView {
         
         UIView.animate(withDuration: 1,
                        delay: 0,
-                       usingSpringWithDamping: 0.6,
+                       usingSpringWithDamping: 0.3,
                        initialSpringVelocity: 0.1,
                        options: .curveEaseOut,
                        animations: {

@@ -101,7 +101,7 @@ class RegistrationViewController: UIViewController {
     
     private let gradientLayer = CAGradientLayer()
     
-    let registeringHUD = JGProgressHUD(style: .dark)
+    private let registeringHUD = JGProgressHUD(style: .dark)
     
     // Life Cycle
     override func viewDidLoad() {

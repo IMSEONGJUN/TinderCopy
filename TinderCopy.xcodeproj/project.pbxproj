@@ -33,6 +33,7 @@
 		CEE1550523F0486F00BA2993 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1550423F0486F00BA2993 /* HomeViewController.swift */; };
 		CEE1550A23F0487000BA2993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE1550923F0487000BA2993 /* Assets.xcassets */; };
 		CEE1550D23F0487000BA2993 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE1550B23F0487000BA2993 /* LaunchScreen.storyboard */; };
+		CEFFD9A0242F85860061A090 /* UserDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFD99F242F85860061A090 /* UserDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		CEE1550923F0487000BA2993 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEE1550C23F0487000BA2993 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEE1550E23F0487000BA2993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEFFD99F242F85860061A090 /* UserDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,20 +116,21 @@
 				CEA3355424076B05002AFECE /* RegistrationViewController.swift */,
 				CEB95A5024151F6900E6198B /* SettingController.swift */,
 				CE8DC79C24211A2B0090D075 /* LoginController.swift */,
+				CEFFD99F242F85860061A090 /* UserDetailController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		CE8B9B7523F1A0F200944CF4 /* Views */ = {
+		CE8B9B7523F1A0F200944CF4 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				CEFFD9A3242F91A40061A090 /* Labels */,
+				CEFFD9A2242F91910061A090 /* Textfields */,
+				CEFFD9A1242F91510061A090 /* StackViews */,
 				CEB95A5424153F0400E6198B /* Cells */,
-				CEA3355624077007002AFECE /* Custom Views */,
-				CE8B9B7823F30F6300944CF4 /* TopNavigationStackView.swift */,
-				CE8B9B7A23F3185700944CF4 /* CardView.swift */,
-				CE8B9B7623F1A13B00944CF4 /* HomeBottomControlsStackView.swift */,
+				CEA3355624077007002AFECE /* Views */,
 			);
-			path = Views;
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		CEA3354C24051D94002AFECE /* Model */ = {
@@ -150,13 +153,12 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		CEA3355624077007002AFECE /* Custom Views */ = {
+		CEA3355624077007002AFECE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CEA335572407702D002AFECE /* CustomTextField.swift */,
-				CE3FE6C924162CFB002B3281 /* HeaderLabelOnSetting.swift */,
+				CE8B9B7A23F3185700944CF4 /* CardView.swift */,
 			);
-			path = "Custom Views";
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CEB95A5424153F0400E6198B /* Cells */ = {
@@ -192,7 +194,7 @@
 				CE8B9B7123F171D000944CF4 /* Support */,
 				CEA3354F24056212002AFECE /* ViewModels */,
 				CEA3354C24051D94002AFECE /* Model */,
-				CE8B9B7523F1A0F200944CF4 /* Views */,
+				CE8B9B7523F1A0F200944CF4 /* Custom Views */,
 				CE8B9B7223F171ED00944CF4 /* Controllers */,
 				CE8B9B7023F171B200944CF4 /* Extensions */,
 				CEE1550923F0487000BA2993 /* Assets.xcassets */,
@@ -201,6 +203,31 @@
 				CEE1550E23F0487000BA2993 /* Info.plist */,
 			);
 			path = TinderCopy;
+			sourceTree = "<group>";
+		};
+		CEFFD9A1242F91510061A090 /* StackViews */ = {
+			isa = PBXGroup;
+			children = (
+				CE8B9B7823F30F6300944CF4 /* TopNavigationStackView.swift */,
+				CE8B9B7623F1A13B00944CF4 /* HomeBottomControlsStackView.swift */,
+			);
+			path = StackViews;
+			sourceTree = "<group>";
+		};
+		CEFFD9A2242F91910061A090 /* Textfields */ = {
+			isa = PBXGroup;
+			children = (
+				CEA335572407702D002AFECE /* CustomTextField.swift */,
+			);
+			path = Textfields;
+			sourceTree = "<group>";
+		};
+		CEFFD9A3242F91A40061A090 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				CE3FE6C924162CFB002B3281 /* HeaderLabelOnSetting.swift */,
+			);
+			path = Labels;
 			sourceTree = "<group>";
 		};
 		EB2C3EE16C806DE01B4B4235 /* Pods */ = {
@@ -336,6 +363,7 @@
 				CE8B9B7423F1721700944CF4 /* UIView+Ext.swift in Sources */,
 				CE3FE6CE2417C758002B3281 /* AgeRangeViewCell.swift in Sources */,
 				CEA3355524076B05002AFECE /* RegistrationViewController.swift in Sources */,
+				CEFFD9A0242F85860061A090 /* UserDetailController.swift in Sources */,
 				CEE1550523F0486F00BA2993 /* HomeViewController.swift in Sources */,
 				CE8B9B7723F1A13B00944CF4 /* HomeBottomControlsStackView.swift in Sources */,
 				CE3FE6CA24162CFB002B3281 /* HeaderLabelOnSetting.swift in Sources */,

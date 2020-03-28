@@ -69,9 +69,9 @@ class HomeViewController: UIViewController {
                 let userDictionary = documentSnapshot.data()
                 let user = User(userDictionary: userDictionary)
                 guard self.user?.uid != user.uid else { return }
-                self.cardViewModels.append(user.toCardViewModel())
-                self.lastFetchedUser = user
                 self.setupCardFromUser(user: user)
+//                self.cardViewModels.append(user.toCardViewModel())
+//                self.lastFetchedUser = user
             })
         }
         print("before")
@@ -79,6 +79,7 @@ class HomeViewController: UIViewController {
     
     private func setupCardFromUser(user: User) {
         let cardView = CardView(frame: .zero)
+        cardView.delegate = self
         cardView.cardViewModel = user.toCardViewModel()
         cardDeckView.addSubview(cardView)
         cardDeckView.sendSubviewToBack(cardView)
@@ -86,6 +87,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func didTapRefreshButton() {
+        cardDeckView.subviews.forEach({ $0.removeFromSuperview()})
         fetchUsersFromFirestore()
     }
     
@@ -125,5 +127,13 @@ extension HomeViewController: SettingControllerDelegate {
     func didSaveSettings() {
         cardDeckView.subviews.forEach({ $0.removeFromSuperview()})
         setupUser()
+    }
+}
+
+
+extension HomeViewController: CardViewDelegate {
+    func didTapShowUserDetailButton() {
+        let userDetailVC = UserDetailController()
+        present(userDetailVC, animated: true)
     }
 }

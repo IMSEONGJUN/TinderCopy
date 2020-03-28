@@ -19,6 +19,7 @@ class CardViewModel {
     let imageNames: [String]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
+    var userBio: String?
     
     init(imageNames: [String], attributedString: NSAttributedString, textAlignment: NSTextAlignment) {
         self.imageNames = imageNames

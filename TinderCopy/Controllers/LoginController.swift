@@ -68,7 +68,6 @@ class LoginController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        print("viewWillLayoutSubviews")
         gradientLayer.frame = view.bounds
     }
     
