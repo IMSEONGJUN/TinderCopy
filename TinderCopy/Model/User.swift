@@ -19,7 +19,7 @@ struct User : ProducesCardViewModel {
     var imageUrl2: String?
     var imageUrl3: String?
     var uid: String?
-    
+    var bio: String?
     var minSeekingAge: Int?
     var maxSeekingAge: Int?
     
@@ -32,7 +32,7 @@ struct User : ProducesCardViewModel {
         self.imageUrl1 = userDictionary["imageUrl1"] as? String
         self.imageUrl2 = userDictionary["imageUrl2"] as? String
         self.imageUrl3 = userDictionary["imageUrl3"] as? String
-        
+        self.bio = userDictionary["bio"] as? String
         self.uid = userDictionary["uid"] as? String
         self.minSeekingAge = userDictionary["minSeekingAge"] as? Int
         self.maxSeekingAge = userDictionary["maxSeekingAge"] as? Int
@@ -57,7 +57,7 @@ struct User : ProducesCardViewModel {
         if let url = imageUrl2 { imageUrls.append(url) }
         if let url = imageUrl3 { imageUrls.append(url) }
         
-        return CardViewModel(imageNames: imageUrls, attributedString: attributeText, textAlignment: .left)
+        return CardViewModel(imageNames: imageUrls, attributedString: attributeText, textAlignment: .left, bio: self.bio)
     }
 }
 

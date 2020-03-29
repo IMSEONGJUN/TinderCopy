@@ -19,6 +19,7 @@
 		CE8B9B7923F30F6300944CF4 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B9B7823F30F6300944CF4 /* TopNavigationStackView.swift */; };
 		CE8B9B7B23F3185700944CF4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B9B7A23F3185700944CF4 /* CardView.swift */; };
 		CE8DC79D24211A2B0090D075 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8DC79C24211A2B0090D075 /* LoginController.swift */; };
+		CEA13801242F9C870017FC10 /* UserDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA13800242F9C870017FC10 /* UserDetailHeader.swift */; };
 		CEA3354E24051DA5002AFECE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3354D24051DA5002AFECE /* User.swift */; };
 		CEA33551240562BF002AFECE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA33550240562BF002AFECE /* CardViewModel.swift */; };
 		CEA3355324064F70002AFECE /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3355224064F70002AFECE /* Advertiser.swift */; };
@@ -51,6 +52,7 @@
 		CE8B9B7823F30F6300944CF4 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		CE8B9B7A23F3185700944CF4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		CE8DC79C24211A2B0090D075 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		CEA13800242F9C870017FC10 /* UserDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailHeader.swift; sourceTree = "<group>"; };
 		CEA3354D24051DA5002AFECE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEA33550240562BF002AFECE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		CEA3355224064F70002AFECE /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				CE8B9B7A23F3185700944CF4 /* CardView.swift */,
+				CEA13800242F9C870017FC10 /* UserDetailHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,9 +195,9 @@
 			isa = PBXGroup;
 			children = (
 				CE8B9B7123F171D000944CF4 /* Support */,
-				CEA3354F24056212002AFECE /* ViewModels */,
-				CEA3354C24051D94002AFECE /* Model */,
 				CE8B9B7523F1A0F200944CF4 /* Custom Views */,
+				CEA3354C24051D94002AFECE /* Model */,
+				CEA3354F24056212002AFECE /* ViewModels */,
 				CE8B9B7223F171ED00944CF4 /* Controllers */,
 				CE8B9B7023F171B200944CF4 /* Extensions */,
 				CEE1550923F0487000BA2993 /* Assets.xcassets */,
@@ -366,6 +369,7 @@
 				CEFFD9A0242F85860061A090 /* UserDetailController.swift in Sources */,
 				CEE1550523F0486F00BA2993 /* HomeViewController.swift in Sources */,
 				CE8B9B7723F1A13B00944CF4 /* HomeBottomControlsStackView.swift in Sources */,
+				CEA13801242F9C870017FC10 /* UserDetailHeader.swift in Sources */,
 				CE3FE6CA24162CFB002B3281 /* HeaderLabelOnSetting.swift in Sources */,
 				CEA3354E24051DA5002AFECE /* User.swift in Sources */,
 				CE8B9B7923F30F6300944CF4 /* TopNavigationStackView.swift in Sources */,

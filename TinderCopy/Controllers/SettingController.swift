@@ -58,6 +58,7 @@ class SettingController: UITableViewController {
             "imageUrl2": user?.imageUrl2 ?? "",
             "imageUrl3": user?.imageUrl3 ?? "",
             "age": user?.age ?? -1,
+            "bio": user?.bio ?? "",
             "profession": user?.profession ?? "",
             "minSeekingAge": user?.minSeekingAge ?? -1,
             "maxSeekingAge": user?.maxSeekingAge ?? -1
@@ -191,6 +192,8 @@ class SettingController: UITableViewController {
             cell.textField.addTarget(self, action: #selector(handleAgeTextFieldChanged), for: .editingChanged)
         case 4:
             cell.textField.placeholder = "Enter Bio"
+            cell.textField.text = user?.bio
+            cell.textField.addTarget(self, action: #selector(handleBioTextFieldChanged), for: .editingChanged)
         case 5:
             let ageRangCell = AgeRangeViewCell(style: .default, reuseIdentifier: nil)
             settingAgeRageViewCell(cell: ageRangCell)
@@ -239,7 +242,7 @@ class SettingController: UITableViewController {
     }
     
     @objc private func handleBioTextFieldChanged(_ sender: UITextField) {
-//        self.user? = sender.text
+        self.user?.bio = sender.text
     }
     
     // MARK: - UITableViewDelegate

@@ -132,8 +132,9 @@ extension HomeViewController: SettingControllerDelegate {
 
 
 extension HomeViewController: CardViewDelegate {
-    func didTapShowUserDetailButton() {
+    func didTapShowUserDetailButton(cardViewModel: CardViewModel) {
         let userDetailVC = UserDetailController()
+        userDetailVC.userData = cardViewModel
         present(userDetailVC, animated: true)
     }
 }

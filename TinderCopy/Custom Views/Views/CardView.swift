@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 protocol CardViewDelegate: class {
-    func didTapShowUserDetailButton()
+    func didTapShowUserDetailButton(cardViewModel: CardViewModel)
 }
 
 class CardView: UIView {
@@ -141,7 +141,7 @@ class CardView: UIView {
     }
     
     @objc private func didTapUserDetailButton() {
-        self.delegate?.didTapShowUserDetailButton()
+        self.delegate?.didTapShowUserDetailButton(cardViewModel: cardViewModel)
     }
     
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
