@@ -135,6 +135,7 @@ extension HomeViewController: CardViewDelegate {
     func didTapShowUserDetailButton(cardViewModel: CardViewModel) {
         let userDetailVC = UserDetailController()
         userDetailVC.userData = cardViewModel
+        userDetailVC.modalPresentationStyle = .fullScreen
         present(userDetailVC, animated: true)
     }
 }

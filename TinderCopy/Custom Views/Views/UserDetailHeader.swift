@@ -17,7 +17,7 @@ class UserDetailHeader: UIView {
     let imageView3 = UIImageView()
     
     let barsStackView = UIStackView()
-    let animator = UIViewPropertyAnimator()
+    var animator = UIViewPropertyAnimator(duration: 0.5, curve: .linear)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,15 +59,12 @@ class UserDetailHeader: UIView {
         imageView3.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         imageView3.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         imageView3.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-//        imageView1.layout.top().leading().bottom().width().height()
-//        imageView2.layout.top().leading(equalTo: imageView1.trailingAnchor).bottom().width()
-//        imageView3.layout.top().leading(equalTo: imageView2.trailingAnchor).bottom().width().trailing()
     }
     
     private func configureIndicatorStackView() {
         
         addSubview(barsStackView)
-        barsStackView.layout.top(equalTo: self.topAnchor, constant: 8)
+        barsStackView.layout.top(equalTo: self.topAnchor, constant: 58)
                             .leading(equalTo: self.leadingAnchor, contant: 8)
                             .trailing(equalTo: self.trailingAnchor, constant: -8)
                             .height(equalToconstant: 4)
@@ -85,10 +82,10 @@ class UserDetailHeader: UIView {
     }
     
     private func configureAnimator() {
-        animator.addAnimations {
-            self.transform = CGAffineTransform(scaleX: 2, y: 2)
-        }
-        animator.fractionComplete = 0
+//        animator.addAnimations {
+//            self.transform = CGAffineTransform(scaleX: 3, y: 3)
+//        }
+//        animator.fractionComplete = 0
     }
     
     func setImages(imageNames: [String]) {

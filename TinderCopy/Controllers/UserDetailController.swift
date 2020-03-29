@@ -13,8 +13,9 @@ class UserDetailController: UIViewController {
 
     let userImages = [UIImage]()
     let tableView = UITableView()
-    let headerView = UserDetailHeader()
+    var headerView = UserDetailHeader()
     var userData: CardViewModel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +26,9 @@ class UserDetailController: UIViewController {
     private func configureTableView() {
         view.addSubview(tableView)
         tableView.backgroundColor = .systemBackground
+        tableView.contentInsetAdjustmentBehavior = .never
         tableView.dataSource = self
         tableView.delegate = self
-//        tableView.contentInset = UIEdgeInsets(top: , left: <#T##CGFloat#>, bottom: <#T##CGFloat#>, right: <#T##CGFloat#>)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         tableView.separatorStyle = .none
@@ -35,9 +36,8 @@ class UserDetailController: UIViewController {
     }
 
     private func setConstraints() {
-        tableView.layout.top().leading().trailing().bottom()
+        tableView.layout.top(equalTo: view.topAnchor, constant: -50).leading().trailing().bottom()
     }
-
 }
 
 extension UserDetailController: UITableViewDataSource {
@@ -70,7 +70,8 @@ extension UserDetailController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 400
+        let height: CGFloat = tableView.frame.height * 0.6
+        return height
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
