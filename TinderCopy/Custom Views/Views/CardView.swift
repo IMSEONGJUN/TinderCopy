@@ -58,14 +58,14 @@ class CardView: UIView {
     
     private func reConfigureCardView(cardViewModel: CardViewModel) {
         let imageName = cardViewModel.imageNames.first ?? ""
-        if let url = URL(string: imageName ?? "") {
+        if let url = URL(string: imageName) {
             imageView.sd_setImage(with: url)
         }
         
         informationLabel.attributedText = cardViewModel.attributedString
         informationLabel.textAlignment = cardViewModel.textAlignment
         
-        (0..<cardViewModel.imageNames.count).forEach { (_) in
+        (0..<cardViewModel.imageNames.filter{$0 != ""}.count).forEach { (_) in
             let barView = UIView()
             barView.backgroundColor = barDeselectedColor
             barsStackView.addArrangedSubview(barView)

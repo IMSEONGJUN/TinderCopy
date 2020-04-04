@@ -100,10 +100,10 @@ class UserDetailHeader: UIView {
         backButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50).isActive = true
     }
     
-    func setImages(imageNames: [String?]) {
+    func setImages(imageNames: [String]) {
         
-        let imageNames = imageNames.map({URL(string: $0 ?? "")})
-        for i in 0..<3 {
+        let imageNames = imageNames.map({URL(string: $0)})
+        for i in 0..<imageNames.count {
             downloadimage(url: imageNames[i], imageView: imageViews[i])
         }
     }

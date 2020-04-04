@@ -57,7 +57,7 @@ class HomeViewController: UIViewController {
 //      let query = Firestore.firestore().collection("users").whereField("age", isLessThan: 31).whereField("age", isGreaterThan:        18).whereField("friends", arrayContains: "Chris")
        
     //  Filtering data using user's minAge, maxAge
-        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge ?? 0)
+        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge ?? 19)
                                                              .whereField("age", isLessThanOrEqualTo: maxAge ?? 100)
         query.getDocuments { (snapshot, error) in
             hud.dismiss()

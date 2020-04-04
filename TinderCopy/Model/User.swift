@@ -52,10 +52,10 @@ struct User : ProducesCardViewModel {
         attributeText.append(attributeStringAge)
         attributeText.append(attributeStringProfession)
         
-        var imageUrls = [String?]()
-        imageUrls.append(imageUrl1)
-        imageUrls.append(imageUrl2)
-        imageUrls.append(imageUrl3)
+        var imageUrls = [String]()
+        if let url = imageUrl1 { imageUrls.append(url)}
+        if let url = imageUrl2 { imageUrls.append(url)}
+        if let url = imageUrl3 { imageUrls.append(url)}
         
         return CardViewModel(imageNames: imageUrls, attributedString: attributeText, textAlignment: .left, bio: self.bio)
     }
