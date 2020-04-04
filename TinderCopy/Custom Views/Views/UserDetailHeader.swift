@@ -8,23 +8,28 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class UserDetailHeader: UIView {
     
-    let scrollView = UIScrollView()
-    let imageView1 = UIImageView()
-    let imageView2 = UIImageView()
-    let imageView3 = UIImageView()
+    private let scrollView = UIScrollView()
+    private let imageView1 = UIImageView()
+    private let imageView2 = UIImageView()
+    private let imageView3 = UIImageView()
     
-    let barsStackView = UIStackView()
-    var animator = UIViewPropertyAnimator(duration: 0.5, curve: .linear)
+    private lazy var imageViews = [imageView1,imageView2,imageView3]
+    
+    private let barsStackView = UIStackView()
+//    var animator = UIViewPropertyAnimator(duration: 0.5, curve: .linear)
+    
+    let backButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureScrollView()
         configureImageViews()
         configureIndicatorStackView()
-        configureAnimator()
+        configureBackButton()
     }
     
     required init?(coder: NSCoder) {
@@ -40,6 +45,7 @@ class UserDetailHeader: UIView {
     
     private func configureImageViews() {
         scrollView.addSubviews([imageView1, imageView2, imageView3])
+        
         imageView1.translatesAutoresizingMaskIntoConstraints = false
         imageView1.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         imageView1.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
@@ -64,7 +70,7 @@ class UserDetailHeader: UIView {
     private func configureIndicatorStackView() {
         
         addSubview(barsStackView)
-        barsStackView.layout.top(equalTo: self.topAnchor, constant: 58)
+        barsStackView.layout.top(equalTo: self.topAnchor, constant: 8)
                             .leading(equalTo: self.leadingAnchor, contant: 8)
                             .trailing(equalTo: self.trailingAnchor, constant: -8)
                             .height(equalToconstant: 4)
@@ -81,21 +87,37 @@ class UserDetailHeader: UIView {
         barsStackView.arrangedSubviews.first?.backgroundColor = .white
     }
     
-    private func configureAnimator() {
-//        animator.addAnimations {
-//            self.transform = CGAffineTransform(scaleX: 3, y: 3)
-//        }
-//        animator.fractionComplete = 0
+    private func configureBackButton() {
+        self.addSubview(backButton)
+        self.bringSubviewToFront(backButton)
+        backButton.clipsToBounds = true
+        backButton.isUserInteractionEnabled = true
+        backButton.setImage(#imageLiteral(resourceName: "arrowDown").withRenderingMode(.alwaysOriginal), for: .normal)
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.widthAnchor.constraint(equalToConstant: 46).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 46).isActive = true
+        backButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 15).isActive = true
+        backButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50).isActive = true
     }
     
-    func setImages(imageNames: [String]) {
-        let image1URL = URL(string: imageNames[0]) ?? nil
-        let image2URL = URL(string: imageNames[1]) ?? nil
-        let image3URL = URL(string: imageNames[2]) ?? nil
+    func setImages(imageNames: [String?]) {
         
-        imageView1.sd_setImage(with: image1URL)
-        imageView2.sd_setImage(with: image2URL)
-        imageView3.sd_setImage(with: image3URL)
+        let imageNames = imageNames.map({URL(string: $0 ?? "")})
+        for i in 0..<3 {
+            downloadimage(url: imageNames[i], imageView: imageViews[i])
+        }
+    }
+    
+    private func downloadimage(url: URL?, imageView: UIImageView) {
+        SDWebImageManager.shared().loadImage(with: url,
+                                             options: .continueInBackground,
+                                             progress: nil)  { (image,_,_,_,_,_) in
+                                                 if let image = image {
+                                                     imageView.image = image
+                                                 } else {
+                                                    imageView.image = UIImage(named: "kelly1")
+                                                 }
+                                            }
     }
     
 }

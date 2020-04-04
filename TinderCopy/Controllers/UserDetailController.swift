@@ -11,7 +11,6 @@ import SDWebImage
 
 class UserDetailController: UIViewController {
 
-    let userImages = [UIImage]()
     let tableView = UITableView()
     var headerView = UserDetailHeader()
     var userData: CardViewModel!
@@ -19,6 +18,7 @@ class UserDetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureTableView()
         setConstraints()
     }
@@ -26,17 +26,18 @@ class UserDetailController: UIViewController {
     private func configureTableView() {
         view.addSubview(tableView)
         tableView.backgroundColor = .systemBackground
-        tableView.contentInsetAdjustmentBehavior = .never
+//        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.allowsSelection = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
+        tableView.estimatedRowHeight = 80
         tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
     }
-
+    
     private func setConstraints() {
-        tableView.layout.top(equalTo: view.topAnchor, constant: -50).leading().trailing().bottom()
+        tableView.layout.top().leading().trailing().bottom()
     }
 }
 
@@ -47,14 +48,11 @@ extension UserDetailController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+        cell.textLabel?.numberOfLines = 0
         if indexPath.row == 0 {
-            cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.attributedText = userData.attributedString
-            cell.backgroundColor = .cyan
+            cell.textLabel?.attributedText = userData?.attributedString
         } else {
-            cell.textLabel?.numberOfLines = 0
-            cell.textLabel?.text = userData.userBio
-            cell.backgroundColor = .cyan
+            cell.textLabel?.text = userData?.userBio
         }
         return cell
     }
@@ -64,6 +62,7 @@ extension UserDetailController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let containerView = UIView()
         containerView.addSubview(headerView)
+        headerView.backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
         headerView.layout.top().leading().trailing().bottom()
         headerView.setImages(imageNames: userData.imageNames)
         return containerView
@@ -74,14 +73,17 @@ extension UserDetailController: UITableViewDelegate {
         return height
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentOffsetY = scrollView.contentOffset.y
-        if contentOffsetY > 0 {
-            headerView.animator.fractionComplete = 0
-            return
-        }
-        
-        headerView.animator.fractionComplete = abs(contentOffsetY) / 100
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let contentOffsetY = scrollView.contentOffset.y
+//        if contentOffsetY > 0 {
+//            headerView.animator.fractionComplete = 0
+//            return
+//        }
+//
+//        headerView.animator.fractionComplete = abs(contentOffsetY) / 1000
+//    }
     
+    @objc func didTapBackButton() {
+        dismiss(animated: true)
+    }
 }

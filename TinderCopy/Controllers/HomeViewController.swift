@@ -45,7 +45,9 @@ class HomeViewController: UIViewController {
     }
     
     private func fetchUsersFromFirestore() {
-        guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else { return }
+        
+        let minAge = user?.minSeekingAge
+        let maxAge = user?.maxSeekingAge
         
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Fetching Users"
@@ -55,8 +57,8 @@ class HomeViewController: UIViewController {
 //      let query = Firestore.firestore().collection("users").whereField("age", isLessThan: 31).whereField("age", isGreaterThan:        18).whereField("friends", arrayContains: "Chris")
        
     //  Filtering data using user's minAge, maxAge
-        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge)
-                                                             .whereField("age", isLessThanOrEqualTo: maxAge)
+        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge ?? 0)
+                                                             .whereField("age", isLessThanOrEqualTo: maxAge ?? 100)
         query.getDocuments { (snapshot, error) in
             hud.dismiss()
             guard error == nil else {
@@ -64,9 +66,8 @@ class HomeViewController: UIViewController {
                 return
             }
             print("after")
-            snapshot?.documents.forEach({ (documentSnapshot) in
-                
-                let userDictionary = documentSnapshot.data()
+            snapshot?.documents.forEach({
+                let userDictionary = $0.data()
                 let user = User(userDictionary: userDictionary)
                 guard self.user?.uid != user.uid else { return }
                 self.setupCardFromUser(user: user)

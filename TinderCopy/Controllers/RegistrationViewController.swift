@@ -103,6 +103,7 @@ class RegistrationViewController: UIViewController {
     
     private let registeringHUD = JGProgressHUD(style: .dark)
     
+    
     // Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -240,8 +241,10 @@ class RegistrationViewController: UIViewController {
     @objc private func didTapRegisterButton() {
         view.endEditing(true)
         registrationViewModel.performRegistration { [weak self] (error) in
-            guard let error = error else { return }
-            self?.showHUDWithError(error: error)
+            if let error = error {
+                self?.showHUDWithError(error: error)
+                return
+            }
             self?.switchToHomeViewAfterLogin()
         }
     }

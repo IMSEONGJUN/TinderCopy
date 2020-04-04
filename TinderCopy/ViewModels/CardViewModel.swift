@@ -16,12 +16,12 @@ protocol ProducesCardViewModel {
 
 // view model is supposed to represent the state of our view
 class CardViewModel {
-    let imageNames: [String]
+    let imageNames: [String?]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
     var userBio: String?
     
-    init(imageNames: [String], attributedString: NSAttributedString, textAlignment: NSTextAlignment, bio: String?) {
+    init(imageNames: [String?], attributedString: NSAttributedString, textAlignment: NSTextAlignment, bio: String?) {
         self.imageNames = imageNames
         self.attributedString = attributedString
         self.textAlignment = textAlignment

@@ -58,7 +58,7 @@ class CardView: UIView {
     
     private func reConfigureCardView(cardViewModel: CardViewModel) {
         let imageName = cardViewModel.imageNames.first ?? ""
-        if let url = URL(string: imageName) {
+        if let url = URL(string: imageName ?? "") {
             imageView.sd_setImage(with: url)
         }
         
