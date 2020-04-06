@@ -136,7 +136,8 @@ class LoginController: UIViewController {
     
     @objc private func didTapLoginButton() {
         loginViewModel.performLogin { (err) in
-            self.hud.dismiss()
+//            self.hud.dismiss()
+            self.loginViewModel.bindableIsLoggingIn.value = false
             if let err = err {
                 print("failed to log in:", err)
                 return

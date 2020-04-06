@@ -104,11 +104,11 @@ class UserDetailHeader: UIView {
         
         let imageNames = imageNames.map({URL(string: $0)})
         for i in 0..<imageNames.count {
-            downloadimage(url: imageNames[i], imageView: imageViews[i])
+            downloadImage(url: imageNames[i], imageView: imageViews[i])
         }
     }
     
-    private func downloadimage(url: URL?, imageView: UIImageView) {
+    private func downloadImage(url: URL?, imageView: UIImageView) {
         SDWebImageManager.shared().loadImage(with: url,
                                              options: .continueInBackground,
                                              progress: nil)  { (image,_,_,_,_,_) in

@@ -57,7 +57,7 @@ class CardView: UIView {
     }
     
     private func reConfigureCardView(cardViewModel: CardViewModel) {
-        let imageName = cardViewModel.imageNames.first ?? ""
+        let imageName = cardViewModel.imageUrls.first ?? ""
         if let url = URL(string: imageName) {
             imageView.sd_setImage(with: url)
         }
@@ -65,7 +65,7 @@ class CardView: UIView {
         informationLabel.attributedText = cardViewModel.attributedString
         informationLabel.textAlignment = cardViewModel.textAlignment
         
-        (0..<cardViewModel.imageNames.filter{$0 != ""}.count).forEach { (_) in
+        (0..<cardViewModel.imageUrls.filter{$0 != ""}.count).forEach { (_) in
             let barView = UIView()
             barView.backgroundColor = barDeselectedColor
             barsStackView.addArrangedSubview(barView)
@@ -148,7 +148,7 @@ class CardView: UIView {
         let tapLocation = gesture.location(in: nil)
         let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
         
-        guard cardViewModel.imageNames.count > 1 else { return }
+        guard cardViewModel.imageUrls.count > 1 else { return }
         if shouldAdvanceNextPhoto {
             cardViewModel.advanceToNextPhoto()
         } else {

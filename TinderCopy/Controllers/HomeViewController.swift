@@ -16,9 +16,8 @@ class HomeViewController: UIViewController {
     let cardDeckView = UIView()
     let bottomControl = HomeBottomControlsStackView()
 
-    private var cardViewModels = [CardViewModel]()
-    
-    private var lastFetchedUser: User?
+//    private var cardViewModels = [CardViewModel]()
+//    private var lastFetchedUser: User?
     var user : User?
     
     override func viewDidLoad() {

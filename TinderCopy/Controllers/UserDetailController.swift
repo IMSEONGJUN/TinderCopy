@@ -64,7 +64,7 @@ extension UserDetailController: UITableViewDelegate {
         containerView.addSubview(headerView)
         headerView.backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
         headerView.layout.top().leading().trailing().bottom()
-        headerView.setImages(imageNames: userData.imageNames)
+        headerView.setImages(imageNames: userData.imageUrls)
         return containerView
     }
     

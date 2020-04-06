@@ -27,7 +27,7 @@ extension UIViewController {
             }
             
             guard let dic = snapshot?.data() else {
-                completion(.failure(error!))
+//                completion(.failure(error?.localizedDescription as! Error))
                 return
             }
                 

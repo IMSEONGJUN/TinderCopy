@@ -16,13 +16,13 @@ protocol ProducesCardViewModel {
 
 // view model is supposed to represent the state of our view
 class CardViewModel {
-    let imageNames: [String]
+    let imageUrls: [String]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
     var userBio: String?
     
     init(imageNames: [String], attributedString: NSAttributedString, textAlignment: NSTextAlignment, bio: String?) {
-        self.imageNames = imageNames
+        self.imageUrls = imageNames
         self.attributedString = attributedString
         self.textAlignment = textAlignment
         self.userBio = bio
@@ -30,7 +30,7 @@ class CardViewModel {
     
     private var imageIndex = 0 {
         didSet{
-            let imageUrl = imageNames[imageIndex]
+            let imageUrl = imageUrls[imageIndex]
             imageIndexObserver?(imageUrl, imageIndex)
         }
     }
@@ -39,7 +39,7 @@ class CardViewModel {
     var imageIndexObserver: ((String?, Int) -> ())?
     
     func advanceToNextPhoto() {
-        imageIndex = min(imageNames.count - 1, imageIndex + 1)
+        imageIndex = min(imageUrls.count - 1, imageIndex + 1)
     }
     
     func goToPreviousPhoto() {
