@@ -21,6 +21,7 @@ class UserDetailController: UIViewController {
         
         configureTableView()
         setConstraints()
+        setupVisualEffectView()
     }
     
     private func configureTableView() {
@@ -38,6 +39,19 @@ class UserDetailController: UIViewController {
     
     private func setConstraints() {
         tableView.layout.top().leading().trailing().bottom()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: tableView.frame.height * 0.6)
+    }
+    
+    func setupVisualEffectView() {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        
+        view.addSubview(visualEffectView)
+        visualEffectView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.safeAreaLayoutGuide.topAnchor)
     }
 }
 
@@ -63,7 +77,8 @@ extension UserDetailController: UITableViewDelegate {
         let containerView = UIView()
         containerView.addSubview(headerView)
         headerView.backButton.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
-        headerView.layout.top().leading().trailing().bottom()
+//        headerView.frame = containerView.bounds
+//        headerView.layout.top().leading().trailing().bottom()
         headerView.setImages(imageNames: userData.imageUrls)
         return containerView
     }
@@ -73,15 +88,14 @@ extension UserDetailController: UITableViewDelegate {
         return height
     }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let contentOffsetY = scrollView.contentOffset.y
-//        if contentOffsetY > 0 {
-//            headerView.animator.fractionComplete = 0
-//            return
-//        }
-//
-//        headerView.animator.fractionComplete = abs(contentOffsetY) / 1000
-//    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let changeY = -scrollView.contentOffset.y
+        var width = view.frame.width + changeY * 2
+        var height = (tableView.frame.height * 0.6) + (changeY * 2)
+        height = max(tableView.frame.height * 0.6, height)
+        width = max(view.frame.width, width)
+        headerView.frame = CGRect(x: min(0, -changeY), y: min(0, -changeY), width: width, height: height)
+    }
     
     @objc func didTapBackButton() {
         dismiss(animated: true)

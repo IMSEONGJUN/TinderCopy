@@ -12,7 +12,7 @@ import SDWebImage
 
 class UserDetailHeader: UIView {
     
-    private let scrollView = UIScrollView()
+    let scrollView = UIScrollView()
     private let imageView1 = UIImageView()
     private let imageView2 = UIImageView()
     private let imageView3 = UIImageView()
