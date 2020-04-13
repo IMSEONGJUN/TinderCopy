@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = .systemBackground
         topStackView.settingsButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
         bottomControl.refreshButton.addTarget(self, action: #selector(didTapRefreshButton), for: .touchUpInside)

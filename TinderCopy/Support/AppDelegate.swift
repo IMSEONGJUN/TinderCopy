@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         db.settings = settings
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: RegistrationViewController())
+        window?.makeKeyAndVisible() //RegistrationViewController()
+        window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
         return true
     }
 
