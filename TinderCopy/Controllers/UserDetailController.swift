@@ -15,7 +15,7 @@ class UserDetailController: UIViewController {
     
     lazy var scrollView: UIScrollView = {
        let sv = UIScrollView()
-        sv.backgroundColor = .green
+        sv.backgroundColor = .white
         sv.alwaysBounceVertical = true
         sv.contentInsetAdjustmentBehavior = .never
         sv.delegate = self
