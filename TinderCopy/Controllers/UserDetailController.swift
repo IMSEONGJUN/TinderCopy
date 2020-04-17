@@ -11,7 +11,14 @@ import SDWebImage
 
 class UserDetailController: UIViewController {
     
-    var userData: CardViewModel!
+    var userData: CardViewModel! {
+        didSet{
+            infoLabel.attributedText = userData.attributedString
+            
+            guard let firstImageUrl = userData.imageUrls.first, let url = URL(string: firstImageUrl) else { return }
+            imageView.sd_setImage(with: url)
+        }
+    }
     
     lazy var scrollView: UIScrollView = {
        let sv = UIScrollView()
@@ -36,9 +43,15 @@ class UserDetailController: UIViewController {
         return label
     }()
     
+    let dismissButton: UIButton = {
+       let btn = UIButton()
+        btn.setImage(#imageLiteral(resourceName: "arrowDown").withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.addTarget(self, action: #selector(didTapDismissButton), for: .touchUpInside)
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
         view.addSubview(scrollView)
         scrollView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.bottomAnchor)
         
@@ -49,9 +62,13 @@ class UserDetailController: UIViewController {
         infoLabel.layout.top(equalTo: imageView.bottomAnchor, constant: 30)
                         .leading(equalTo: view.leadingAnchor, contant: 30)
                         .trailing(equalTo: view.trailingAnchor, constant: -30)
+        
+        scrollView.addSubview(dismissButton)
+        dismissButton.layout.top(equalTo: imageView.bottomAnchor, constant: -25)
+            .trailing(equalTo: view.trailingAnchor, constant: -30).width(equalToconstant: 50).height(equalToconstant: 50)
     }
     
-    @objc private func handleDismiss() {
+    @objc private func didTapDismissButton() {
         dismiss(animated: true)
     }
 }
