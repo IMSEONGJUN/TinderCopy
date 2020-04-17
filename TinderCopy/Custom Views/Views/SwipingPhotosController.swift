@@ -33,6 +33,9 @@ class SwipingPhotosController: UIPageViewController {
         }
         
     }
+//    override var transitionStyle: UIPageViewController.TransitionStyle {
+//        return .scroll
+//    }
 
 }
 

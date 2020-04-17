@@ -27,6 +27,7 @@ class UserDetailController: UIViewController {
         return sv
     }()
     
+    let imageSwiperView = UIView()
     
     let swipingPhotosController = SwipingPhotosController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
@@ -76,29 +77,31 @@ class UserDetailController: UIViewController {
     @objc private func didTapDislikeButton() {
         
     }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        let swipeingView = swipingPhotosController.view!
-        swipeingView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraHeight)
-    }
+    
+//    override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//        let swipeingView = swipingPhotosController.view!
+//        swipeingView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraHeight)
+//    }
     
     private func setupUI() {
         view.addSubview(scrollView)
         scrollView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.bottomAnchor)
-//        scrollView.addSubview(photosContainerView)
-//        photosContainerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraHeight)
+        scrollView.addSubview(imageSwiperView)
+        imageSwiperView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraHeight)
         
-        let swipingView = swipingPhotosController.view!
-        scrollView.addSubview(swipingView)
+        let swiper = swipingPhotosController.view!
+        imageSwiperView.addSubview(swiper)
+        swiper.frame = imageSwiperView.bounds
         
         
         scrollView.addSubview(infoLabel)
-        infoLabel.layout.top(equalTo: swipingView.bottomAnchor, constant: 30)
+        infoLabel.layout.top(equalTo: imageSwiperView.bottomAnchor, constant: 30)
                         .leading(equalTo: view.leadingAnchor, contant: 30)
                         .trailing(equalTo: view.trailingAnchor, constant: -30)
         
         scrollView.addSubview(dismissButton)
-        dismissButton.layout.top(equalTo: swipingView.bottomAnchor, constant: -25)
+        dismissButton.layout.top(equalTo: imageSwiperView.bottomAnchor, constant: -25)
             .trailing(equalTo: view.trailingAnchor, constant: -30).width(equalToconstant: 50).height(equalToconstant: 50)
     }
     
@@ -120,8 +123,8 @@ extension UserDetailController: UIScrollViewDelegate {
         let changeY = -scrollView.contentOffset.y
         var width = view.frame.width + changeY * 2
         width = max(view.frame.width, width)
-        let imageView = swipingPhotosController.view!
-        imageView.frame = CGRect(x: min(0, -changeY), y: min(0, -changeY), width: width, height: width + extraHeight)
+//        let imageView = swipingPhotosController.view!
+        imageSwiperView.frame = CGRect(x: min(0, -changeY), y: min(0, -changeY), width: width, height: width + extraHeight)
     }
 }
 
