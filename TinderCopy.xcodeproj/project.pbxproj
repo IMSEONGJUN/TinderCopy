@@ -34,6 +34,7 @@
 		CEE1550523F0486F00BA2993 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1550423F0486F00BA2993 /* HomeViewController.swift */; };
 		CEE1550A23F0487000BA2993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE1550923F0487000BA2993 /* Assets.xcassets */; };
 		CEE1550D23F0487000BA2993 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE1550B23F0487000BA2993 /* LaunchScreen.storyboard */; };
+		CEEA977C2449E262001565D8 /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEA977B2449E262001565D8 /* SwipingPhotosController.swift */; };
 		CEFFD9A0242F85860061A090 /* UserDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFFD99F242F85860061A090 /* UserDetailController.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		CEE1550923F0487000BA2993 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEE1550C23F0487000BA2993 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEE1550E23F0487000BA2993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEEA977B2449E262001565D8 /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		CEFFD99F242F85860061A090 /* UserDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +162,7 @@
 			children = (
 				CE8B9B7A23F3185700944CF4 /* CardView.swift */,
 				CEA13800242F9C870017FC10 /* UserDetailHeader.swift */,
+				CEEA977B2449E262001565D8 /* SwipingPhotosController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				CE8B9B7923F30F6300944CF4 /* TopNavigationStackView.swift in Sources */,
 				CE8DC79D24211A2B0090D075 /* LoginController.swift in Sources */,
 				CE6406EB240F9C6600D57CAA /* Bindable.swift in Sources */,
+				CEEA977C2449E262001565D8 /* SwipingPhotosController.swift in Sources */,
 				CEB95A5624153F3200E6198B /* SettingCell.swift in Sources */,
 				CEA335582407702D002AFECE /* CustomTextField.swift in Sources */,
 				CECDDDD9240D5712007560F2 /* RegistrationViewModel.swift in Sources */,

@@ -14,9 +14,7 @@ class UserDetailController: UIViewController {
     var userData: CardViewModel! {
         didSet{
             infoLabel.attributedText = userData.attributedString
-            
-            guard let firstImageUrl = userData.imageUrls.first, let url = URL(string: firstImageUrl) else { return }
-            imageView.sd_setImage(with: url)
+            swipingPhotosController.cardViewModel = userData
         }
     }
     
@@ -29,12 +27,8 @@ class UserDetailController: UIViewController {
         return sv
     }()
     
-    let imageView: UIImageView = {
-       let iv = UIImageView(image: #imageLiteral(resourceName: "kelly3"))
-        iv.contentMode = .scaleAspectFill
-        iv.clipsToBounds = true
-        return iv
-    }()
+    
+    let swipingPhotosController = SwipingPhotosController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     let infoLabel: UILabel = {
        let label = UILabel()
@@ -50,22 +44,70 @@ class UserDetailController: UIViewController {
         return btn
     }()
     
+    lazy var dislikeButton = self.createButton(image: #imageLiteral(resourceName: "dismiss_circle"), selector: #selector(didTapDislikeButton))
+    lazy var superLikeButton = self.createButton(image: #imageLiteral(resourceName: "super_like_circle"), selector: #selector(didTapDislikeButton))
+    lazy var likeButton = self.createButton(image: #imageLiteral(resourceName: "like_circle"), selector: #selector(didTapDislikeButton))
+    
+    let extraHeight: CGFloat = 80
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        configureVisualBlurEffectView()
+        configureBottomControls()
+    }
+    
+    private func configureBottomControls() {
+        let stackView = UIStackView(arrangedSubviews: [dislikeButton, superLikeButton, likeButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        view.addSubview(stackView)
+        stackView.layout.centerX().bottom(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30)
+    }
+    
+    private func createButton(image: UIImage, selector: Selector) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        return button
+    }
+    
+    @objc private func didTapDislikeButton() {
+        
+    }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let swipeingView = swipingPhotosController.view!
+        swipeingView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraHeight)
+    }
+    
+    private func setupUI() {
         view.addSubview(scrollView)
         scrollView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.bottomAnchor)
+//        scrollView.addSubview(photosContainerView)
+//        photosContainerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraHeight)
         
-        scrollView.addSubview(imageView)
-        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width)
+        let swipingView = swipingPhotosController.view!
+        scrollView.addSubview(swipingView)
+        
         
         scrollView.addSubview(infoLabel)
-        infoLabel.layout.top(equalTo: imageView.bottomAnchor, constant: 30)
+        infoLabel.layout.top(equalTo: swipingView.bottomAnchor, constant: 30)
                         .leading(equalTo: view.leadingAnchor, contant: 30)
                         .trailing(equalTo: view.trailingAnchor, constant: -30)
         
         scrollView.addSubview(dismissButton)
-        dismissButton.layout.top(equalTo: imageView.bottomAnchor, constant: -25)
+        dismissButton.layout.top(equalTo: swipingView.bottomAnchor, constant: -25)
             .trailing(equalTo: view.trailingAnchor, constant: -30).width(equalToconstant: 50).height(equalToconstant: 50)
+    }
+    
+    private func configureVisualBlurEffectView() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        view.addSubview(visualEffectView)
+        visualEffectView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        view.bringSubviewToFront(visualEffectView)
     }
     
     @objc private func didTapDismissButton() {
@@ -78,8 +120,8 @@ extension UserDetailController: UIScrollViewDelegate {
         let changeY = -scrollView.contentOffset.y
         var width = view.frame.width + changeY * 2
         width = max(view.frame.width, width)
-        
-        imageView.frame = CGRect(x: min(0, -changeY), y: min(0, -changeY), width: width, height: width)
+        let imageView = swipingPhotosController.view!
+        imageView.frame = CGRect(x: min(0, -changeY), y: min(0, -changeY), width: width, height: width + extraHeight)
     }
 }
 
