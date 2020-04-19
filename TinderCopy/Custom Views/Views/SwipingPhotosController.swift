@@ -12,51 +12,92 @@ class SwipingPhotosController: UIPageViewController {
 
     var cardViewModel: CardViewModel! {
         didSet {
-            print(cardViewModel.attributedString)
-            controllers = cardViewModel.imageUrls.map({
+            controllers = cardViewModel.imageUrls.filter{$0 != ""}.map({
                 return PhotoController(imageUrl: $0)
             })
+            
+            if let firstController = controllers.first {
+                setViewControllers([firstController], direction: .forward, animated: true)
+            } else {
+                setViewControllers([PhotoController(image: #imageLiteral(resourceName: "top_left_profile"))], direction: .forward, animated: true)
+            }
+            
+            configureBarViews()
         }
     }
     
     var controllers = [UIViewController]()
     
+    let barStackView = UIStackView(arrangedSubviews: [])
+    let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         dataSource = self
-        
-        if let firstController = controllers.first {
-            setViewControllers([firstController], direction: .forward, animated: true)
-        } else {
-            setViewControllers([PhotoController(image: #imageLiteral(resourceName: "top_left_profile"))], direction: .forward, animated: true)
-        }
-        
+        delegate = self
     }
-//    override var transitionStyle: UIPageViewController.TransitionStyle {
-//        return .scroll
-//    }
+    
+    private func configureBarViews() {
+        cardViewModel.imageUrls.filter{$0 != ""}.forEach { (_) in
+            let barView = UIView()
+            barView.backgroundColor = barDeselectedColor
+            barView.layer.cornerRadius = 2
+            barStackView.addArrangedSubview(barView)
+        }
+        barStackView.spacing = 4
+        barStackView.distribution = .fillEqually
+        barStackView.arrangedSubviews.first?.backgroundColor = .white
+//        let statusBarHeight: CGFloat = {
+//            var heightToReturn: CGFloat = 0.0
+//                 for window in UIApplication.shared.windows {
+//                     if let height = window.windowScene?.statusBarManager?.statusBarFrame.height, height > heightToReturn {
+//                         heightToReturn = height
+//                     }
+//                 }
+//            return heightToReturn
+//        }()
+//        let statusBar: CGFloat = UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        let window = UIApplication.shared.windows.filter{$0.isKeyWindow}.first
+        let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        view.addSubview(barStackView)
+        barStackView.layout.top(equalTo: view.topAnchor, constant: statusBarHeight + 8)
+                            .leading(equalTo: view.leadingAnchor, contant: 8)
+                            .trailing(equalTo: view.trailingAnchor, constant: -8)
+                            .height(equalToconstant: 4)
+    }
 
 }
 
 extension SwipingPhotosController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard self.controllers.count > 1 else { return nil }
         let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? 0
-//        if index == 0 { return controllers.last! }
-        if index == 0 { return nil }
+        if index == 0 { return controllers.last! }
+//        if index == 0 { return nil }
         return controllers[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard self.controllers.count > 1 else { return nil }
         let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? 0
-//        if index == controllers.count - 1 { return controllers.first! }
-        if index == controllers.count - 1 { return nil }
+        if index == controllers.count - 1 { return controllers.first! }
+//        if index == controllers.count - 1 { return nil }
         return controllers[index + 1]
     }
     
     
 }
 
+extension SwipingPhotosController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        let currentViewController = viewControllers?.first
+        if let index = controllers.firstIndex(where: {$0 == currentViewController}) {
+            barStackView.arrangedSubviews.forEach({$0.backgroundColor = barDeselectedColor})
+            barStackView.arrangedSubviews[index].backgroundColor = .white
+        }
+    }
+}
 
 class PhotoController: UIViewController {
     
@@ -82,8 +123,6 @@ class PhotoController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         view.addSubview(imageView)
         imageView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.bottomAnchor)
         imageView.clipsToBounds = true

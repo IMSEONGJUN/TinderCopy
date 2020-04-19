@@ -21,37 +21,37 @@ extension UIView {
     }
     @discardableResult
     func top(equalTo anchor: NSLayoutYAxisAnchor? = nil, constant c: CGFloat = 0) -> Self {
-        let anchor = anchor ?? superview!.safeAreaLayoutGuide.topAnchor
+        let anchor = anchor ?? superview!.topAnchor
         topAnchor.constraint(equalTo: anchor, constant: c).isActive = true
         return self
     }
     @discardableResult
     func leading(equalTo anchor: NSLayoutXAxisAnchor? = nil, contant c: CGFloat = 0) -> Self {
-        let anchor = anchor ?? superview!.safeAreaLayoutGuide.leadingAnchor
+        let anchor = anchor ?? superview!.leadingAnchor
         leadingAnchor.constraint(equalTo: anchor, constant: c).isActive = true
         return self
     }
     @discardableResult
     func trailing(equalTo anchor: NSLayoutXAxisAnchor? = nil, constant c: CGFloat = 0) -> Self {
-        let anchor = anchor ?? superview!.safeAreaLayoutGuide.trailingAnchor
+        let anchor = anchor ?? superview!.trailingAnchor
         trailingAnchor.constraint(equalTo: anchor, constant: c).isActive = true
         return self
     }
     @discardableResult
     func bottom(equalTo anchor: NSLayoutYAxisAnchor? = nil, constant c: CGFloat = 0) -> Self {
-        let anchor = anchor ?? superview!.safeAreaLayoutGuide.bottomAnchor
+        let anchor = anchor ?? superview!.bottomAnchor
         bottomAnchor.constraint(equalTo: anchor, constant: c).isActive = true
         return self
     }
     @discardableResult
     func centerX(equalTo anchor: NSLayoutXAxisAnchor? = nil, constant c: CGFloat = 0) -> Self {
-        let anchor = anchor ?? superview!.safeAreaLayoutGuide.centerXAnchor
+        let anchor = anchor ?? superview!.centerXAnchor
         centerXAnchor.constraint(equalTo: anchor, constant: c).isActive = true
         return self
     }
     @discardableResult
     func centerY(equalTo anchor: NSLayoutYAxisAnchor? = nil, constant c: CGFloat = 0) -> Self {
-        let anchor = anchor ?? superview!.safeAreaLayoutGuide.centerYAnchor
+        let anchor = anchor ?? superview!.centerYAnchor
         centerYAnchor.constraint(equalTo: anchor, constant: c).isActive = true
         return self
     }

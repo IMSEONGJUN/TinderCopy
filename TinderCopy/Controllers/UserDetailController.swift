@@ -45,9 +45,9 @@ class UserDetailController: UIViewController {
         return btn
     }()
     
-    lazy var dislikeButton = self.createButton(image: #imageLiteral(resourceName: "dismiss_circle"), selector: #selector(didTapDislikeButton))
-    lazy var superLikeButton = self.createButton(image: #imageLiteral(resourceName: "super_like_circle"), selector: #selector(didTapDislikeButton))
-    lazy var likeButton = self.createButton(image: #imageLiteral(resourceName: "like_circle"), selector: #selector(didTapDislikeButton))
+    lazy var dislikeButton = self.createButton(image: #imageLiteral(resourceName: "dismiss_circle"), selector: #selector(didTapBottomControlButton))
+    lazy var superLikeButton = self.createButton(image: #imageLiteral(resourceName: "super_like_circle"), selector: #selector(didTapBottomControlButton))
+    lazy var likeButton = self.createButton(image: #imageLiteral(resourceName: "like_circle"), selector: #selector(didTapBottomControlButton))
     
     let extraHeight: CGFloat = 80
     
@@ -74,7 +74,7 @@ class UserDetailController: UIViewController {
         return button
     }
     
-    @objc private func didTapDislikeButton() {
+    @objc private func didTapBottomControlButton() {
         
     }
     
