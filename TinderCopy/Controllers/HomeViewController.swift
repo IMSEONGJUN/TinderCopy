@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
         let maxAge = user?.maxSeekingAge
         
         let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Fetching Users"
+        hud.textLabel.text = "Loading"
         hud.show(in: view)
         
 //      let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)

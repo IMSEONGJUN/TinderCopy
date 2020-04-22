@@ -10,6 +10,9 @@ import UIKit
 
 class AgeRangeViewCell: UITableViewCell {
 
+    static let minSeekingAge = 18
+    static let maxSeekingAge = 50
+    
     let minSlider: UISlider = {
         let slider = UISlider()
         slider.minimumValue = 19

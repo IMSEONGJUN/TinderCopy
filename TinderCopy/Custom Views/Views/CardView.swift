@@ -59,7 +59,8 @@ class CardView: UIView {
     private func reConfigureCardView(cardViewModel: CardViewModel) {
         let imageName = cardViewModel.imageUrls.first ?? ""
         if let url = URL(string: imageName) {
-            imageView.sd_setImage(with: url)
+//            imageView.sd_setImage(with: url)
+            imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "top_left_profile"), options: .continueInBackground)
         }
         
         informationLabel.attributedText = cardViewModel.attributedString
@@ -133,7 +134,7 @@ class CardView: UIView {
             guard let self = self else { return }
             
             if let url = URL(string: imageUrl ?? "") {
-                self.imageView.sd_setImage(with: url)
+                self.imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "top_left_profile"), options: .continueInBackground)
             }
             self.barsStackView.arrangedSubviews.forEach({$0.backgroundColor = self.barDeselectedColor})
             self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white

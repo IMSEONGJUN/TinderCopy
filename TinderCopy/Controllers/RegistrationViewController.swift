@@ -12,7 +12,8 @@ import JGProgressHUD
 
 class RegistrationViewController: UIViewController {
 
-    // Properties
+    // MARK: - Properties
+    
     private let selectPhotoButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("Select Photo", for: .normal)
@@ -104,7 +105,8 @@ class RegistrationViewController: UIViewController {
     private let registeringHUD = JGProgressHUD(style: .dark)
     
     
-    // Life Cycle
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loginCheck()
@@ -135,7 +137,8 @@ class RegistrationViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    // Setup
+    // MARK: - Setup
+    
     private func setupLayout() {
         view.addSubview(overallStackView)
         view.addSubview(goToLoginPageButton)
@@ -206,7 +209,8 @@ class RegistrationViewController: UIViewController {
     
     
     
-    // Action Handler
+    // MARK: - Action Handler
+    
     @objc private func didTapGotoLoginButton() {
         let loginVC = LoginController()
         navigationController?.pushViewController(loginVC, animated: true)
@@ -308,6 +312,7 @@ extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigat
     
         let image = info[.originalImage] as? UIImage
         registrationViewModel.bindableImage.value = image
+        registrationViewModel.checkFormValidity()
         picker.dismiss(animated: true)
     }
     

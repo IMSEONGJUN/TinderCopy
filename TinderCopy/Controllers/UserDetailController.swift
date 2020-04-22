@@ -78,12 +78,6 @@ class UserDetailController: UIViewController {
         
     }
     
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        let swipeingView = swipingPhotosController.view!
-//        swipeingView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraHeight)
-//    }
-    
     private func setupUI() {
         view.addSubview(scrollView)
         scrollView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.bottomAnchor)
