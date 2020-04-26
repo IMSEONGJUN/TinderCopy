@@ -33,7 +33,6 @@ class UserDetailController: UIViewController {
     
     let infoLabel: UILabel = {
        let label = UILabel()
-        label.text = "User name 30\nDeveloper\nSome bio text down below"
         label.numberOfLines = 0
         return label
     }()
