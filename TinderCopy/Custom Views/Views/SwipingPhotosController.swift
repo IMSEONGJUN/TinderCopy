@@ -90,8 +90,9 @@ extension SwipingPhotosController: UIPageViewControllerDataSource {
 }
 
 extension SwipingPhotosController: UIPageViewControllerDelegate {
+    // called after Swiping
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        let currentViewController = viewControllers?.first
+        let currentViewController = viewControllers?.first // Swiping 되고 나서 현재 보여지는 ViewController
         if let index = controllers.firstIndex(where: {$0 == currentViewController}) {
             barStackView.arrangedSubviews.forEach({$0.backgroundColor = barDeselectedColor})
             barStackView.arrangedSubviews[index].backgroundColor = .white
