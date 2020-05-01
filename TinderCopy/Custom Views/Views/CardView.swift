@@ -15,8 +15,9 @@ protocol CardViewDelegate: class {
 
 class CardView: UIView {
 
-    var cardViewModel: CardViewModel! {
+    var cardViewModel: CardViewModel? {
         didSet{
+            guard let cardViewModel = cardViewModel else {return}
             reConfigureCardView(cardViewModel: cardViewModel)
         }
     }
@@ -130,7 +131,7 @@ class CardView: UIView {
     }
     
     private func setupImageIndexObserver() {
-        cardViewModel.imageIndexObserver = {[weak self] (imageUrl, imageIndex) in
+        cardViewModel?.imageIndexObserver = {[weak self] (imageUrl, imageIndex) in
             guard let self = self else { return }
             
             if let url = URL(string: imageUrl ?? "") {
@@ -142,18 +143,18 @@ class CardView: UIView {
     }
     
     @objc private func didTapUserDetailButton() {
-        self.delegate?.didTapShowUserDetailButton(cardViewModel: cardViewModel)
+        self.delegate?.didTapShowUserDetailButton(cardViewModel: cardViewModel!)
     }
     
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         let tapLocation = gesture.location(in: nil)
         let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
         
-        guard cardViewModel.imageUrls.count > 1 else { return }
+        guard cardViewModel?.imageUrls.count ?? 0 > 1 else { return }
         if shouldAdvanceNextPhoto {
-            cardViewModel.advanceToNextPhoto()
+            cardViewModel?.advanceToNextPhoto()
         } else {
-            cardViewModel.goToPreviousPhoto()
+            cardViewModel?.goToPreviousPhoto()
         }
     }
     

@@ -46,6 +46,11 @@ class SettingController: UITableViewController {
             UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(didTapSaveButton)),
             UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(didTapLogoutButton)),
         ]
+        navigationItem.prompt = "User Infomation"
+//        navigationController?.viewControllers[navigationController?.viewControllers.endIndex ?? 0 - 2]
+//        let segmentedControl = UISegmentedControl(items: ["1","2","3","4","5","1","2"])
+//        segmentedControl.setWidth(100, forSegmentAt: 1)
+//        self.navigationItem.titleView = segmentedControl
     }
     
     @objc private func didTapSaveButton() {
