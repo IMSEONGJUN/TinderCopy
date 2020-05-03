@@ -212,9 +212,9 @@ class SettingController: UITableViewController {
     private func settingAgeRageViewCell(cell: AgeRangeViewCell) {
         cell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
         cell.maxSlider.addTarget(self, action: #selector(handleMaxAgeChange), for: .valueChanged)
-        cell.minLabel.text = user?.minSeekingAge != nil ? "Min \(user?.minSeekingAge ?? 0)" : "Min N/A"
+        cell.minLabel.text = user?.minSeekingAge != nil ? "Min \(user?.minSeekingAge ?? 0)" : "Min 18"
         cell.minSlider.value = Float(user?.minSeekingAge ?? 0)
-        cell.maxLabel.text = user?.maxSeekingAge != nil ? "Max \(user?.maxSeekingAge ?? 0)" : "Max N/A"
+        cell.maxLabel.text = user?.maxSeekingAge != nil ? "Max \(user?.maxSeekingAge ?? 0)" : "Max 50"
         cell.maxSlider.value = Float(user?.maxSeekingAge ?? 0)
     }
     

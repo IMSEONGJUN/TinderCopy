@@ -45,7 +45,10 @@ class HomeViewController: UIViewController {
     }
     
     private func fetchUsersFromFirestore() {
-        
+        let loadingView = UIView()
+        loadingView.backgroundColor = UIColor.white
+        cardDeckView.addSubview(loadingView)
+        loadingView.layout.top().leading().trailing().bottom()
         let minAge = user?.minSeekingAge
         let maxAge = user?.maxSeekingAge
         
@@ -60,7 +63,7 @@ class HomeViewController: UIViewController {
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge ?? 19)
                                                              .whereField("age", isLessThanOrEqualTo: maxAge ?? 100)
         query.getDocuments { (snapshot, error) in
-            hud.dismiss()
+            
             guard error == nil else {
                 print("Failed to fetch users:", error!.localizedDescription)
                 return
@@ -73,7 +76,13 @@ class HomeViewController: UIViewController {
                 self.setupCardFromUser(user: user)
 //                self.cardViewModels.append(user.toCardViewModel())
 //                self.lastFetchedUser = user
+                print("after2")
             })
+            print("after3")
+            hud.dismiss()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                loadingView.removeFromSuperview()
+            }
         }
         print("before")
     }
