@@ -101,9 +101,6 @@ class CardView: UIView {
             }
             self.barsStackView.arrangedSubviews.first?.backgroundColor = .white
         }
-        
-        
-        
 //        setupImageIndexObserver()
     }
     
@@ -164,7 +161,7 @@ class CardView: UIView {
 //    private func setupImageIndexObserver() {
 //        cardViewModel?.imageIndexObserver = {[weak self] (imageUrl, imageIndex) in
 //            guard let self = self else { return }
-//            
+//
 //            if let url = URL(string: imageUrl ?? "") {
 //                self.imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "top_left_profile"), options: .continueInBackground)
 //            }

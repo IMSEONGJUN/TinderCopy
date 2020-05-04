@@ -49,6 +49,7 @@ class HomeViewController: UIViewController {
         loadingView.backgroundColor = UIColor.white
         cardDeckView.addSubview(loadingView)
         loadingView.layout.top().leading().trailing().bottom()
+        
         let minAge = user?.minSeekingAge
         let maxAge = user?.maxSeekingAge
         
@@ -80,7 +81,7 @@ class HomeViewController: UIViewController {
             })
             print("after3")
             hud.dismiss()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 loadingView.removeFromSuperview()
             }
         }
