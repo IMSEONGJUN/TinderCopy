@@ -22,9 +22,6 @@ class CardView: UIView {
         }
     }
 
-    
-    private var photos: [UIImage] = []
-    var currentIndex = 0
     private let barsStackView = UIStackView()
     private let imageView = UIImageView()
     private let informationLabel = UILabel()
@@ -68,40 +65,35 @@ class CardView: UIView {
             guard let data = data else { print("log4"); return }
             guard let image = UIImage(data: data) else { print("log5"); return }
             
-            self.photos.append(image)
+            self.cardViewModel?.photos.append(image)
             completion()
         }
         .resume()
     }
     
     private func reConfigureCardView(cardViewModel: CardViewModel) {
-//        let imageName = cardViewModel.imageUrls.first ?? ""
-//        if let url = URL(string: imageName) {
-////            imageView.sd_setImage(with: url)
-//            imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "top_left_profile"), options: .continueInBackground)
-//        }
         let group = DispatchGroup()
-        
         cardViewModel.imageUrls.filter{$0 != ""}.forEach({ (str) in
             group.enter()
             self.loadPhoto(using: str){
                 group.leave()
             }
+            group.wait()
         })
             
         group.notify(queue: .main) {
-            self.imageView.image = self.photos.first
+            self.imageView.image = self.cardViewModel?.photos.first
             self.informationLabel.attributedText = cardViewModel.attributedString
             self.informationLabel.textAlignment = cardViewModel.textAlignment
             
-            (0..<self.photos.count).forEach { (_) in
+            (0..<self.cardViewModel!.photos.count).forEach { (_) in
                 let barView = UIView()
                 barView.backgroundColor = self.barDeselectedColor
                 self.barsStackView.addArrangedSubview(barView)
             }
             self.barsStackView.arrangedSubviews.first?.backgroundColor = .white
         }
-//        setupImageIndexObserver()
+        setupImageIndexObserver()
     }
     
     private func configureBarsStackView() {
@@ -169,6 +161,14 @@ class CardView: UIView {
 //            self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
 //        }
 //    }
+    private func setupImageIndexObserver() {
+        cardViewModel?.imageIndexObserver = { [weak self] (imageIndex) in
+            guard let self = self else { return }
+            self.imageView.image = self.cardViewModel?.photos[imageIndex]
+            self.barsStackView.arrangedSubviews.forEach({$0.backgroundColor = self.barDeselectedColor})
+            self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
+        }
+    }
     
     @objc private func didTapUserDetailButton() {
         self.delegate?.didTapShowUserDetailButton(cardViewModel: cardViewModel!)
@@ -180,20 +180,9 @@ class CardView: UIView {
         
         guard cardViewModel?.imageUrls.count ?? 0 > 1 else { return }
         if shouldAdvanceNextPhoto {
-//            cardViewModel?.advanceToNextPhoto()
-            let index = min(currentIndex + 1, photos.count - 1)
-            print("tap")
-            imageView.image = photos[index]
-            self.barsStackView.arrangedSubviews.forEach({$0.backgroundColor = self.barDeselectedColor})
-            self.barsStackView.arrangedSubviews[index].backgroundColor = .white
-            currentIndex = index
+            cardViewModel?.advanceToNextPhoto()
         } else {
-//            cardViewModel?.goToPreviousPhoto()
-            let index = max(currentIndex - 1, 0)
-            imageView.image = photos[index]
-            self.barsStackView.arrangedSubviews.forEach({$0.backgroundColor = self.barDeselectedColor})
-            self.barsStackView.arrangedSubviews[index].backgroundColor = .white
-            currentIndex = index
+            cardViewModel?.goToPreviousPhoto()
         }
     }
     

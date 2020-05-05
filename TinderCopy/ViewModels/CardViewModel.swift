@@ -20,6 +20,7 @@ class CardViewModel {
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
     var userBio: String?
+    var photos:[UIImage] = []
     
     init(imageNames: [String], attributedString: NSAttributedString, textAlignment: NSTextAlignment, bio: String?) {
         self.imageUrls = imageNames
@@ -30,16 +31,15 @@ class CardViewModel {
     
     private var imageIndex = 0 {
         didSet{
-            let imageUrl = imageUrls[imageIndex]
-            imageIndexObserver?(imageUrl, imageIndex)
+            imageIndexObserver?(imageIndex)
         }
     }
     
     // Reactive Programmming
-    var imageIndexObserver: ((String?, Int) -> ())?
+    var imageIndexObserver: ((Int) -> ())?
     
     func advanceToNextPhoto() {
-        imageIndex = min(imageUrls.count - 1, imageIndex + 1)
+        imageIndex = min(photos.count - 1, imageIndex + 1)
     }
     
     func goToPreviousPhoto() {

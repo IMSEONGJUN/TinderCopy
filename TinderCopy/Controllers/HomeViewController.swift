@@ -16,8 +16,6 @@ class HomeViewController: UIViewController {
     let cardDeckView = UIView()
     let bottomControl = HomeBottomControlsStackView()
 
-//    private var cardViewModels = [CardViewModel]()
-//    private var lastFetchedUser: User?
     var user : User?
     
     override func viewDidLoad() {
@@ -45,10 +43,10 @@ class HomeViewController: UIViewController {
     }
     
     private func fetchUsersFromFirestore() {
-        let loadingView = UIView()
-        loadingView.backgroundColor = UIColor.white
-        cardDeckView.addSubview(loadingView)
-        loadingView.layout.top().leading().trailing().bottom()
+        let loadingCoverView = UIView()
+        loadingCoverView.backgroundColor = UIColor.white
+        cardDeckView.addSubview(loadingCoverView)
+        loadingCoverView.layout.top().leading().trailing().bottom()
         
         let minAge = user?.minSeekingAge
         let maxAge = user?.maxSeekingAge
@@ -75,14 +73,12 @@ class HomeViewController: UIViewController {
                 let user = User(userDictionary: userDictionary)
                 guard self.user?.uid != user.uid else { return }
                 self.setupCardFromUser(user: user)
-//                self.cardViewModels.append(user.toCardViewModel())
-//                self.lastFetchedUser = user
                 print("after2")
             })
             print("after3")
-            hud.dismiss()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                loadingView.removeFromSuperview()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                loadingCoverView.removeFromSuperview()
+                hud.dismiss()
             }
         }
         print("before")
