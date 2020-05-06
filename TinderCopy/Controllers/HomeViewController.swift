@@ -18,17 +18,21 @@ class HomeViewController: UIViewController {
 
     var user : User?
     
+    var topCardView: CardView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = .systemBackground
         topStackView.settingsButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
         bottomControl.refreshButton.addTarget(self, action: #selector(didTapRefreshButton), for: .touchUpInside)
+        bottomControl.likeButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
+        
         
         setupLayout()
         setupUser()
     }
-    
+
     func setupUser() {
         fetchCurrentUser { [weak self] (result) in
             guard let self = self else { return }
@@ -68,11 +72,21 @@ class HomeViewController: UIViewController {
                 return
             }
             print("after")
+            var previousCardView: CardView?
+            
             snapshot?.documents.forEach({
                 let userDictionary = $0.data()
                 let user = User(userDictionary: userDictionary)
                 guard self.user?.uid != user.uid else { return }
-                self.setupCardFromUser(user: user)
+                let cardView = self.setupCardFromUser(user: user)
+                
+                previousCardView?.nextCardView = cardView
+                previousCardView = cardView
+                
+                if self.topCardView == nil {
+                    self.topCardView = cardView
+                }
+                
                 print("after2")
             })
             print("after3")
@@ -84,13 +98,31 @@ class HomeViewController: UIViewController {
         print("before")
     }
     
-    private func setupCardFromUser(user: User) {
+    
+    
+    @objc private func didTapLikeButton() {
+        
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+            
+            self.topCardView?.frame = CGRect(x: 600, y: 0, width: self.topCardView!.frame.width, height: self.topCardView!.frame.height)
+            let angle = 15 * CGFloat.pi / 180
+            self.topCardView?.transform = CGAffineTransform(rotationAngle: angle)
+            self.topCardView?.removeFromSuperview()
+            
+        }) { (_) in
+            self.topCardView = self.topCardView?.nextCardView
+        }
+        
+    }
+    
+    private func setupCardFromUser(user: User) -> CardView {
         let cardView = CardView(frame: .zero)
         cardView.delegate = self
         cardView.cardViewModel = user.toCardViewModel()
         cardDeckView.addSubview(cardView)
         cardDeckView.sendSubviewToBack(cardView)
         cardView.layout.top().leading().trailing().bottom()
+        return cardView
     }
     
     @objc private func didTapRefreshButton() {
@@ -144,5 +176,10 @@ extension HomeViewController: CardViewDelegate {
         userDetailVC.userData = cardViewModel
         userDetailVC.modalPresentationStyle = .fullScreen
         present(userDetailVC, animated: true)
+    }
+    
+    func didRemoveCard(cardView: CardView) {
+       self.topCardView?.removeFromSuperview()
+       self.topCardView = self.topCardView?.nextCardView
     }
 }

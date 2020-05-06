@@ -11,10 +11,13 @@ import SDWebImage
 
 protocol CardViewDelegate: class {
     func didTapShowUserDetailButton(cardViewModel: CardViewModel)
+    func didRemoveCard(cardView: CardView)
 }
 
 class CardView: UIView {
 
+    var nextCardView: CardView?
+    
     var cardViewModel: CardViewModel? {
         didSet{
             guard let cardViewModel = cardViewModel else {return}
@@ -78,7 +81,7 @@ class CardView: UIView {
             self.loadPhoto(using: str){
                 group.leave()
             }
-            group.wait()
+//            group.wait()
         })
             
         group.notify(queue: .main) {
@@ -230,7 +233,9 @@ class CardView: UIView {
         }) { (_) in
             if shouldDismissCard {
                 self.removeFromSuperview()
+                self.delegate?.didRemoveCard(cardView: self)
             }
+            
         }
     }
 }
