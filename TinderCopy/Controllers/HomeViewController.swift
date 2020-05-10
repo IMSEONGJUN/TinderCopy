@@ -103,7 +103,6 @@ class HomeViewController: UIViewController {
         flyingAwayAction(translationValue: 700, rotationAngle: 15)
     }
     
-    
     @objc private func didTapDislikeButton() {
         flyingAwayAction(translationValue: -700, rotationAngle: -15)
     }

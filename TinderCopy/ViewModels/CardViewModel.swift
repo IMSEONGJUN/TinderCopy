@@ -20,6 +20,7 @@ class CardViewModel {
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
     var userBio: String?
+    
     var photos:[UIImage] = []
     
     init(imageNames: [String], attributedString: NSAttributedString, textAlignment: NSTextAlignment, bio: String?) {

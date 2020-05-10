@@ -62,8 +62,8 @@ class CardView: UIView {
     
     private func loadPhoto(using urlString: String, completion: @escaping () -> Void){
         guard let url = URL(string: urlString) else { return }
+        
         URLSession.shared.dataTask(with: url) { (data, res, err) in
-            
             guard err == nil else { print("log3"); return }
             guard let data = data else { print("log4"); return }
             guard let image = UIImage(data: data) else { print("log5"); return }
