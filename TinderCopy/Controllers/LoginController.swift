@@ -142,7 +142,6 @@ class LoginController: UIViewController {
                 print("failed to log in:", err)
                 return
             }
-            
             self.switchToHomeViewAfterLogin()
         }
     }

@@ -16,6 +16,7 @@ protocol ProducesCardViewModel {
 
 // view model is supposed to represent the state of our view
 class CardViewModel {
+    let uid: String
     let imageUrls: [String]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
@@ -23,7 +24,8 @@ class CardViewModel {
     
     var photos:[UIImage] = []
     
-    init(imageNames: [String], attributedString: NSAttributedString, textAlignment: NSTextAlignment, bio: String?) {
+    init(uid:String, imageNames: [String], attributedString: NSAttributedString, textAlignment: NSTextAlignment, bio: String?) {
+        self.uid = uid
         self.imageUrls = imageNames
         self.attributedString = attributedString
         self.textAlignment = textAlignment

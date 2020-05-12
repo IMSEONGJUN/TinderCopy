@@ -11,7 +11,7 @@ import SDWebImage
 
 protocol CardViewDelegate: class {
     func didTapShowUserDetailButton(cardViewModel: CardViewModel)
-    func didRemoveCard(cardView: CardView)
+    func changeTopCardViewOnHomeVC(cardView: CardView)
 }
 
 class CardView: UIView {
@@ -215,28 +215,49 @@ class CardView: UIView {
         
         let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
         let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
-        
-        UIView.animate(withDuration: 1,
-                       delay: 0,
-                       usingSpringWithDamping: 0.3,
-                       initialSpringVelocity: 0.1,
-                       options: .curveEaseOut,
-                       animations: {
-                        if shouldDismissCard {
-//                            self.center = CGPoint(x: 600 * translationDirection, y: 0)
-                            let offScreenTransform = self.transform.translatedBy(x: 600 * translationDirection, y: 0)
-                            self.transform = offScreenTransform
-                        } else {
-                            self.transform = .identity
-                        }
-                        
-        }) { (_) in
-            if shouldDismissCard {
-                self.removeFromSuperview()
-                self.delegate?.didRemoveCard(cardView: self)
-            }
+       
+        if shouldDismissCard {
+            guard let homeController = self.delegate as? HomeViewController else { return }
             
+            if translationDirection == 1 {
+                homeController.didTapLikeButton()
+            } else {
+                homeController.didTapDislikeButton()
+            }
+        } else {
+            UIView.animate(withDuration: 1,
+                                   delay: 0,
+                                   usingSpringWithDamping: 0.3,
+                                   initialSpringVelocity: 0.1,
+                                   options: .curveEaseOut,
+                                   animations: {
+                                    self.transform = .identity
+            })
         }
+        
+        
+//        UIView.animate(withDuration: 1,
+//                       delay: 0,
+//                       usingSpringWithDamping: 0.3,
+//                       initialSpringVelocity: 0.1,
+//                       options: .curveEaseOut,
+//                       animations: {
+//                        if shouldDismissCard {
+////                            self.center = CGPoint(x: 600 * translationDirection, y: 0)
+//                            let offScreenTransform = self.transform.translatedBy(x: 600 * translationDirection, y: 0)
+//                            self.transform = offScreenTransform
+//                        } else {
+//                            self.transform = .identity
+//                        }
+//
+//        }) { (_) in
+//            if shouldDismissCard {
+//                self.delegate?.changeTopCardViewOnHomeVC(cardView: self)
+//                self.removeFromSuperview()
+//
+//            }
+//
+//        }
     }
 }
 

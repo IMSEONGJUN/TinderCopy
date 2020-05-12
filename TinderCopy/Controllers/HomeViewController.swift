@@ -99,12 +99,42 @@ class HomeViewController: UIViewController {
         print("before")
     }
     
-    @objc private func didTapLikeButton() {
+    @objc func didTapLikeButton() {
+        saveSwipingInfoToFirestore(isLike: true)
         flyingAwayAction(translationValue: 700, rotationAngle: 15)
     }
     
-    @objc private func didTapDislikeButton() {
+    @objc func didTapDislikeButton() {
+        saveSwipingInfoToFirestore(isLike: false)
         flyingAwayAction(translationValue: -700, rotationAngle: -15)
+    }
+    
+    private func saveSwipingInfoToFirestore(isLike: Bool) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let cardID = topCardView?.cardViewModel?.uid else { return }
+        let swippedData = [cardID : isLike]
+        
+        Firestore.firestore().collection("swipingInfos").document(uid).getDocument { (snapshot, error) in
+            guard error == nil else { print("failed to load snapshot:", error!) ; return }
+            
+            if snapshot?.exists == true {
+                Firestore.firestore().collection("swipingInfos").document(uid).updateData(swippedData) { (error) in
+                    if let err = error {
+                        print("Failed to save swipe data:", err)
+                        return
+                    }
+                    print("Successfully updated")
+                }
+            } else {
+                Firestore.firestore().collection("swipingInfos").document(uid).setData(swippedData) { (error) in
+                    if let err = error {
+                        print("Failed to save swipe data:", err)
+                        return
+                    }
+                    print("Successfully saved")
+                }
+            }
+        }
     }
     
     private func flyingAwayAction(translationValue: CGFloat, rotationAngle: CGFloat) {
@@ -196,8 +226,8 @@ extension HomeViewController: CardViewDelegate {
         present(userDetailVC, animated: true)
     }
     
-    func didRemoveCard(cardView: CardView) {
-       self.topCardView?.removeFromSuperview()
-       self.topCardView = self.topCardView?.nextCardView
+    func changeTopCardViewOnHomeVC(cardView: CardView) {
+//       self.topCardView?.removeFromSuperview()
+//       self.topCardView = self.topCardView?.nextCardView
     }
 }

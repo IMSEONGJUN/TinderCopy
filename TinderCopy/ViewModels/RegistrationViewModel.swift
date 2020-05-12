@@ -20,7 +20,8 @@ class RegistraionViewModel {
     var password: String? { didSet{ checkFormValidity() } }
     
     func checkFormValidity() {
-        let isFormValid = fullName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false && bindableImage.value != nil
+        let isFormValid = fullName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
+            && bindableImage.value != nil
         bindableIsFormValid.value = isFormValid
 
     }

@@ -57,7 +57,7 @@ struct User : ProducesCardViewModel {
         if let url = imageUrl2 { imageUrls.append(url)}
         if let url = imageUrl3 { imageUrls.append(url)}
         
-        return CardViewModel(imageNames: imageUrls, attributedString: attributeText, textAlignment: .left, bio: self.bio)
+        return CardViewModel(uid: self.uid ?? "", imageNames: imageUrls, attributedString: attributeText, textAlignment: .left, bio: self.bio)
     }
 }
 
