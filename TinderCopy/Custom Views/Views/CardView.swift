@@ -218,7 +218,6 @@ class CardView: UIView {
        
         if shouldDismissCard {
             guard let homeController = self.delegate as? HomeViewController else { return }
-            
             if translationDirection == 1 {
                 homeController.didTapLikeButton()
             } else {
@@ -226,39 +225,13 @@ class CardView: UIView {
             }
         } else {
             UIView.animate(withDuration: 1,
-                                   delay: 0,
-                                   usingSpringWithDamping: 0.3,
-                                   initialSpringVelocity: 0.1,
-                                   options: .curveEaseOut,
-                                   animations: {
-                                    self.transform = .identity
-            })
+                           delay: 0,
+                           usingSpringWithDamping: 0.3,
+                           initialSpringVelocity: 0.1,
+                           options: .curveEaseOut,
+                           animations: {
+                            self.transform = .identity
+                           })
         }
-        
-        
-//        UIView.animate(withDuration: 1,
-//                       delay: 0,
-//                       usingSpringWithDamping: 0.3,
-//                       initialSpringVelocity: 0.1,
-//                       options: .curveEaseOut,
-//                       animations: {
-//                        if shouldDismissCard {
-////                            self.center = CGPoint(x: 600 * translationDirection, y: 0)
-//                            let offScreenTransform = self.transform.translatedBy(x: 600 * translationDirection, y: 0)
-//                            self.transform = offScreenTransform
-//                        } else {
-//                            self.transform = .identity
-//                        }
-//
-//        }) { (_) in
-//            if shouldDismissCard {
-//                self.delegate?.changeTopCardViewOnHomeVC(cardView: self)
-//                self.removeFromSuperview()
-//
-//            }
-//
-//        }
     }
 }
-
-//            self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
