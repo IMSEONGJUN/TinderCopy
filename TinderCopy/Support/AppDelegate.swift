@@ -45,3 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension UIApplication {
+
+    static var statusBar: UIView {
+        let status = UIView(frame: (UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.windowScene?.statusBarManager?.statusBarFrame)!)
+        status.backgroundColor = UIColor.red
+        return status
+//        UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.addSubview(statusBar)
+    }
+}
+

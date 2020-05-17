@@ -11,7 +11,6 @@ import SDWebImage
 
 protocol CardViewDelegate: class {
     func didTapShowUserDetailButton(cardViewModel: CardViewModel)
-    func changeTopCardViewOnHomeVC(cardView: CardView)
 }
 
 class CardView: UIView {

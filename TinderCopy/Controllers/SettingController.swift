@@ -31,6 +31,8 @@ class SettingController: UITableViewController {
 
     let padding: CGFloat = 16
     
+    var statusBar: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNaviBar()
@@ -38,6 +40,13 @@ class SettingController: UITableViewController {
         setupUser()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        statusBar = UIApplication.statusBar
+        statusBar.backgroundColor = .blue
+        UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.addSubview(statusBar)
+    }
+    
     private func configureNaviBar() {
         navigationItem.title = "Setting"
         navigationController?.navigationBar.prefersLargeTitles = true

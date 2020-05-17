@@ -33,6 +33,15 @@ class HomeViewController: UIViewController {
         setupUser()
     }
 
+    var statusBar: UIView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        statusBar = UIApplication.statusBar
+        statusBar.backgroundColor = .red
+        UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.addSubview(statusBar)
+    }
+    
     func setupUser() {
         fetchCurrentUser { [weak self] (result) in
             guard let self = self else { return }
@@ -174,7 +183,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func didTapRefreshButton() {
-        cardDeckView.subviews.forEach({ $0.removeFromSuperview()})
+        cardDeckView.subviews.forEach({ $0.removeFromSuperview() })
         fetchUsersFromFirestore()
     }
     
@@ -225,9 +234,5 @@ extension HomeViewController: CardViewDelegate {
         userDetailVC.modalPresentationStyle = .fullScreen
         present(userDetailVC, animated: true)
     }
-    
-    func changeTopCardViewOnHomeVC(cardView: CardView) {
-//       self.topCardView?.removeFromSuperview()
-//       self.topCardView = self.topCardView?.nextCardView
-    }
+
 }

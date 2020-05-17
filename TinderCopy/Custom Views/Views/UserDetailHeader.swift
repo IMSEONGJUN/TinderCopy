@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import SDWebImage
 
+
+// MARK: 사용하지 않는 파일 -> SwipingPhotosController로 대체됨
 class UserDetailHeader: UIView {
     
     let scrollView = UIScrollView()
