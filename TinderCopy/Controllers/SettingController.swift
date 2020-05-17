@@ -43,7 +43,7 @@ class SettingController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         statusBar = UIApplication.statusBar
-        statusBar.backgroundColor = .blue
+        statusBar.backgroundColor = .clear
         UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.addSubview(statusBar)
     }
     
@@ -51,6 +51,14 @@ class SettingController: UITableViewController {
         navigationItem.title = "Setting"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(didTapCancelButton))
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        let appearance = UINavigationBarAppearance()
+        appearance.shadowImage = nil
+        appearance.configureWithTransparentBackground()
+        
+        appearance.backgroundColor = .cyan
+        navigationController?.navigationBar.standardAppearance = appearance
+        
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(didTapSaveButton)),
             UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(didTapLogoutButton)),
