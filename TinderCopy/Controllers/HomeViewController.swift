@@ -65,8 +65,15 @@ class HomeViewController: UIViewController {
         let maxAge = user?.maxSeekingAge
         
         let hud = JGProgressHUD(style: .dark)
+//        hud.indicatorView = nil
+//        hud.indicatorView?.frame.size = CGSize(width: 100, height: 30)
         hud.textLabel.text = "Loading"
+//        hud.textLabel.textColor = .white
+//        hud.textLabel.backgroundColor = .lightGray
+//        hud.textLabel.layer.cornerRadius = 3
+//        hud.textLabel.clipsToBounds = true
         hud.show(in: view)
+        
         
 //      let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)
 //      let query = Firestore.firestore().collection("users").whereField("age", isLessThan: 31).whereField("age", isGreaterThan:        18).whereField("friends", arrayContains: "Chris")
@@ -133,6 +140,9 @@ class HomeViewController: UIViewController {
                         return
                     }
                     print("Successfully updated")
+                    if isLike {
+                        self.checkMatchedUser(cardUID: cardID)
+                    }
                 }
             } else {
                 Firestore.firestore().collection("swipingInfos").document(uid).setData(swippedData) { (error) in
@@ -141,9 +151,33 @@ class HomeViewController: UIViewController {
                         return
                     }
                     print("Successfully saved")
+                    if isLike {
+                        self.checkMatchedUser(cardUID: cardID)
+                    }
                 }
             }
         }
+    }
+    
+    private func checkMatchedUser(cardUID: String) {
+        print("check match")
+        
+        Firestore.firestore().collection("swipingInfos").document(cardUID).getDocument { (snapShot, error) in
+            if let error = error {
+                print("failed to fetch document for card user:", error)
+                return
+            }
+            
+            guard let data = snapShot?.data() else { return }
+            
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            
+            let hasMatched = (data[uid] as? Bool) == true
+            if hasMatched {
+                print("Found matched User")
+            }
+        }
+        
     }
     
     private func flyingAwayAction(translationValue: CGFloat, rotationAngle: CGFloat) {

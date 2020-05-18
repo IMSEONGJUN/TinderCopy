@@ -27,10 +27,10 @@ extension UIViewController {
             }
             
             guard let dic = snapshot?.data() else {
-//                completion(.failure(error?.localizedDescription as! Error))
+                completion(.failure(error?.localizedDescription as! Error))
                 return
             }
-                
+            print("Thread checking: ",Thread.isMainThread)
             let user = User(userDictionary: dic)
             completion(.success(user))
         }

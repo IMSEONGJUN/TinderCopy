@@ -55,8 +55,6 @@ class SettingController: UITableViewController {
         let appearance = UINavigationBarAppearance()
         appearance.shadowImage = nil
         appearance.configureWithTransparentBackground()
-        
-        appearance.backgroundColor = .cyan
         navigationController?.navigationBar.standardAppearance = appearance
         
         navigationItem.rightBarButtonItems = [
@@ -88,6 +86,7 @@ class SettingController: UITableViewController {
         
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Saving settings"
+        
         hud.show(in: view)
         
         Firestore.firestore().collection("users").document(uid).setData(docData) { (error) in
