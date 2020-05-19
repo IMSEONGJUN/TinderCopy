@@ -107,7 +107,7 @@ class HomeViewController: UIViewController {
                 print("after2")
             })
             print("after3")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 loadingCoverView.removeFromSuperview()
                 hud.dismiss()
             }
