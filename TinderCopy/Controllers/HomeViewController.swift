@@ -175,9 +175,16 @@ class HomeViewController: UIViewController {
             let hasMatched = (data[uid] as? Bool) == true
             if hasMatched {
                 print("Found matched User")
+                self.showMatchNoticeView(cardID: cardUID)
             }
         }
         
+    }
+    
+    private func showMatchNoticeView(cardID: String) {
+        let matchView = MatchNoticeView()
+        self.view.addSubview(matchView)
+        matchView.layout.top().leading().trailing().bottom()
     }
     
     private func flyingAwayAction(translationValue: CGFloat, rotationAngle: CGFloat) {
