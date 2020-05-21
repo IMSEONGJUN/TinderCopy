@@ -1,6 +1,6 @@
 # TinderCopy
 
-## Work in progress now
+## Work in progress Recently
 
 - Practice for MVVM Pattern
 
