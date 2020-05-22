@@ -1,7 +1,7 @@
 # TinderCopy
 
-## Work in progress now
+## Work in progress Recently
 
-- Practice for MVVM Pattern
+- Reactive Programming Practice using MVVM Pattern
 
 - Using Google FireStore
