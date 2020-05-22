@@ -87,7 +87,7 @@ class MatchNoticeView: UIView {
                         initialSpringVelocity: 1,
                         options: .curveEaseOut,
                         animations: {
-                         self.alpha = 1
+                         self.alpha = 0
                         },
                         completion: { (_) in
                             self.removeFromSuperview()

@@ -13,8 +13,6 @@ struct User : ProducesCardViewModel {
     var name: String?
     var age: Int?
     var profession: String?
-    
-//    let imageNames: [String]
     var imageUrl1: String?
     var imageUrl2: String?
     var imageUrl3: String?
@@ -24,11 +22,9 @@ struct User : ProducesCardViewModel {
     var maxSeekingAge: Int?
     
     init(userDictionary: [String : Any]) {
-        
         self.age = userDictionary["age"] as? Int
         self.profession = userDictionary["profession"] as? String
         self.name = userDictionary["fullName"] as? String
-        
         self.imageUrl1 = userDictionary["imageUrl1"] as? String
         self.imageUrl2 = userDictionary["imageUrl2"] as? String
         self.imageUrl3 = userDictionary["imageUrl3"] as? String

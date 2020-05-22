@@ -86,7 +86,6 @@ class SettingController: UITableViewController {
         
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Saving settings"
-        
         hud.show(in: view)
         
         Firestore.firestore().collection("users").document(uid).setData(docData) { (error) in
