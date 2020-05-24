@@ -15,6 +15,9 @@ protocol CardViewDelegate: class {
 
 class CardView: UIView {
 
+    
+    // MARK: - Properties
+    
     var nextCardView: CardView?
     
     var cardViewModel: CardViewModel? {
@@ -35,6 +38,8 @@ class CardView: UIView {
     private let threshold: CGFloat = 100
     
     weak var delegate: CardViewDelegate?
+    
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -58,6 +63,9 @@ class CardView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    // MARK: - Set
     
     private func loadPhoto(using urlString: String, completion: @escaping () -> Void){
         guard let url = URL(string: urlString) else { return }
@@ -171,6 +179,9 @@ class CardView: UIView {
             self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
         }
     }
+    
+    
+    // MARK: - Action Handle
     
     @objc private func didTapUserDetailButton() {
         self.delegate?.didTapShowUserDetailButton(cardViewModel: cardViewModel!)

@@ -12,6 +12,22 @@ class MatchNoticeView: UIView {
     
     let imageViewSize: CGFloat = 140
     
+    let titleImageView: UIImageView = {
+       let iv = UIImageView(image: #imageLiteral(resourceName: "itsamatch"))
+        iv.contentMode = .scaleAspectFill
+        return iv
+    }()
+    
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "You and someone have liked\neach other"
+        label.textAlignment = .center
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        return label
+    }()
+    
     let currentUserImageView: UIImageView = {
        let iv = UIImageView(image: #imageLiteral(resourceName: "kelly1"))
         iv.contentMode = .scaleAspectFill
@@ -32,6 +48,13 @@ class MatchNoticeView: UIView {
         return iv
     }()
     
+    let sendMessageButton: UIButton = {
+       let btn = UIButton()
+        btn.setTitle("SEND MESSAGE", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        return btn
+    }()
+    
     let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     override init(frame: CGRect) {
@@ -47,7 +70,7 @@ class MatchNoticeView: UIView {
     
     private func configureBlurEffect() {
         addSubview(visualEffectView)
-        visualEffectView.layout.top().leading().trailing().bottom()
+        visualEffectView.layout.fillSuperView()
         visualEffectView.alpha = 0
         
         UIView.animate(withDuration: 0.5,
@@ -61,7 +84,19 @@ class MatchNoticeView: UIView {
     }
     
     private func configureImageViews() {
-        [currentUserImageView, matchedUserImageView].forEach({visualEffectView.addSubview($0)})
+        [titleImageView, descriptionLabel, currentUserImageView, matchedUserImageView, sendMessageButton]
+            .forEach({addSubview($0)})
+        
+        titleImageView.layout
+                      .leading(equalTo: currentUserImageView.leadingAnchor)
+                      .trailing(equalTo: matchedUserImageView.trailingAnchor)
+                      .bottom(equalTo: descriptionLabel.topAnchor, constant: -16)
+                      .height(equalToconstant: 80)
+        
+        descriptionLabel.layout
+                        .leading(equalTo: currentUserImageView.leadingAnchor)
+                        .trailing(equalTo: matchedUserImageView.trailingAnchor)
+                        .bottom(equalTo: currentUserImageView.topAnchor, constant: -45)
         
         currentUserImageView.layout
                             .centerY()
@@ -74,6 +109,12 @@ class MatchNoticeView: UIView {
                             .leading(equalTo: visualEffectView.centerXAnchor, contant: 16)
                             .width(equalToconstant: self.imageViewSize)
                             .height(equalToconstant: self.imageViewSize)
+        
+        sendMessageButton.layout
+            .top(equalTo: currentUserImageView.bottomAnchor, constant: 16)
+            .leading(equalTo: currentUserImageView.leadingAnchor)
+            .trailing(equalTo: matchedUserImageView.trailingAnchor)
+            .height(equalToconstant: 60)
     }
     
     private func configureTapGestureToDismiss() {

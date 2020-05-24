@@ -48,16 +48,7 @@ class SwipingPhotosController: UIPageViewController {
         barStackView.spacing = 4
         barStackView.distribution = .fillEqually
         barStackView.arrangedSubviews.first?.backgroundColor = .white
-//        let statusBarHeight: CGFloat = {
-//            var heightToReturn: CGFloat = 0.0
-//                 for window in UIApplication.shared.windows {
-//                     if let height = window.windowScene?.statusBarManager?.statusBarFrame.height, height > heightToReturn {
-//                         heightToReturn = height
-//                     }
-//                 }
-//            return heightToReturn
-//        }()
-//        let statusBar: CGFloat = UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+
         let window = UIApplication.shared.windows.filter{$0.isKeyWindow}.first
         let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         view.addSubview(barStackView)
@@ -73,7 +64,7 @@ extension SwipingPhotosController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard self.controllers.count > 1 else { return nil }
         let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? 0
-        if index == 0 { return controllers.last! }
+        if index == 0 { return controllers.last! } // show last image
 //        if index == 0 { return nil }
         return controllers[index - 1]
     }
@@ -81,7 +72,7 @@ extension SwipingPhotosController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard self.controllers.count > 1 else { return nil }
         let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? 0
-        if index == controllers.count - 1 { return controllers.first! }
+        if index == controllers.count - 1 { return controllers.first! } // show first image
 //        if index == controllers.count - 1 { return nil }
         return controllers[index + 1]
     }
@@ -125,7 +116,7 @@ class PhotoController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageView)
-        imageView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.bottomAnchor)
+        imageView.layout.fillSuperView()
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
     }

@@ -17,7 +17,7 @@ class HomeViewController: UIViewController {
     let bottomControl = HomeBottomControlsStackView()
 
     var user : User?
-    
+    var swipingInfoOfCurrentUser = [String : Bool]()
     var topCardView: CardView?
     
     override func viewDidLoad() {
@@ -51,6 +51,20 @@ class HomeViewController: UIViewController {
             case .failure(let error):
                 print(error)
             }
+            self.fetchCurrentUsersSwipeInfo()
+        }
+    }
+    
+    private func fetchCurrentUsersSwipeInfo() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("swipingInfos").document(uid).getDocument { (snapshot, error) in
+            if let error = error {
+                print("Failed to fetch swipingInfos of current User:", error)
+                return
+            }
+            
+            guard let data = snapshot?.data() as? [String : Bool] else { return }
+            self.swipingInfoOfCurrentUser = data
             self.fetchUsersFromFirestore()
         }
     }
@@ -76,7 +90,7 @@ class HomeViewController: UIViewController {
         
         
 //      let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)
-//      let query = Firestore.firestore().collection("users").whereField("age", isLessThan: 31).whereField("age", isGreaterThan:        18).whereField("friends", arrayContains: "Chris")
+//      let query = Firestore.firestore().collection("users").whereField("age", isLessThan: 31).whereField("age", isGreaterThan:18).whereField("friends", arrayContains: "Chris")
        
     //  Filtering data using user's minAge, maxAge
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge ?? 19)
@@ -94,6 +108,7 @@ class HomeViewController: UIViewController {
             snapshot?.documents.forEach({
                 let userDictionary = $0.data()
                 let user = User(userDictionary: userDictionary)
+//                guard self.swipingInfoOfCurrentUser[user.uid ?? ""] == nil else { return }
                 guard self.user?.uid != user.uid else { return }
                 let cardView = self.setupCardFromUser(user: user)
                 
@@ -127,8 +142,8 @@ class HomeViewController: UIViewController {
     
     private func saveSwipingInfoToFirestore(isLike: Bool) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        guard let cardID = topCardView?.cardViewModel?.uid else { return }
-        let swippedData = [cardID : isLike]
+        guard let cardUID = topCardView?.cardViewModel?.uid else { return }
+        let swippedData = [cardUID : isLike]
         
         Firestore.firestore().collection("swipingInfos").document(uid).getDocument { (snapshot, error) in
             guard error == nil else { print("failed to load snapshot:", error!) ; return }
@@ -141,7 +156,7 @@ class HomeViewController: UIViewController {
                     }
                     print("Successfully updated")
                     if isLike {
-                        self.checkMatchedUser(cardUID: cardID)
+                        self.checkMatchedUser(cardUID: cardUID)
                     }
                 }
             } else {
@@ -152,7 +167,7 @@ class HomeViewController: UIViewController {
                     }
                     print("Successfully saved")
                     if isLike {
-                        self.checkMatchedUser(cardUID: cardID)
+                        self.checkMatchedUser(cardUID: cardUID)
                     }
                 }
             }
@@ -160,8 +175,6 @@ class HomeViewController: UIViewController {
     }
     
     private func checkMatchedUser(cardUID: String) {
-        print("check match")
-        
         Firestore.firestore().collection("swipingInfos").document(cardUID).getDocument { (snapShot, error) in
             if let error = error {
                 print("failed to fetch document for card user:", error)
