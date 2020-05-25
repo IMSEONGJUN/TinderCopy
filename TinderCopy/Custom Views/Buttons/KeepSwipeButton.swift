@@ -1,15 +1,15 @@
 //
-//  SendMessageButton.swift
+//  KeepSwipButton.swift
 //  TinderCopy
 //
-//  Created by SEONGJUN on 2020/05/24.
+//  Created by SEONGJUN on 2020/05/25.
 //  Copyright © 2020 Seongjun Im. All rights reserved.
 //
 
 import UIKit
 
-class SendMessageButton: UIButton {
-
+class KeepSwipeButton: UIButton {
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -27,7 +27,16 @@ class SendMessageButton: UIButton {
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
         
+        let maskLayer = CAShapeLayer()
         
+        let maskPath = CGMutablePath()
+        maskPath.addPath(UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).cgPath)
+        
+        maskPath.addPath(UIBezierPath(roundedRect: rect.insetBy(dx: 2, dy: 2), cornerRadius: cornerRadius).cgPath)
+        
+        maskLayer.path = maskPath
+        maskLayer.fillRule = .evenOdd
+        
+        gradient.mask = maskLayer
     }
-    
 }

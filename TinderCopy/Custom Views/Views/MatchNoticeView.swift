@@ -49,8 +49,17 @@ class MatchNoticeView: UIView {
     }()
     
     let sendMessageButton: UIButton = {
-       let btn = UIButton()
+       let btn = SendMessageButton(type: .system)
         btn.setTitle("SEND MESSAGE", for: .normal)
+        btn.titleLabel?.textAlignment = .center
+        btn.setTitleColor(.white, for: .normal)
+        return btn
+    }()
+    
+    let keepswipeButton: UIButton = {
+        let btn = KeepSwipeButton(type: .system)
+        btn.setTitle("Keep Swiping", for: .normal)
+        btn.titleLabel?.textAlignment = .center
         btn.setTitleColor(.white, for: .normal)
         return btn
     }()
@@ -84,7 +93,8 @@ class MatchNoticeView: UIView {
     }
     
     private func configureImageViews() {
-        [titleImageView, descriptionLabel, currentUserImageView, matchedUserImageView, sendMessageButton]
+        [titleImageView, descriptionLabel, currentUserImageView,
+         matchedUserImageView, sendMessageButton, keepswipeButton]
             .forEach({addSubview($0)})
         
         titleImageView.layout
@@ -111,10 +121,16 @@ class MatchNoticeView: UIView {
                             .height(equalToconstant: self.imageViewSize)
         
         sendMessageButton.layout
-            .top(equalTo: currentUserImageView.bottomAnchor, constant: 16)
-            .leading(equalTo: currentUserImageView.leadingAnchor)
-            .trailing(equalTo: matchedUserImageView.trailingAnchor)
-            .height(equalToconstant: 60)
+                         .top(equalTo: currentUserImageView.bottomAnchor, constant: 20)
+                         .leading(equalTo: currentUserImageView.leadingAnchor)
+                         .trailing(equalTo: matchedUserImageView.trailingAnchor)
+                         .height(equalToconstant: 60)
+        
+        keepswipeButton.layout
+                       .top(equalTo: sendMessageButton.bottomAnchor, constant: 16)
+                       .leading(equalTo: currentUserImageView.leadingAnchor)
+                       .trailing(equalTo: matchedUserImageView.trailingAnchor)
+                       .height(equalToconstant: 60)
     }
     
     private func configureTapGestureToDismiss() {
