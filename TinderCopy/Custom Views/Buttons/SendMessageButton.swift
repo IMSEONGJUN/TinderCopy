@@ -26,8 +26,6 @@ class SendMessageButton: UIButton {
         let cornerRadius = rect.height / 2
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
-        
-        
     }
     
 }

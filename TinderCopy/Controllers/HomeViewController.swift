@@ -43,10 +43,12 @@ class HomeViewController: UIViewController {
     }
     
     func setupUser() {
+        print("try to fetch current user")
         fetchCurrentUser { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let user):
+                print("fetched current user")
                 self.user = user
             case .failure(let error):
                 print(error)
@@ -188,6 +190,8 @@ class HomeViewController: UIViewController {
             let hasMatched = (data[uid] as? Bool) == true
             if hasMatched {
                 print("Found matched User")
+                guard let likeButton = self.bottomControl.arrangedSubviews[3] as? UIButton else {return}
+                likeButton.isEnabled = false
                 self.showMatchNoticeView(cardID: cardUID)
             }
         }

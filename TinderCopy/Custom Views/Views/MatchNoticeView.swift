@@ -70,7 +70,9 @@ class MatchNoticeView: UIView {
         super.init(frame: frame)
         configureBlurEffect()
         configureImageViews()
+        setConstraints()
         configureTapGestureToDismiss()
+        configureAnimations()
     }
     
     required init?(coder: NSCoder) {
@@ -96,7 +98,9 @@ class MatchNoticeView: UIView {
         [titleImageView, descriptionLabel, currentUserImageView,
          matchedUserImageView, sendMessageButton, keepswipeButton]
             .forEach({addSubview($0)})
-        
+    }
+    
+    private func setConstraints() {
         titleImageView.layout
                       .leading(equalTo: currentUserImageView.leadingAnchor)
                       .trailing(equalTo: matchedUserImageView.trailingAnchor)
@@ -137,6 +141,37 @@ class MatchNoticeView: UIView {
         visualEffectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
     }
     
+    private func configureAnimations() {
+        let angle = 30 * CGFloat.pi / 180
+        
+        currentUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
+        matchedUserImageView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: -200, y: 0))
+        sendMessageButton.transform = CGAffineTransform(translationX: -500, y: 0)
+        keepswipeButton.transform = CGAffineTransform(translationX: 500, y: 0)
+        
+        UIView.animateKeyframes(
+            withDuration: 1.5,
+            delay: 0,
+            options: .calculationModeCubic,
+            animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.6) {
+                    self.currentUserImageView.transform = .identity
+                    self.matchedUserImageView.transform = .identity
+                    self.currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle)
+                    self.matchedUserImageView.transform = CGAffineTransform(rotationAngle: angle)
+                }
+                UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.4) {
+                    self.currentUserImageView.transform = .identity
+                    self.matchedUserImageView.transform = .identity
+                }
+        })
+        
+        UIView.animate(withDuration: 0.85, delay: 1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+            self.sendMessageButton.transform = .identity
+            self.keepswipeButton.transform = .identity
+        })
+    }
+    
     @objc private func handleTapGesture() {
          UIView.animate(withDuration: 0.5,
                         delay: 0,
@@ -147,6 +182,11 @@ class MatchNoticeView: UIView {
                          self.alpha = 0
                         },
                         completion: { (_) in
+                            guard let homeView = self.superview?.subviews.first as? UIStackView else {print("1"); return }
+                            guard let bottom = homeView.arrangedSubviews.last as? UIStackView else {print("2"); return }
+                            guard let likeButton = bottom.arrangedSubviews[3] as? UIButton else {print("3"); return }
+                            print("found out")
+                            likeButton.isEnabled = true
                             self.removeFromSuperview()
                         })
     }
