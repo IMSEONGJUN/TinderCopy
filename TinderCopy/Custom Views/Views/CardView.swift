@@ -159,18 +159,7 @@ class CardView: UIView {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         addGestureRecognizer(tapGesture)
     }
-    
-//    private func setupImageIndexObserver() {
-//        cardViewModel?.imageIndexObserver = {[weak self] (imageUrl, imageIndex) in
-//            guard let self = self else { return }
-//
-//            if let url = URL(string: imageUrl ?? "") {
-//                self.imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "top_left_profile"), options: .continueInBackground)
-//            }
-//            self.barsStackView.arrangedSubviews.forEach({$0.backgroundColor = self.barDeselectedColor})
-//            self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
-//        }
-//    }
+
     private func setupImageIndexObserver() {
         cardViewModel?.imageIndexObserver = { [weak self] (imageIndex) in
             guard let self = self else { return }
