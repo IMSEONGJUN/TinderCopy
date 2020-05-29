@@ -62,6 +62,7 @@ class MatchNoticeView: UIView {
         btn.setTitle("Keep Swiping", for: .normal)
         btn.titleLabel?.textAlignment = .center
         btn.setTitleColor(.white, for: .normal)
+        btn.addTarget(self, action: #selector(handleTapGesture), for: .touchUpInside)
         return btn
     }()
     
@@ -73,7 +74,7 @@ class MatchNoticeView: UIView {
         configureImageViews()
         setConstraints()
         configureTapGestureToDismiss()
-        configureAnimations()
+//        configureAnimations()
     }
     
     required init?(coder: NSCoder) {
@@ -146,7 +147,7 @@ class MatchNoticeView: UIView {
         visualEffectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapGesture)))
     }
     
-    private func configureAnimations() {
+    func configureAnimations() {
         let angle = 30 * CGFloat.pi / 180
         
         currentUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: 200, y: 0))

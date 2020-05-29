@@ -124,7 +124,7 @@ class HomeViewController: UIViewController {
                 }
             })
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 loadingCoverView.removeFromSuperview()
                 hud.dismiss()
             }
@@ -234,6 +234,7 @@ class HomeViewController: UIViewController {
         
         group.notify(queue: .main) {
             print("finished to fetch image")
+            matchView.configureAnimations()
             self.view.addSubview(matchView)
             matchView.layout.fillSuperView()
         }
