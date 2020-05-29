@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import JGProgressHUD
+import SDWebImage
 
 class HomeViewController: UIViewController {
 
@@ -19,6 +20,8 @@ class HomeViewController: UIViewController {
     var user : User?
     var swipingInfoOfCurrentUser = [String : Bool]()
     var topCardView: CardView?
+    
+    var matchedUser: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,15 +78,15 @@ class HomeViewController: UIViewController {
         let loadingCoverView = UIView()
         loadingCoverView.backgroundColor = UIColor.white
         cardDeckView.addSubview(loadingCoverView)
-        loadingCoverView.layout.top().leading().trailing().bottom()
+        loadingCoverView.layout.fillSuperView()
         
         let minAge = user?.minSeekingAge
         let maxAge = user?.maxSeekingAge
         
         let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Loading"
 //        hud.indicatorView = nil
 //        hud.indicatorView?.frame.size = CGSize(width: 100, height: 30)
-        hud.textLabel.text = "Loading"
 //        hud.textLabel.textColor = .white
 //        hud.textLabel.backgroundColor = .lightGray
 //        hud.textLabel.layer.cornerRadius = 3
@@ -99,12 +102,11 @@ class HomeViewController: UIViewController {
                                                              .whereField("age", isLessThanOrEqualTo: maxAge ?? 100)
         topCardView = nil
         query.getDocuments { (snapshot, error) in
-            
             guard error == nil else {
                 print("Failed to fetch users:", error!.localizedDescription)
                 return
             }
-            print("after")
+            
             var previousCardView: CardView?
             
             snapshot?.documents.forEach({
@@ -120,16 +122,13 @@ class HomeViewController: UIViewController {
                 if self.topCardView == nil {
                     self.topCardView = cardView
                 }
-                
-                print("after2")
             })
-            print("after3")
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 loadingCoverView.removeFromSuperview()
                 hud.dismiss()
             }
         }
-        print("before")
     }
     
     @objc func didTapLikeButton() {
@@ -190,18 +189,56 @@ class HomeViewController: UIViewController {
             let hasMatched = (data[uid] as? Bool) == true
             if hasMatched {
                 print("Found matched User")
-                guard let likeButton = self.bottomControl.arrangedSubviews[3] as? UIButton else {return}
-                likeButton.isEnabled = false
-                self.showMatchNoticeView(cardID: cardUID)
+                
+                self.fetchMatchedUser(matchedUserID: cardUID)
+//                guard let likeButton = self.bottomControl.arrangedSubviews[3] as? UIButton else {return}
+//                likeButton.isEnabled = false
             }
         }
         
     }
     
-    private func showMatchNoticeView(cardID: String) {
+    private func fetchMatchedUser(matchedUserID: String) {
+        Firestore.firestore().collection("users").document(matchedUserID).getDocument { (snapshot, error) in
+            if let error = error {
+                print("Failed to fetch matched users", error)
+                return
+            }
+            guard let data = snapshot?.data() else { return }
+            self.matchedUser = User(userDictionary: data)
+            guard let name = self.matchedUser?.name else { return }
+            self.showMatchNoticeView(matchedUserName: name)
+        }
+    }
+    
+    private func showMatchNoticeView(matchedUserName: String) {
+        
         let matchView = MatchNoticeView()
-        self.view.addSubview(matchView)
-        matchView.layout.top().leading().trailing().bottom()
+        matchView.setDescriptionLabel(matchedUserName: matchedUserName)
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        matchView.currentUserImageView.sd_setImage(with: URL(string: self.user?.imageUrl1 ?? ""), placeholderImage: #imageLiteral(resourceName: "top_left_profile"), options: .continueInBackground) { (_, _, _, _) in
+            print("fetch image1")
+            print("Thread check, isMainThread?:", Thread.isMainThread)
+            group.leave()
+        }
+        
+        group.enter()
+        matchView.matchedUserImageView.sd_setImage(with: URL(string: self.matchedUser?.imageUrl1 ?? ""), placeholderImage: #imageLiteral(resourceName: "top_left_profile")) { (_,_,_,_) in
+            print("fetch image2")
+            print("Thread check, isMainThread?:", Thread.isMainThread)
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            print("finished to fetch image")
+            self.view.addSubview(matchView)
+            matchView.layout.fillSuperView()
+        }
+        
+    
     }
     
     private func flyingAwayAction(translationValue: CGFloat, rotationAngle: CGFloat) {
@@ -236,7 +273,7 @@ class HomeViewController: UIViewController {
         cardView.cardViewModel = user.toCardViewModel()
         cardDeckView.addSubview(cardView)
         cardDeckView.sendSubviewToBack(cardView)
-        cardView.layout.top().leading().trailing().bottom()
+        cardView.layout.fillSuperView()
         return cardView
     }
     

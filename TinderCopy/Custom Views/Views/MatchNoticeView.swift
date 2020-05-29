@@ -11,16 +11,17 @@ import UIKit
 class MatchNoticeView: UIView {
     
     let imageViewSize: CGFloat = 140
+
+    var matchedUserName = ""
     
     let titleImageView: UIImageView = {
        let iv = UIImageView(image: #imageLiteral(resourceName: "itsamatch"))
         iv.contentMode = .scaleAspectFill
         return iv
     }()
-    
+
     let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "You and someone have liked\neach other"
         label.textAlignment = .center
         label.textColor = .white
         label.numberOfLines = 0
@@ -98,6 +99,10 @@ class MatchNoticeView: UIView {
         [titleImageView, descriptionLabel, currentUserImageView,
          matchedUserImageView, sendMessageButton, keepswipeButton]
             .forEach({addSubview($0)})
+    }
+    
+    func setDescriptionLabel(matchedUserName: String) {
+        self.descriptionLabel.text = "You and " + matchedUserName + " have liked\neach other"
     }
     
     private func setConstraints() {
