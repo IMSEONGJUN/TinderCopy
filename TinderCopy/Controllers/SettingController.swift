@@ -136,6 +136,7 @@ class SettingController: UITableViewController {
                                              options: .continueInBackground,
                                              progress: nil) { (image, _, _, _, _, _) in
             button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+                                                print("success")
         }
     }
     

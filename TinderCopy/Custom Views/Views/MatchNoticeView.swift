@@ -11,8 +11,11 @@ import UIKit
 class MatchNoticeView: UIView {
     
     let imageViewSize: CGFloat = 140
-
-    var matchedUserName = ""
+    var matchedUser: User! {
+        didSet{
+            setDescriptionLabel(matchedUserName: matchedUser.name ?? "")
+        }
+    }
     
     let titleImageView: UIImageView = {
        let iv = UIImageView(image: #imageLiteral(resourceName: "itsamatch"))

@@ -191,8 +191,6 @@ class HomeViewController: UIViewController {
                 print("Found matched User")
                 
                 self.fetchMatchedUser(matchedUserID: cardUID)
-//                guard let likeButton = self.bottomControl.arrangedSubviews[3] as? UIButton else {return}
-//                likeButton.isEnabled = false
             }
         }
         
@@ -206,27 +204,29 @@ class HomeViewController: UIViewController {
             }
             guard let data = snapshot?.data() else { return }
             self.matchedUser = User(userDictionary: data)
-            guard let name = self.matchedUser?.name else { return }
-            self.showMatchNoticeView(matchedUserName: name)
+            guard let matchedUser = self.matchedUser else { return }
+            self.showMatchNoticeView(matchedUser: matchedUser)
         }
     }
     
-    private func showMatchNoticeView(matchedUserName: String) {
+    private func showMatchNoticeView(matchedUser: User) {
         
         let matchView = MatchNoticeView()
-        matchView.setDescriptionLabel(matchedUserName: matchedUserName)
+        matchView.matchedUser = matchedUser
         
         let group = DispatchGroup()
         
         group.enter()
-        matchView.currentUserImageView.sd_setImage(with: URL(string: self.user?.imageUrl1 ?? ""), placeholderImage: #imageLiteral(resourceName: "top_left_profile"), options: .continueInBackground) { (_, _, _, _) in
+        matchView.currentUserImageView.sd_setImage(with: URL(string: self.user?.imageUrl1 ?? ""), placeholderImage: #imageLiteral(resourceName: "top_left_profile"),
+                                                   options: .continueInBackground) { (_, _, _, _) in
             print("fetch image1")
             print("Thread check, isMainThread?:", Thread.isMainThread)
             group.leave()
         }
         
         group.enter()
-        matchView.matchedUserImageView.sd_setImage(with: URL(string: self.matchedUser?.imageUrl1 ?? ""), placeholderImage: #imageLiteral(resourceName: "top_left_profile")) { (_,_,_,_) in
+        matchView.matchedUserImageView.sd_setImage(with: URL(string: self.matchedUser?.imageUrl1 ?? ""),
+                                                   placeholderImage: #imageLiteral(resourceName: "top_left_profile")) { (_,_,_,_) in
             print("fetch image2")
             print("Thread check, isMainThread?:", Thread.isMainThread)
             group.leave()

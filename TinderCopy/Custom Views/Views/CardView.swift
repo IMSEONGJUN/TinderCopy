@@ -69,16 +69,22 @@ class CardView: UIView {
     
     private func loadPhoto(using urlString: String, completion: @escaping () -> Void){
         guard let url = URL(string: urlString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, res, err) in
-            guard err == nil else { print("log3"); return }
-            guard let data = data else { print("log4"); return }
-            guard let image = UIImage(data: data) else { print("log5"); return }
-            
-            self.cardViewModel?.photos.append(image)
-            completion()
+        SDWebImageManager.shared().loadImage(with: url,
+                                             options: .continueInBackground,
+                                             progress: nil) { (image, _, _, _, _, _) in
+                                                guard let images = image else { print("no image", image ?? UIImage());return }
+                                                self.cardViewModel?.photos.append(images)
+                                                completion()
         }
-        .resume()
+//        URLSession.shared.dataTask(with: url) { (data, res, err) in
+//            guard err == nil else { print("log3"); return }
+//            guard let data = data else { print("log4"); return }
+//            guard let image = UIImage(data: data) else { print("log5"); return }
+//
+//            self.cardViewModel?.photos.append(image)
+//            completion()
+//        }
+//        .resume()
     }
     
     private func reConfigureCardView(cardViewModel: CardViewModel) {
