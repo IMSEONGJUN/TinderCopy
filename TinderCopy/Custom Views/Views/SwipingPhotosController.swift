@@ -63,7 +63,7 @@ class SwipingPhotosController: UIPageViewController {
 extension SwipingPhotosController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard self.controllers.count > 1 else { return nil }
-        let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? 0
+        let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? 0 // viewController는 현재 보여지는 viewController
         if index == 0 { return controllers.last! } // show last image
 //        if index == 0 { return nil }
         return controllers[index - 1]

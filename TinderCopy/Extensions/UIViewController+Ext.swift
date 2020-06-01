@@ -11,10 +11,11 @@ import Firebase
 
 extension UIViewController {
     
-//    var topbarHeight: CGFloat {
-//       return UIApplication.shared.statusBarFrame.size.height +
-//                (self.navigationController?.navigationBar.frame.height ?? 0.0)
-//    }
+    var statusBarHeight: CGFloat {
+        let window = UIApplication.shared.windows.filter{$0.isKeyWindow}.first
+        let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
+        return statusBarHeight
+    }
     
     func fetchCurrentUser(completion: @escaping (Result<User, Error>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
