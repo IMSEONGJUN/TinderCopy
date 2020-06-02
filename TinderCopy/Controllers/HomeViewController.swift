@@ -25,9 +25,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.isHidden = true
+//        navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = .systemBackground
         topStackView.settingsButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
+        topStackView.messageButton.addTarget(self, action: #selector(didTapMessageButton), for: .touchUpInside)
         bottomControl.refreshButton.addTarget(self, action: #selector(didTapRefreshButton), for: .touchUpInside)
         bottomControl.likeButton.addTarget(self, action: #selector(didTapLikeButton), for: .touchUpInside)
         bottomControl.dislikeButton.addTarget(self, action: #selector(didTapDislikeButton), for: .touchUpInside)
@@ -289,6 +291,12 @@ class HomeViewController: UIViewController {
         let navController = UINavigationController(rootViewController: settingVC)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
+    }
+    
+    @objc private func didTapMessageButton() {
+        print("tap")
+        let vc = MessageController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     fileprivate func setupLayout() {

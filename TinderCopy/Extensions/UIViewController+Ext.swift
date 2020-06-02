@@ -21,7 +21,9 @@ extension UIViewController {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let ref = Firestore.firestore().collection("users")
         DispatchQueue.global().async {
-            print("Thread checking - isMain?: ",Thread.isMainThread)
+            //Just Thread Check
+            print("Thread checking - isMain?: ",Thread.isMainThread) // background thread
+            
             ref.document(uid).getDocument { (snapshot, error) in
                         if let error = error {
                             completion(.failure(error))
@@ -32,7 +34,7 @@ extension UIViewController {
             //                completion(.failure(error?.localizedDescription as Error)
                             return
                         }
-                        print("Thread checking - isMain?: ",Thread.isMainThread)
+                        print("Thread checking - isMain?: ",Thread.isMainThread) // main thread
                         let user = User(userDictionary: dic)
                         completion(.success(user))
                     }
@@ -75,18 +77,18 @@ extension UIViewController {
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 let window = UIWindow(windowScene: windowScene)
                 window.backgroundColor = .systemBackground
-                let rootVC = HomeViewController()
+                let rootVC = UINavigationController(rootViewController: HomeViewController())
                 window.rootViewController = rootVC
                 
                 let sceneDelegate = windowScene.delegate as? SceneDelegate
-                sceneDelegate?.window = window
                 window.makeKeyAndVisible()
+                sceneDelegate?.window = window
             }
         } else {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let window = UIWindow(frame: UIScreen.main.bounds)
             window.backgroundColor = .systemBackground
-            window.rootViewController = HomeViewController()
+            window.rootViewController = UINavigationController(rootViewController: HomeViewController())
             window.makeKeyAndVisible()
             appDelegate.window = window
         }

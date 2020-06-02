@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6E8066A5CC3CB4F7EDAEB274 /* Pods_TinderCopy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CD0FBCFF110FBC130F4EABE /* Pods_TinderCopy.framework */; };
+		CE0C5CD3248557B700530196 /* MessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C5CD2248557B700530196 /* MessageController.swift */; };
 		CE31EC3E241A5D0C00F12EA4 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31EC3D241A5D0C00F12EA4 /* UIViewController+Ext.swift */; };
 		CE3FE6CA24162CFB002B3281 /* HeaderLabelOnSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3FE6C924162CFB002B3281 /* HeaderLabelOnSetting.swift */; };
 		CE3FE6CC2416973E002B3281 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3FE6CB2416973E002B3281 /* UINavigationController+Ext.swift */; };
@@ -45,6 +46,7 @@
 		0CD0FBCFF110FBC130F4EABE /* Pods_TinderCopy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinderCopy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DD0960AC52DD8A65117F9C3 /* Pods-TinderCopy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinderCopy.debug.xcconfig"; path = "Target Support Files/Pods-TinderCopy/Pods-TinderCopy.debug.xcconfig"; sourceTree = "<group>"; };
 		7859971BA73CE9C24C6D7E78 /* Pods-TinderCopy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinderCopy.release.xcconfig"; path = "Target Support Files/Pods-TinderCopy/Pods-TinderCopy.release.xcconfig"; sourceTree = "<group>"; };
+		CE0C5CD2248557B700530196 /* MessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageController.swift; sourceTree = "<group>"; };
 		CE31EC3D241A5D0C00F12EA4 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		CE3FE6C924162CFB002B3281 /* HeaderLabelOnSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabelOnSetting.swift; sourceTree = "<group>"; };
 		CE3FE6CB2416973E002B3281 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				CEA3355424076B05002AFECE /* RegistrationViewController.swift */,
 				CE8DC79C24211A2B0090D075 /* LoginController.swift */,
 				CEFFD99F242F85860061A090 /* UserDetailController.swift */,
+				CE0C5CD2248557B700530196 /* MessageController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				CE8DC79D24211A2B0090D075 /* LoginController.swift in Sources */,
 				CE6406EB240F9C6600D57CAA /* Bindable.swift in Sources */,
 				CEEA977C2449E262001565D8 /* SwipingPhotosController.swift in Sources */,
+				CE0C5CD3248557B700530196 /* MessageController.swift in Sources */,
 				CEB95A5624153F3200E6198B /* SettingCell.swift in Sources */,
 				CEA335582407702D002AFECE /* CustomTextField.swift in Sources */,
 				CECDDDD9240D5712007560F2 /* RegistrationViewModel.swift in Sources */,
