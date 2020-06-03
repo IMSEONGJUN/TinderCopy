@@ -175,7 +175,7 @@ class MatchNoticeView: UIView {
                 }
         })
         
-        UIView.animate(withDuration: 0.85, delay: 1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.85, delay: 0.8, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
             self.sendMessageButton.transform = .identity
             self.keepswipeButton.transform = .identity
         })
