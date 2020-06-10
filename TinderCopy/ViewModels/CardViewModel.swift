@@ -39,7 +39,7 @@ class CardViewModel {
     }
     
     // Reactive Programmming
-    var imageIndexObserver: ((Int) -> ())?
+    var imageIndexObserver: ((Int) -> Void)?
     
     func advanceToNextPhoto() {
         imageIndex = min(photos.count - 1, imageIndex + 1)

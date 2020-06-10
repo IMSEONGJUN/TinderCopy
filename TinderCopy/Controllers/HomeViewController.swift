@@ -236,12 +236,10 @@ class HomeViewController: UIViewController {
         
         group.notify(queue: .main) {
             print("finished to fetch image")
-            matchView.configureAnimations()
             self.view.addSubview(matchView)
             matchView.layout.fillSuperView()
+            matchView.configureAnimations()
         }
-        
-    
     }
     
     private func flyingAwayAction(translationValue: CGFloat, rotationAngle: CGFloat) {
