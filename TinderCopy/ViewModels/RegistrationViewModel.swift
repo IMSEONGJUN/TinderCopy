@@ -61,7 +61,7 @@ class RegistraionViewModel {
                 }
                 self.bindableIsRegistering.value = false
                 
-                // store the download url into firestore here
+                // store the downloaded url into firestore here
                 let imageUrl = url?.absoluteString ?? ""
                 self.saveInfoToFirestore(imageUrl: imageUrl, completion: completion)
             }
@@ -86,6 +86,4 @@ class RegistraionViewModel {
             completion(nil)
         }
     }
-    // Reactive Programming
-//    var isFormValidObserver: ((Bool) -> Void)?
 }

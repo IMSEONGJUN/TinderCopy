@@ -110,40 +110,46 @@ class MatchNoticeView: UIView {
     }
     
     private func setConstraints() {
-        titleImageView.layout
-                      .leading(equalTo: currentUserImageView.leadingAnchor)
-                      .trailing(equalTo: matchedUserImageView.trailingAnchor)
-                      .bottom(equalTo: descriptionLabel.topAnchor, constant: -16)
-                      .height(equalToconstant: 80)
+        titleImageView
+            .layout
+            .leading(equalTo: currentUserImageView.leadingAnchor)
+            .trailing(equalTo: matchedUserImageView.trailingAnchor)
+            .bottom(equalTo: descriptionLabel.topAnchor, constant: -16)
+            .height(equalToconstant: 80)
         
-        descriptionLabel.layout
-                        .leading(equalTo: currentUserImageView.leadingAnchor)
-                        .trailing(equalTo: matchedUserImageView.trailingAnchor)
-                        .bottom(equalTo: currentUserImageView.topAnchor, constant: -45)
+        descriptionLabel
+            .layout
+            .leading(equalTo: currentUserImageView.leadingAnchor)
+            .trailing(equalTo: matchedUserImageView.trailingAnchor)
+            .bottom(equalTo: currentUserImageView.topAnchor, constant: -45)
         
-        currentUserImageView.layout
-                            .centerY()
-                            .trailing(equalTo: visualEffectView.centerXAnchor, constant: -16)
-                            .width(equalToconstant: self.imageViewSize)
-                            .height(equalToconstant: self.imageViewSize)
+        currentUserImageView
+            .layout
+            .centerY()
+            .trailing(equalTo: visualEffectView.centerXAnchor, constant: -16)
+            .width(equalToconstant: self.imageViewSize)
+            .height(equalToconstant: self.imageViewSize)
         
-        matchedUserImageView.layout
-                            .centerY()
-                            .leading(equalTo: visualEffectView.centerXAnchor, contant: 16)
-                            .width(equalToconstant: self.imageViewSize)
-                            .height(equalToconstant: self.imageViewSize)
+        matchedUserImageView
+            .layout
+            .centerY()
+            .leading(equalTo: visualEffectView.centerXAnchor, contant: 16)
+            .width(equalToconstant: self.imageViewSize)
+            .height(equalToconstant: self.imageViewSize)
         
-        sendMessageButton.layout
-                         .top(equalTo: currentUserImageView.bottomAnchor, constant: 20)
-                         .leading(equalTo: currentUserImageView.leadingAnchor)
-                         .trailing(equalTo: matchedUserImageView.trailingAnchor)
-                         .height(equalToconstant: 60)
-        
-        keepswipeButton.layout
-                       .top(equalTo: sendMessageButton.bottomAnchor, constant: 16)
-                       .leading(equalTo: currentUserImageView.leadingAnchor)
-                       .trailing(equalTo: matchedUserImageView.trailingAnchor)
-                       .height(equalToconstant: 60)
+        sendMessageButton
+            .layout
+            .top(equalTo: currentUserImageView.bottomAnchor, constant: 20)
+            .leading(equalTo: currentUserImageView.leadingAnchor)
+            .trailing(equalTo: matchedUserImageView.trailingAnchor)
+            .height(equalToconstant: 60)
+
+        keepswipeButton
+            .layout
+            .top(equalTo: sendMessageButton.bottomAnchor, constant: 16)
+            .leading(equalTo: currentUserImageView.leadingAnchor)
+            .trailing(equalTo: matchedUserImageView.trailingAnchor)
+            .height(equalToconstant: 60)
     }
     
     private func configureTapGestureToDismiss() {

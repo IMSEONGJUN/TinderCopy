@@ -33,6 +33,8 @@ class SettingController: UITableViewController {
     
     var statusBar: UIView!
     
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNaviBar()
@@ -45,6 +47,20 @@ class SettingController: UITableViewController {
         statusBar = UIApplication.statusBar
         statusBar.backgroundColor = .clear
         UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.addSubview(statusBar)
+    }
+    
+    
+    // MARK: - Initial Setup
+    
+    func createButton(selector: Selector) -> UIButton {
+        let button = UIButton(type: .system)
+        button.backgroundColor = .white
+        button.setTitle("Select Photo", for: .normal)
+        button.layer.cornerRadius = 8
+        button.clipsToBounds = true
+        button.imageView?.contentMode = .scaleAspectFill
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        return button
     }
     
     private func configureNaviBar() {
@@ -67,41 +83,7 @@ class SettingController: UITableViewController {
 //        segmentedControl.setWidth(100, forSegmentAt: 1)
 //        self.navigationItem.titleView = segmentedControl
     }
-    
-    @objc private func didTapSaveButton() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        
-        let docData: [String: Any] = [
-            "uid": uid,
-            "fullName": user?.name ?? "",
-            "imageUrl1": user?.imageUrl1 ?? "",
-            "imageUrl2": user?.imageUrl2 ?? "",
-            "imageUrl3": user?.imageUrl3 ?? "",
-            "age": user?.age ?? -1,
-            "bio": user?.bio ?? "",
-            "profession": user?.profession ?? "",
-            "minSeekingAge": user?.minSeekingAge ?? -1,
-            "maxSeekingAge": user?.maxSeekingAge ?? -1
-        ]
-        
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Saving settings"
-        hud.show(in: view)
-        
-        Firestore.firestore().collection("users").document(uid).setData(docData) { (error) in
-            hud.dismiss()
-            if let error = error {
-                print("Failed to save user settings:", error)
-                return
-            }
-            
-            print("Finished saving user info")
-            self.dismiss(animated: true) {
-                self.delegate?.didSaveSettings()
-            }
-        }
-    }
-    
+
     private func configureTableView() {
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         tableView.tableFooterView = UIView()
@@ -139,16 +121,42 @@ class SettingController: UITableViewController {
                                                 print("success")
         }
     }
+
     
-    func createButton(selector: Selector) -> UIButton {
-        let button = UIButton(type: .system)
-        button.backgroundColor = .white
-        button.setTitle("Select Photo", for: .normal)
-        button.layer.cornerRadius = 8
-        button.clipsToBounds = true
-        button.imageView?.contentMode = .scaleAspectFill
-        button.addTarget(self, action: selector, for: .touchUpInside)
-        return button
+    // MARK: - Action Handler
+    
+    @objc private func didTapSaveButton() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        
+        let docData: [String: Any] = [
+            "uid": uid,
+            "fullName": user?.name ?? "",
+            "imageUrl1": user?.imageUrl1 ?? "",
+            "imageUrl2": user?.imageUrl2 ?? "",
+            "imageUrl3": user?.imageUrl3 ?? "",
+            "age": user?.age ?? -1,
+            "bio": user?.bio ?? "",
+            "profession": user?.profession ?? "",
+            "minSeekingAge": user?.minSeekingAge ?? -1,
+            "maxSeekingAge": user?.maxSeekingAge ?? -1
+        ]
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Saving settings"
+        hud.show(in: view)
+        
+        Firestore.firestore().collection("users").document(uid).setData(docData) { (error) in
+            hud.dismiss()
+            if let error = error {
+                print("Failed to save user settings:", error)
+                return
+            }
+            
+            print("Finished saving user info")
+            self.dismiss(animated: true) {
+                self.delegate?.didSaveSettings()
+            }
+        }
     }
     
     @objc private func didTapCancelButton() {
@@ -327,6 +335,9 @@ class SettingController: UITableViewController {
         }
     }
 }
+
+
+// MARK: - UIImagePickerControllerDelegate
 
 extension SettingController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,

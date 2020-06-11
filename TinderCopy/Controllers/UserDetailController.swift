@@ -103,7 +103,7 @@ class UserDetailController: UIViewController {
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         view.addSubview(visualEffectView)
         visualEffectView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        view.bringSubviewToFront(visualEffectView)
+//        view.bringSubviewToFront(visualEffectView)
     }
     
     @objc private func didTapDismissButton() {
@@ -114,7 +114,7 @@ class UserDetailController: UIViewController {
 extension UserDetailController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let changeY = -scrollView.contentOffset.y
-        var width = view.frame.width + changeY * 2
+        var width = view.frame.width + changeY * 1.5
         width = max(view.frame.width, width)
 //        let imageView = swipingPhotosController.view!
         imageSwiperView.frame = CGRect(x: min(0, -changeY), y: min(0, -changeY), width: width, height: width + extraHeight)
