@@ -6,7 +6,7 @@
 //  Copyright © 2020 Seongjun Im. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Firebase
 
 class RegistraionViewModel {

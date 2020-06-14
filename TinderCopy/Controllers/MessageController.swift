@@ -21,8 +21,12 @@ class MessageController: UIViewController {
     
     private func configureCustomNaviBar() {
         view.addSubview(customNaviBar)
-        customNaviBar.layout.top(equalTo: view.safeAreaLayoutGuide.topAnchor)
-            .leading().trailing().height(equalToconstant: 150)
+        customNaviBar
+            .layout
+            .top(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            .leading()
+            .trailing()
+            .height(equalToconstant: 150)
     }
 }
 

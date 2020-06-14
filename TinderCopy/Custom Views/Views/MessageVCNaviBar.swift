@@ -12,11 +12,9 @@ protocol MessageVCNaviBarDelegate: class {
     func didTapBackButton()
 }
 
-
 class MessageVCNaviBar: UIView {
     
     weak var delegate: MessageVCNaviBarDelegate?
-    
     
     let backButton: UIButton = {
        let btn = UIButton()
@@ -67,7 +65,6 @@ class MessageVCNaviBar: UIView {
     }
     
     private func configureCustomNaviBar() {
-        
         backgroundColor = .white
         
         setupShadow(opacity: 0.2, radius: 8, offset: CGSize(width: 0, height: 10), color: UIColor.init(white: 0, alpha: 0.3))

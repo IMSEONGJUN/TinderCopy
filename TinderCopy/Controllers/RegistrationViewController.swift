@@ -298,6 +298,7 @@ class RegistrationViewController: UIViewController {
     // Called whenever Device Orientation Changed
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         print("Orientation changed")
+//        self.traitCollection.userInterfaceStyle == .dark 다크모드 판별
         if self.traitCollection.verticalSizeClass == .compact {
             overallStackView.axis = .horizontal
         } else {
@@ -320,3 +321,4 @@ extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigat
         picker.dismiss(animated: true)
     }
 }
+
