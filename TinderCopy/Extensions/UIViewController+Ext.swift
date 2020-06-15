@@ -20,9 +20,9 @@ extension UIViewController {
     func fetchCurrentUser(completion: @escaping (Result<User, Error>) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let ref = Firestore.firestore().collection("users")
-        DispatchQueue.global().async {
+        DispatchQueue.global(qos: .userInteractive).async {
             //Just Thread Check
-            print("Thread checking - isMain?: ",Thread.isMainThread) // background thread
+            print("Thread checking.1 - isMain?: ",Thread.isMainThread) // background thread
             
             ref.document(uid).getDocument { (snapshot, error) in
                         if let error = error {
@@ -34,7 +34,7 @@ extension UIViewController {
             //                completion(.failure(error?.localizedDescription as Error)
                             return
                         }
-                        print("Thread checking - isMain?: ",Thread.isMainThread) // main thread
+                        print("Thread checking.2 - isMain?: ",Thread.isMainThread) // main thread
                         let user = User(userDictionary: dic)
                         completion(.success(user))
                     }

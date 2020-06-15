@@ -34,6 +34,4 @@ extension MessageController: MessageVCNaviBarDelegate {
     func didTapBackButton() {
         navigationController?.popViewController(animated: true)
     }
-    
-    
 }

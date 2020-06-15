@@ -191,7 +191,7 @@ class HomeViewController: UIViewController {
             let hasMatched = (data[uid] as? Bool) == true
             if hasMatched {
                 print("Found matched User")
-                
+                self.bottomControl.likeButton.isEnabled = false
                 self.fetchMatchedUser(matchedUserID: cardUID)
             }
         }
@@ -207,6 +207,7 @@ class HomeViewController: UIViewController {
             guard let data = snapshot?.data() else { return }
             self.matchedUser = User(userDictionary: data)
             guard let matchedUser = self.matchedUser else { return }
+            
             self.showMatchNoticeView(matchedUser: matchedUser)
         }
     }
