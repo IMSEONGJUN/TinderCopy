@@ -12,7 +12,6 @@
 		CE0C5CD5248807CD00530196 /* MessageVCNaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0C5CD4248807CD00530196 /* MessageVCNaviBar.swift */; };
 		CE31EC3E241A5D0C00F12EA4 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31EC3D241A5D0C00F12EA4 /* UIViewController+Ext.swift */; };
 		CE3FE6CA24162CFB002B3281 /* HeaderLabelOnSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3FE6C924162CFB002B3281 /* HeaderLabelOnSetting.swift */; };
-		CE3FE6CC2416973E002B3281 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3FE6CB2416973E002B3281 /* UINavigationController+Ext.swift */; };
 		CE3FE6CE2417C758002B3281 /* AgeRangeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3FE6CD2417C758002B3281 /* AgeRangeViewCell.swift */; };
 		CE41E5FE2474216A00F06F4F /* MatchNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41E5FD2474216A00F06F4F /* MatchNoticeView.swift */; };
 		CE41E667247AB5DA00F06F4F /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE41E666247AB5DA00F06F4F /* SendMessageButton.swift */; };
@@ -51,7 +50,6 @@
 		CE0C5CD4248807CD00530196 /* MessageVCNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVCNaviBar.swift; sourceTree = "<group>"; };
 		CE31EC3D241A5D0C00F12EA4 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		CE3FE6C924162CFB002B3281 /* HeaderLabelOnSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabelOnSetting.swift; sourceTree = "<group>"; };
-		CE3FE6CB2416973E002B3281 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		CE3FE6CD2417C758002B3281 /* AgeRangeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeViewCell.swift; sourceTree = "<group>"; };
 		CE41E5FD2474216A00F06F4F /* MatchNoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchNoticeView.swift; sourceTree = "<group>"; };
 		CE41E666247AB5DA00F06F4F /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				CE8B9B7323F1721700944CF4 /* UIView+Ext.swift */,
-				CE3FE6CB2416973E002B3281 /* UINavigationController+Ext.swift */,
 				CE31EC3D241A5D0C00F12EA4 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
@@ -388,7 +385,6 @@
 				CEC4B835242DD18100A97B64 /* LoginViewModel.swift in Sources */,
 				CE41E669247C01D300F06F4F /* KeepSwipeButton.swift in Sources */,
 				CE31EC3E241A5D0C00F12EA4 /* UIViewController+Ext.swift in Sources */,
-				CE3FE6CC2416973E002B3281 /* UINavigationController+Ext.swift in Sources */,
 				CE8B9B7B23F3185700944CF4 /* CardView.swift in Sources */,
 				CE8B9B7423F1721700944CF4 /* UIView+Ext.swift in Sources */,
 				CE3FE6CE2417C758002B3281 /* AgeRangeViewCell.swift in Sources */,
