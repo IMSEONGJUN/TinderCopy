@@ -12,6 +12,11 @@ class MessageController: UIViewController {
 
     let customNaviBar = MessageVCNaviBar()
     
+    var collectionView: UICollectionView!
+    var layout: UICollectionViewFlowLayout!
+    
+    let tableView = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -27,6 +32,10 @@ class MessageController: UIViewController {
             .leading()
             .trailing()
             .height(equalToconstant: 150)
+    }
+    
+    private func configureMatchedUsersCollectionView() {
+        
     }
 }
 
