@@ -22,6 +22,7 @@ class MessageController: UIViewController {
         view.backgroundColor = .white
         customNaviBar.delegate = self
         configureCustomNaviBar()
+        configureMatchedUsersCollectionView()
     }
     
     private func configureCustomNaviBar() {
@@ -35,6 +36,22 @@ class MessageController: UIViewController {
     }
     
     private func configureMatchedUsersCollectionView() {
+        layout = UICollectionViewFlowLayout()
+        let collectionWidth = self.view.frame.width
+        let itemWidth: CGFloat = collectionWidth / 3
+        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        layout.scrollDirection = .horizontal
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .yellow
+        view.addSubview(collectionView)
+        
+        collectionView
+            .layout
+            .top(equalTo: customNaviBar.bottomAnchor, constant: 20)
+            .leading()
+            .trailing()
+            .height(equalToconstant: itemWidth)
         
     }
 }

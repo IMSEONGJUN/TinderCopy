@@ -81,11 +81,19 @@ class MessageVCNaviBar: UIView {
         addSubview(topImageButton)
         addSubview(backButton)
         
-        topImageButton.layout.top(equalTo: self.topAnchor, constant: 15).bottom(equalTo: btnStackView.topAnchor, constant: -15)
-            .centerX().width(equalToconstant: 45)
-        topImageButton.imageView?.layout.fillSuperView()
+        topImageButton.layout
+//            .top(equalTo: self.topAnchor, constant: 15)
+            .bottom(equalTo: btnStackView.topAnchor, constant: -15)
+            .centerX()
+            .width(equalToconstant: 45)
+            .height(equalToconstant: 45)
+            topImageButton.imageView?.layout.fillSuperView()
         
-        backButton.layout.top(constant: 23).leading(contant: 20).bottom(equalTo: btnStackView.topAnchor, constant: -23).width(equalToconstant: 32)
+        backButton.layout
+            .top(constant: 23)
+            .leading(contant: 20)
+            .bottom(equalTo: btnStackView.topAnchor, constant: -23)
+            .width(equalToconstant: 32)
     }
     
     @objc private func didTapMsgBtn(_ sender:UIButton) {
