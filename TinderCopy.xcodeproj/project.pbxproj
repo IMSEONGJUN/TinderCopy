@@ -23,6 +23,7 @@
 		CE8B9B7923F30F6300944CF4 /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B9B7823F30F6300944CF4 /* TopNavigationStackView.swift */; };
 		CE8B9B7B23F3185700944CF4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8B9B7A23F3185700944CF4 /* CardView.swift */; };
 		CE8DC79D24211A2B0090D075 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8DC79C24211A2B0090D075 /* LoginController.swift */; };
+		CE9919B5249E6B4E0097A647 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9919B4249E6B4E0097A647 /* MessageViewModel.swift */; };
 		CEA13801242F9C870017FC10 /* UserDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA13800242F9C870017FC10 /* UserDetailHeader.swift */; };
 		CEA3354E24051DA5002AFECE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3354D24051DA5002AFECE /* User.swift */; };
 		CEA33551240562BF002AFECE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA33550240562BF002AFECE /* CardViewModel.swift */; };
@@ -61,6 +62,7 @@
 		CE8B9B7823F30F6300944CF4 /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		CE8B9B7A23F3185700944CF4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		CE8DC79C24211A2B0090D075 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		CE9919B4249E6B4E0097A647 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		CEA13800242F9C870017FC10 /* UserDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailHeader.swift; sourceTree = "<group>"; };
 		CEA3354D24051DA5002AFECE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEA33550240562BF002AFECE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				CECDDDD8240D5712007560F2 /* RegistrationViewModel.swift */,
 				CEC4B834242DD18100A97B64 /* LoginViewModel.swift */,
 				CE6406EA240F9C6600D57CAA /* Bindable.swift */,
+				CE9919B4249E6B4E0097A647 /* MessageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				CE6406EB240F9C6600D57CAA /* Bindable.swift in Sources */,
 				CEEA977C2449E262001565D8 /* SwipingPhotosController.swift in Sources */,
 				CE0C5CD3248557B700530196 /* MessageController.swift in Sources */,
+				CE9919B5249E6B4E0097A647 /* MessageViewModel.swift in Sources */,
 				CEB95A5624153F3200E6198B /* SettingCell.swift in Sources */,
 				CEA335582407702D002AFECE /* CustomTextField.swift in Sources */,
 				CECDDDD9240D5712007560F2 /* RegistrationViewModel.swift in Sources */,

@@ -10,6 +10,8 @@ import UIKit
 
 class MessageController: UIViewController {
 
+    let viewModel = MessageViewModel()
+    
     let customNaviBar = MessageVCNaviBar()
     
     var collectionView: UICollectionView!
@@ -44,15 +46,15 @@ class MessageController: UIViewController {
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .yellow
+        collectionView.dataSource = self
         view.addSubview(collectionView)
         
         collectionView
             .layout
-            .top(equalTo: customNaviBar.bottomAnchor, constant: 20)
+            .top(equalTo: customNaviBar.bottomAnchor, constant: 10)
             .leading()
             .trailing()
             .height(equalToconstant: itemWidth)
-        
     }
 }
 
@@ -60,4 +62,16 @@ extension MessageController: MessageVCNaviBarDelegate {
     func didTapBackButton() {
         navigationController?.popViewController(animated: true)
     }
+}
+
+extension MessageController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
+    
+    
 }
