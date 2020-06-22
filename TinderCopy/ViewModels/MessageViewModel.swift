@@ -9,7 +9,13 @@
 import Foundation
 
 class MessageViewModel {
-    var matchedUserList: [CardViewModel] = []
     
-    var chattingList: [CardViewModel] = []
+    var matchedUserList = Bindable<[CardViewModel]>()
+
+    var chattingList = Bindable<[CardViewModel]>()
+
+    
+    func fetchMatchedUserList() {
+        
+    }
 }

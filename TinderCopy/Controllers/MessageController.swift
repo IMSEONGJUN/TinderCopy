@@ -14,6 +14,22 @@ class MessageController: UIViewController {
     
     let customNaviBar = MessageVCNaviBar()
     
+    let matchedUsersTitle: UILabel = {
+       let label = UILabel()
+        label.text = "New Matches"
+        label.textColor = #colorLiteral(red: 1, green: 0.4191399813, blue: 0.4337587357, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        return label
+    }()
+    
+    let MessagesTitle: UILabel = {
+       let label = UILabel()
+        label.text = "Messages"
+        label.textColor = #colorLiteral(red: 1, green: 0.4191399813, blue: 0.4337587357, alpha: 1)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        return label
+    }()
+    
     var collectionView: UICollectionView!
     var layout: UICollectionViewFlowLayout!
     
@@ -24,7 +40,9 @@ class MessageController: UIViewController {
         view.backgroundColor = .white
         customNaviBar.delegate = self
         configureCustomNaviBar()
+        setCollectionViewTitle()
         configureMatchedUsersCollectionView()
+        viewModelBinding()
     }
     
     private func configureCustomNaviBar() {
@@ -34,27 +52,43 @@ class MessageController: UIViewController {
             .top(equalTo: view.safeAreaLayoutGuide.topAnchor)
             .leading()
             .trailing()
-            .height(equalToconstant: 150)
+            .height(equalToconstant: 120)
+    }
+    
+    private func setCollectionViewTitle() {
+        view.addSubview(matchedUsersTitle)
+        matchedUsersTitle.layout
+            .top(equalTo: customNaviBar.bottomAnchor, constant: 20)
+            .leading(contant: 20)
+            .trailing()
     }
     
     private func configureMatchedUsersCollectionView() {
         layout = UICollectionViewFlowLayout()
         let collectionWidth = self.view.frame.width
-        let itemWidth: CGFloat = collectionWidth / 3
-        layout.itemSize = CGSize(width: itemWidth, height: itemWidth)
+        let itemWidth: CGFloat = collectionWidth / 4
+        let itemHeight = itemWidth + 40
+        layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
         layout.scrollDirection = .horizontal
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .yellow
         collectionView.dataSource = self
+        collectionView.register(MatchedUserCell.self, forCellWithReuseIdentifier: MatchedUserCell.identifier)
         view.addSubview(collectionView)
         
         collectionView
             .layout
-            .top(equalTo: customNaviBar.bottomAnchor, constant: 10)
+            .top(equalTo: matchedUsersTitle.bottomAnchor, constant: 10)
             .leading()
             .trailing()
-            .height(equalToconstant: itemWidth)
+            .height(equalToconstant: itemHeight)
+    }
+    
+    private func viewModelBinding() {
+        viewModel.matchedUserList.bind {[unowned self] (matchedUsers) in
+            self.collectionView.reloadData()
+        }
     }
 }
 
@@ -66,11 +100,15 @@ extension MessageController: MessageVCNaviBarDelegate {
 
 extension MessageController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return viewModel.matchedUserList.value?.count ?? 0
         return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MatchedUserCell.identifier, for: indexPath)
+         as! MatchedUserCell
+        cell.set()
+        return cell
     }
     
     
