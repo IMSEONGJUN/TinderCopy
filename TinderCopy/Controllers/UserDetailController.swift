@@ -90,7 +90,7 @@ class UserDetailController: UIViewController {
         
         scrollView.addSubview(infoLabel)
         infoLabel.layout.top(equalTo: imageSwiperView.bottomAnchor, constant: 30)
-                        .leading(equalTo: view.leadingAnchor, contant: 30)
+                        .leading(equalTo: view.leadingAnchor, constant: 30)
                         .trailing(equalTo: view.trailingAnchor, constant: -30)
         
         scrollView.addSubview(dismissButton)

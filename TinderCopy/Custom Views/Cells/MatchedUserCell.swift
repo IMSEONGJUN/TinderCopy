@@ -36,6 +36,7 @@ class MatchedUserCell: UICollectionViewCell {
     }
     
     func configureUI() {
+        contentView.backgroundColor = .cyan
         [imageView, nameLabel].forEach({ contentView.addSubview($0) })
         imageView.layout
                  .top()
@@ -58,7 +59,7 @@ class MatchedUserCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5))
         imageView.layer.cornerRadius = contentView.frame.width / 2
         imageView.clipsToBounds = true
     }

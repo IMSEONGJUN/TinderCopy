@@ -60,7 +60,7 @@ class AgeRangeViewCell: UITableViewCell {
         addSubview(overralStackView)
         overralStackView.layout
                         .top(equalTo: topAnchor, constant: padding)
-                        .leading(equalTo: leadingAnchor, contant: padding)
+                        .leading(equalTo: leadingAnchor, constant: padding)
                         .trailing(equalTo: trailingAnchor, constant: -padding)
                         .bottom(equalTo: bottomAnchor, constant: -padding)
     }

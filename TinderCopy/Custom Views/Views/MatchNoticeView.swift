@@ -133,7 +133,7 @@ class MatchNoticeView: UIView {
         matchedUserImageView
             .layout
             .centerY()
-            .leading(equalTo: visualEffectView.centerXAnchor, contant: 16)
+            .leading(equalTo: visualEffectView.centerXAnchor, constant: 16)
             .width(equalToconstant: self.imageViewSize)
             .height(equalToconstant: self.imageViewSize)
         

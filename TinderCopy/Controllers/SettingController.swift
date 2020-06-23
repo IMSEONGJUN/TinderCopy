@@ -304,7 +304,7 @@ class SettingController: UITableViewController {
         header.addSubview(image1Button)
         let padding: CGFloat = 16
         image1Button.layout.top(equalTo: header.topAnchor, constant: padding)
-                           .leading(equalTo: header.leadingAnchor, contant: padding)
+                           .leading(equalTo: header.leadingAnchor, constant: padding)
                            .bottom(equalTo: header.bottomAnchor, constant: -padding)
         image1Button.widthAnchor.constraint(equalTo: header.widthAnchor, multiplier: 0.45).isActive = true
         configureStackView(on: header)
@@ -321,7 +321,7 @@ class SettingController: UITableViewController {
         header.addSubview(stackView)
         
         stackView.layout.top(equalTo: header.topAnchor, constant: padding)
-                        .leading(equalTo: image1Button.trailingAnchor, contant: padding)
+                        .leading(equalTo: image1Button.trailingAnchor, constant: padding)
                         .trailing(equalTo: header.trailingAnchor, constant: -padding)
                         .bottom(equalTo: header.bottomAnchor, constant: -padding)
     }

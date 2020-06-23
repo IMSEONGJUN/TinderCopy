@@ -115,7 +115,7 @@ class CardView: UIView {
     private func configureBarsStackView() {
         addSubview(barsStackView)
         barsStackView.layout.top(equalTo: self.topAnchor, constant: 8)
-                            .leading(equalTo: self.leadingAnchor, contant: 8)
+                            .leading(equalTo: self.leadingAnchor, constant: 8)
                             .trailing(equalTo: self.trailingAnchor, constant: -8)
                             .height(equalToconstant: 4)
         barsStackView.axis = .horizontal
@@ -138,7 +138,7 @@ class CardView: UIView {
     private func configureInformationLabel() {
         addSubview(informationLabel)
         informationLabel.layout
-                        .leading(equalTo: self.leadingAnchor, contant: 16)
+                        .leading(equalTo: self.leadingAnchor, constant: 16)
                         .bottom(equalTo: self.bottomAnchor, constant: -16)
                         .trailing(equalTo: self.trailingAnchor, constant: -16)
         informationLabel.numberOfLines = 0

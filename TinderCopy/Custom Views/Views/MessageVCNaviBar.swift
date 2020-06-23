@@ -91,7 +91,7 @@ class MessageVCNaviBar: UIView {
         
         backButton.layout
             .top(constant: 23)
-            .leading(contant: 20)
+            .leading(constant: 20)
             .bottom(equalTo: btnStackView.topAnchor, constant: -23)
             .width(equalToconstant: 32)
     }

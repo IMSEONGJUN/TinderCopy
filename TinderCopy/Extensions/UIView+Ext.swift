@@ -28,7 +28,7 @@ extension UIView {
     }
     
     @discardableResult
-    func leading(equalTo anchor: NSLayoutXAxisAnchor? = nil, contant c: CGFloat = 0) -> Self {
+    func leading(equalTo anchor: NSLayoutXAxisAnchor? = nil, constant c: CGFloat = 0) -> Self {
         let anchor = anchor ?? superview!.leadingAnchor
         leadingAnchor.constraint(equalTo: anchor, constant: c).isActive = true
         return self

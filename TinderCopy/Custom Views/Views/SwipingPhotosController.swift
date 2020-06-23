@@ -53,7 +53,7 @@ class SwipingPhotosController: UIPageViewController {
         let statusBarHeight = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         view.addSubview(barStackView)
         barStackView.layout.top(equalTo: view.topAnchor, constant: statusBarHeight + 8)
-                            .leading(equalTo: view.leadingAnchor, contant: 8)
+                            .leading(equalTo: view.leadingAnchor, constant: 8)
                             .trailing(equalTo: view.trailingAnchor, constant: -8)
                             .height(equalToconstant: 4)
     }
