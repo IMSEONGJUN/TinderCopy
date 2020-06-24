@@ -120,8 +120,8 @@ extension MessageController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MatchedUserCell.identifier, for: indexPath)
-         as! MatchedUserCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MatchedUserCell.identifier,
+                                                      for: indexPath) as! MatchedUserCell
         cell.set()
         return cell
     }

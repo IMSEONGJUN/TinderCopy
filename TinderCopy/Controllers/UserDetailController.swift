@@ -73,8 +73,17 @@ class UserDetailController: UIViewController {
         return button
     }
     
-    @objc private func didTapBottomControlButton() {
-        
+    @objc private func didTapBottomControlButton(_ sender: UIButton) {
+        switch sender {
+        case likeButton:
+            print("")
+        case superLikeButton:
+            print("")
+        case dislikeButton:
+            print("")
+        default:
+            break
+        }
     }
     
     private func setupUI() {
