@@ -44,4 +44,8 @@ class MessageViewModel {
             })
         }
     }
+    
+    func fetchChattingList() {
+        
+    }
 }

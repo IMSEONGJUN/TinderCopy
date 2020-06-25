@@ -44,7 +44,12 @@ class MessageController: UIViewController {
         setCollectionViewTitle()
         configureFlowLayout()
         configureMessagesListTitle()
+        configureMessageListTableView()
         viewModelBinding()
+    }
+    
+    deinit {
+        print("MessageVC deinit!!")
     }
     
     private func configureCustomNaviBar() {
@@ -102,24 +107,34 @@ class MessageController: UIViewController {
             .trailing()
     }
     
+    private func configureMessageListTableView() {
+        view.addSubview(tableView)
+        tableView.backgroundColor = .green
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+        
+        tableView.layout
+            .top(equalTo: messagesTitle.bottomAnchor, constant: 10)
+            .leading()
+            .trailing()
+            .bottom()
+    }
+    
     private func viewModelBinding() {
         viewModel.matchedUserList.bind {[unowned self] (matchedUsers) in
             print("bind closure")
             self.collectionView.reloadData()
         }
-    }
-}
-
-extension MessageController: MessageVCNaviBarDelegate {
-    func didTapBackButton() {
-        navigationController?.popViewController(animated: true)
+        
+        viewModel.chattingList.bind { [unowned self] (_) in
+            self.tableView.reloadData()
+        }
     }
 }
 
 extension MessageController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.matchedUserList.value?.count ?? 0
-//        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -128,6 +143,25 @@ extension MessageController: UICollectionViewDataSource {
         cell.matchedUser = viewModel.matchedUserList.value?[indexPath.row]
         return cell
     }
+}
+
+extension MessageController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
+        cell.textLabel?.text = "test"
+        return cell
+    }
     
     
 }
+
+extension MessageController: MessageVCNaviBarDelegate {
+    func didTapBackButton() {
+        navigationController?.popViewController(animated: true)
+    }
+}
+

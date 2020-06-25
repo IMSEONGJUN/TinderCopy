@@ -174,8 +174,8 @@
 				CEA33550240562BF002AFECE /* CardViewModel.swift */,
 				CECDDDD8240D5712007560F2 /* RegistrationViewModel.swift */,
 				CEC4B834242DD18100A97B64 /* LoginViewModel.swift */,
-				CE6406EA240F9C6600D57CAA /* Bindable.swift */,
 				CE9919B4249E6B4E0097A647 /* MessageViewModel.swift */,
+				CE6406EA240F9C6600D57CAA /* Bindable.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

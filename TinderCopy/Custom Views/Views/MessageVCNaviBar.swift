@@ -90,9 +90,9 @@ class MessageVCNaviBar: UIView {
             topImageButton.imageView?.layout.fillSuperView()
         
         backButton.layout
-            .top(constant: 23)
+            .top(constant: 13)
             .leading(constant: 20)
-            .bottom(equalTo: btnStackView.topAnchor, constant: -23)
+            .height(equalToconstant: 32)
             .width(equalToconstant: 32)
     }
     
