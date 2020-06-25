@@ -31,7 +31,6 @@ class KeepSwipeButton: UIButton {
         
         let maskPath = CGMutablePath()
         maskPath.addPath(UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius).cgPath)
-        
         maskPath.addPath(UIBezierPath(roundedRect: rect.insetBy(dx: 2, dy: 2), cornerRadius: cornerRadius).cgPath)
         
         maskLayer.path = maskPath

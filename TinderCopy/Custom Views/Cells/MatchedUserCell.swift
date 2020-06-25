@@ -11,7 +11,14 @@ import UIKit
 class MatchedUserCell: UICollectionViewCell {
     static let identifier = "MatchedUserCell"
     
-    var matchedUser: CardViewModel?
+    var matchedUser: CardViewModel? {
+        didSet {
+            guard let matchedUser = matchedUser else { return }
+            guard let url = URL(string: matchedUser.imageUrls.first ?? "") else { return }
+            imageView.sd_setImage(with: url)
+            nameLabel.text = matchedUser.name
+        }
+    }
     
     let imageView: UIImageView = {
        let iv = UIImageView()

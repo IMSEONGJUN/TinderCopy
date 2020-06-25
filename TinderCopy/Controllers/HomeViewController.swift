@@ -193,9 +193,32 @@ class HomeViewController: UIViewController {
                 print("Found matched User")
                 self.bottomControl.likeButton.isEnabled = false
                 self.fetchMatchedUser(matchedUserID: cardUID)
+                self.saveMatchedUserID(cardUID: cardUID)
             }
         }
         
+    }
+    
+    
+    private func saveMatchedUserID(cardUID: String) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        var matchedData = ["matchedUsers" : [cardUID]]
+        Firestore.firestore().collection("matchInfos").document(uid).getDocument { (snapshot, error) in
+            if let err = error {
+                print("failed to load matchedUser's info from firestore: ", err)
+                return
+            }
+            
+            if snapshot?.exists == true {
+                guard let data = snapshot?.data() else { return }
+                guard let list = data["matchedUsers"], var newList = list as? [String] else { return }
+                newList.append(cardUID)
+                matchedData = ["matchedUsers" : newList]
+            }
+            
+            Firestore.firestore().collection("matchInfos").document(uid).setData(matchedData)
+            print("success to save matched user")
+        }
     }
     
     private func fetchMatchedUser(matchedUserID: String) {

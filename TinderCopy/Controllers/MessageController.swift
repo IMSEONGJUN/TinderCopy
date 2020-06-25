@@ -38,6 +38,7 @@ class MessageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        viewModel.fetchMatchedUserList()
         customNaviBar.delegate = self
         configureCustomNaviBar()
         setCollectionViewTitle()
@@ -80,6 +81,7 @@ class MessageController: UIViewController {
     private func configureMatchedUsersCollectionView(itemHeight: CGFloat) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .yellow
+        collectionView.alwaysBounceHorizontal = true
         collectionView.dataSource = self
         collectionView.register(MatchedUserCell.self, forCellWithReuseIdentifier: MatchedUserCell.identifier)
         view.addSubview(collectionView)
@@ -102,6 +104,7 @@ class MessageController: UIViewController {
     
     private func viewModelBinding() {
         viewModel.matchedUserList.bind {[unowned self] (matchedUsers) in
+            print("bind closure")
             self.collectionView.reloadData()
         }
     }
@@ -115,14 +118,14 @@ extension MessageController: MessageVCNaviBarDelegate {
 
 extension MessageController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return viewModel.matchedUserList.value?.count ?? 0
-        return 10
+        return viewModel.matchedUserList.value?.count ?? 0
+//        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MatchedUserCell.identifier,
                                                       for: indexPath) as! MatchedUserCell
-        cell.set()
+        cell.matchedUser = viewModel.matchedUserList.value?[indexPath.row]
         return cell
     }
     
