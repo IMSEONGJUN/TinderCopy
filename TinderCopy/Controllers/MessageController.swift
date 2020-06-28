@@ -121,8 +121,7 @@ class MessageController: UIViewController {
     }
     
     private func viewModelBinding() {
-        viewModel.matchedUserList.bind {[unowned self] (matchedUsers) in
-            print("bind closure")
+        viewModel.matchedUserList.bind {[unowned self] (_) in
             self.collectionView.reloadData()
         }
         
@@ -147,7 +146,7 @@ extension MessageController: UICollectionViewDataSource {
 
 extension MessageController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 15
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

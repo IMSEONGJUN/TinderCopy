@@ -12,6 +12,9 @@ import JGProgressHUD
 
 class LoginController: UIViewController {
 
+    
+    // MARK: -Properties
+    
     let emailTextField: CustomTextField = {
        let tf = CustomTextField(padding: 12)
         tf.placeholder = "Enter Email Address"
@@ -57,6 +60,9 @@ class LoginController: UIViewController {
     
     let hud = JGProgressHUD(style: .dark)
     
+    
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -70,6 +76,9 @@ class LoginController: UIViewController {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.bounds
     }
+    
+    
+    // MARK: - Initial Setup
     
     private func setLoginViewModelObserver() {
         loginViewModel.bindableIsFormValid.bind { [unowned self] (isFormValid) in
@@ -129,6 +138,9 @@ class LoginController: UIViewController {
     private func setupDismissTapGesture() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
+    
+    
+    // MARK: - Action Handler
     
     @objc private func didTapGotoRegistrationButton() {
         navigationController?.popViewController(animated: true)

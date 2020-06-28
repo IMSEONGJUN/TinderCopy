@@ -25,6 +25,8 @@ class SettingController: UITableViewController {
     lazy var image2Button = createButton(selector: #selector(didTapSelectPhotoButton))
     lazy var image3Button = createButton(selector: #selector(didTapSelectPhotoButton))
     
+    let imagePicker = CustomImagePickerController()
+    
     weak var delegate: SettingControllerDelegate?
     
     var user: User?
@@ -164,7 +166,6 @@ class SettingController: UITableViewController {
     }
 
     @objc func didTapSelectPhotoButton(_ button: UIButton) {
-        let imagePicker = CustomImagePickerController()
         imagePicker.delegate = self
         imagePicker.imageButton = button
         
@@ -172,14 +173,14 @@ class SettingController: UITableViewController {
         
         let takePhoto = UIAlertAction(title: "Take photo", style: .default) { (_) in
             guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
-            imagePicker.sourceType = .camera
-            imagePicker.videoQuality = .typeHigh
-            self.present(imagePicker, animated: true)
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.videoQuality = .typeHigh
+            self.present(self.imagePicker, animated: true)
         }
         
         let album = UIAlertAction(title: "Photo Album", style: .default) { (_) in
-            imagePicker.sourceType = .savedPhotosAlbum
-            self.present(imagePicker, animated: true)
+            self.imagePicker.sourceType = .savedPhotosAlbum
+            self.present(self.imagePicker, animated: true)
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
