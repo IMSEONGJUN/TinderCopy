@@ -14,7 +14,7 @@ protocol ProducesCardViewModel {
 
 
 
-// view model is supposed to represent the state of our view
+// view model is supposed to represent the state of view
 class CardViewModel {
     let uid: String
     let imageUrls: [String]

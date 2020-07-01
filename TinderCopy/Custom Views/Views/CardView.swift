@@ -126,7 +126,7 @@ class CardView: UIView {
     private func configureImageView() {
         addSubview(imageView)
         imageView.contentMode = .scaleToFill
-        imageView.layout.top().leading().trailing().bottom()
+        imageView.layout.fillSuperView()
     }
     
     private func configureGradientLayer() {

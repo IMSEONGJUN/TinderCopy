@@ -9,6 +9,7 @@
 import UIKit
 
 class MatchedUserCell: UICollectionViewCell {
+    
     static let identifier = "MatchedUserCell"
     
     var matchedUser: CardViewModel? {
@@ -43,20 +44,19 @@ class MatchedUserCell: UICollectionViewCell {
     }
     
     func configureUI() {
-        contentView.backgroundColor = .cyan
+        contentView.backgroundColor = .white
         [imageView, nameLabel].forEach({ contentView.addSubview($0) })
         imageView.layout
                  .top()
                  .leading()
                  .trailing()
-        imageView.heightAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-        
+        imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
         
         nameLabel.layout
                  .top(equalTo: imageView.bottomAnchor, constant: 8)
                  .leading()
                  .trailing()
-                 .height(equalToconstant: 20)
+        print(#function)
     }
     
     func set() {
@@ -66,8 +66,9 @@ class MatchedUserCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5))
+//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         imageView.layer.cornerRadius = contentView.frame.width / 2
         imageView.clipsToBounds = true
+        print(#function)
     }
 }

@@ -88,7 +88,7 @@ class UserDetailController: UIViewController {
     
     private func setupUI() {
         view.addSubview(scrollView)
-        scrollView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.bottomAnchor)
+        scrollView.layout.fillSuperView()
         scrollView.addSubview(imageSwiperView)
         imageSwiperView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraHeight)
         
@@ -111,7 +111,11 @@ class UserDetailController: UIViewController {
         let blurEffect = UIBlurEffect(style: .regular)
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         view.addSubview(visualEffectView)
-        visualEffectView.layout.top(equalTo: view.topAnchor).leading().trailing().bottom(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        visualEffectView.layout
+            .top()
+            .leading()
+            .trailing()
+            .bottom(equalTo: view.safeAreaLayoutGuide.topAnchor)
 //        view.bringSubviewToFront(visualEffectView)
     }
     

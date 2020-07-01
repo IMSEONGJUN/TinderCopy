@@ -71,9 +71,15 @@ class SettingController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(didTapCancelButton))
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         let appearance = UINavigationBarAppearance()
-        appearance.shadowImage = nil
-        appearance.configureWithTransparentBackground()
+//        appearance.shadowImage = nil
+//        appearance.shadowColor = .blue
+//        appearance.configureWithTransparentBackground()
+//        appearance.configureWithOpaqueBackground()
+//        appearance.configureWithDefaultBackground()
         navigationController?.navigationBar.standardAppearance = appearance
+//        navigationController?.navigationBar.compactAppearance = appearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+//        navigationController?.navigationBar.isTranslucent = true
         
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(didTapSaveButton)),

@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
     let bottomControl = HomeBottomControlsStackView()
 
     var user : User?
-    var swipingInfoOfCurrentUser = [String : Bool]()
+    var swipingInfoOfCurrentUser: [String:Bool]? = [String : Bool]()
     var topCardView: CardView?
     
     var matchedUser: User?
@@ -70,7 +70,7 @@ class HomeViewController: UIViewController {
                 return
             }
             
-            guard let data = snapshot?.data() as? [String : Bool] else { return }
+            let data = snapshot?.data() as? [String : Bool]
             self.swipingInfoOfCurrentUser = data
             self.fetchUsersFromFirestore()
         }
@@ -211,7 +211,9 @@ class HomeViewController: UIViewController {
             
             if snapshot?.exists == true {
                 guard let data = snapshot?.data() else { return }
-                guard let list = data["matchedUsers"], var newList = list as? [String] else { return }
+                guard let list = data["matchedUsers"],
+                      var newList = list as? [String],
+                      !newList.contains(cardUID) else { print("contains");return }
                 newList.append(cardUID)
                 matchedData = ["matchedUsers" : newList]
             }
@@ -316,7 +318,6 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func didTapMessageButton() {
-        print("tap")
         let vc = MessageController()
         navigationController?.pushViewController(vc, animated: true)
     }

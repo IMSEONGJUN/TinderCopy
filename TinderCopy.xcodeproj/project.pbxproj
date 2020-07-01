@@ -25,6 +25,7 @@
 		CE8DC79D24211A2B0090D075 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8DC79C24211A2B0090D075 /* LoginController.swift */; };
 		CE9919B5249E6B4E0097A647 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9919B4249E6B4E0097A647 /* MessageViewModel.swift */; };
 		CE9919B724A0A33A0097A647 /* MatchedUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9919B624A0A33A0097A647 /* MatchedUserCell.swift */; };
+		CE9AE42524A9DF3600F77F48 /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AE42424A9DF3600F77F48 /* ConversationCell.swift */; };
 		CEA13801242F9C870017FC10 /* UserDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA13800242F9C870017FC10 /* UserDetailHeader.swift */; };
 		CEA3354E24051DA5002AFECE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3354D24051DA5002AFECE /* User.swift */; };
 		CEA33551240562BF002AFECE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA33550240562BF002AFECE /* CardViewModel.swift */; };
@@ -65,6 +66,7 @@
 		CE8DC79C24211A2B0090D075 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		CE9919B4249E6B4E0097A647 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		CE9919B624A0A33A0097A647 /* MatchedUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchedUserCell.swift; sourceTree = "<group>"; };
+		CE9AE42424A9DF3600F77F48 /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		CEA13800242F9C870017FC10 /* UserDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailHeader.swift; sourceTree = "<group>"; };
 		CEA3354D24051DA5002AFECE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CEA33550240562BF002AFECE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				CEB95A5524153F3200E6198B /* SettingCell.swift */,
 				CE3FE6CD2417C758002B3281 /* AgeRangeViewCell.swift */,
 				CE9919B624A0A33A0097A647 /* MatchedUserCell.swift */,
+				CE9AE42424A9DF3600F77F48 /* ConversationCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				CE41E667247AB5DA00F06F4F /* SendMessageButton.swift in Sources */,
 				CEA3355524076B05002AFECE /* RegistrationViewController.swift in Sources */,
 				CEFFD9A0242F85860061A090 /* UserDetailController.swift in Sources */,
+				CE9AE42524A9DF3600F77F48 /* ConversationCell.swift in Sources */,
 				CEE1550523F0486F00BA2993 /* HomeViewController.swift in Sources */,
 				CE8B9B7723F1A13B00944CF4 /* HomeBottomControlsStackView.swift in Sources */,
 				CEA13801242F9C870017FC10 /* UserDetailHeader.swift in Sources */,

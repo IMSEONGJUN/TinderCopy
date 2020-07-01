@@ -10,6 +10,8 @@ import UIKit
 
 class MessageController: UIViewController {
 
+    static let tableViewRowHeight: CGFloat = 120
+    
     let viewModel = MessageViewModel()
     
     let customNaviBar = MessageVCNaviBar()
@@ -73,12 +75,16 @@ class MessageController: UIViewController {
     private func configureFlowLayout() {
         layout = UICollectionViewFlowLayout()
         let collectionWidth = self.view.frame.width
-        let itemWidth: CGFloat = (collectionWidth) / 4
+        let itemSpacing: CGFloat = 10
+        let horizontalSectionInset: CGFloat = 10
+        let itemsInLine: CGFloat = 4
+        let availableWidth: CGFloat = collectionWidth - ((itemSpacing * (itemsInLine - 1)) + (horizontalSectionInset * 2))
+        let itemWidth = availableWidth / itemsInLine
         let itemHeight = itemWidth + 40
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 0
         layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         layout.scrollDirection = .horizontal
         configureMatchedUsersCollectionView(itemHeight: itemHeight)
     }
@@ -109,9 +115,10 @@ class MessageController: UIViewController {
     
     private func configureMessageListTableView() {
         view.addSubview(tableView)
-        tableView.backgroundColor = .green
+        tableView.backgroundColor = .white
+        tableView.rowHeight = MessageController.tableViewRowHeight
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+        tableView.register(ConversationCell.self, forCellReuseIdentifier: ConversationCell.identifier)
         
         tableView.layout
             .top(equalTo: messagesTitle.bottomAnchor, constant: 10)
@@ -131,32 +138,44 @@ class MessageController: UIViewController {
     }
 }
 
+
+// MARK: - UICollectionViewDataSource, Delegate
+
 extension MessageController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.matchedUserList.value?.count ?? 0
+//        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MatchedUserCell.identifier,
                                                       for: indexPath) as! MatchedUserCell
         cell.matchedUser = viewModel.matchedUserList.value?[indexPath.row]
+//        cell.set()
         return cell
     }
 }
 
+
+
+// MARK: - UITableViewDataSource, Delegate
+
 extension MessageController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return viewModel.chattingList.value?.count ?? 0
         return 15
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath)
-        cell.textLabel?.text = "test"
+        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationCell.identifier, for: indexPath)
+            as! ConversationCell
+        cell.set()
         return cell
     }
-    
-    
 }
+
+
+// MARK: - Custom Delegates
 
 extension MessageController: MessageVCNaviBarDelegate {
     func didTapBackButton() {
