@@ -12,6 +12,8 @@ class HeaderLabel: UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = #colorLiteral(red: 0.9489303231, green: 0.9490666986, blue: 0.94890064, alpha: 1)
+        textColor = .black
         font = UIFont.boldSystemFont(ofSize: 16)
     }
     

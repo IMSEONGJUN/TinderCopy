@@ -67,6 +67,7 @@ class SettingController: UITableViewController {
     
     private func configureNaviBar() {
         navigationItem.title = "Setting"
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(didTapCancelButton))
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -213,6 +214,8 @@ class SettingController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = SettingCell(style: .default, reuseIdentifier: nil)
+        cell.contentView.backgroundColor = .white
+        cell.textField.textColor = .black
         switch indexPath.section {
         case 1:
             cell.textField.placeholder = "Enter Name"
@@ -241,11 +244,14 @@ class SettingController: UITableViewController {
     }
     
     private func settingAgeRageViewCell(cell: AgeRangeViewCell) {
+        cell.backgroundColor = .white
         cell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
         cell.maxSlider.addTarget(self, action: #selector(handleMaxAgeChange), for: .valueChanged)
         cell.minLabel.text = user?.minSeekingAge != nil ? "Min \(user?.minSeekingAge ?? 0)" : "Min 18"
+        cell.minLabel.textColor = .black
         cell.minSlider.value = Float(user?.minSeekingAge ?? 0)
         cell.maxLabel.text = user?.maxSeekingAge != nil ? "Max \(user?.maxSeekingAge ?? 0)" : "Max 50"
+        cell.maxLabel.textColor = .black
         cell.maxSlider.value = Float(user?.maxSeekingAge ?? 0)
     }
     

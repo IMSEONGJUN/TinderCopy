@@ -23,11 +23,17 @@ class HomeViewController: UIViewController {
     
     var matchedUser: User?
     
+//    var isDarkStatusBar = false {
+//        didSet {
+//            self.setNeedsStatusBarAppearanceUpdate()
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
 //        navigationController?.setNavigationBarHidden(true, animated: false)
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         topStackView.settingsButton.addTarget(self, action: #selector(didTapSettingButton), for: .touchUpInside)
         topStackView.messageButton.addTarget(self, action: #selector(didTapMessageButton), for: .touchUpInside)
         bottomControl.refreshButton.addTarget(self, action: #selector(didTapRefreshButton), for: .touchUpInside)
@@ -39,6 +45,18 @@ class HomeViewController: UIViewController {
     }
 
     var statusBar: UIView!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+//
+//    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+//        super.traitCollectionDidChange(previousTraitCollection)
+//        print("change1")
+//        if traitCollection.userInterfaceStyle == .dark {
+//            self.isDarkStatusBar.toggle()
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -102,6 +120,7 @@ class HomeViewController: UIViewController {
     //  Filtering data using user's minAge, maxAge
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge ?? 19)
                                                              .whereField("age", isLessThanOrEqualTo: maxAge ?? 100)
+                                                             .limit(to: 10)
         topCardView = nil
         query.getDocuments { (snapshot, error) in
             guard error == nil else {

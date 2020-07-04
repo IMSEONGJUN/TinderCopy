@@ -33,6 +33,7 @@ class UserDetailController: UIViewController {
     
     let infoLabel: UILabel = {
        let label = UILabel()
+        label.attributedText = NSAttributedString(string: "", attributes: [.foregroundColor : UIColor.label])
         label.numberOfLines = 0
         return label
     }()

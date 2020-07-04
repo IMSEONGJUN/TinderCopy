@@ -19,6 +19,7 @@ class ConversationCell: UITableViewCell {
     
     let nameLabel: UILabel = {
        let label = UILabel()
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         return label
     }()
@@ -48,6 +49,7 @@ class ConversationCell: UITableViewCell {
     
     // MARK: - Initial Setup
     private func configure() {
+        contentView.backgroundColor = .white
         [profileImageView, nameLabel, messageLabel].forEach({ contentView.addSubview($0) })
         configureImageView()
         
