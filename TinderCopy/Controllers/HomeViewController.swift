@@ -232,7 +232,7 @@ class HomeViewController: UIViewController {
                 guard let data = snapshot?.data() else { return }
                 guard let list = data["matchedUsers"],
                       var newList = list as? [String],
-                      !newList.contains(cardUID) else { print("contains");return }
+                      !newList.contains(cardUID) else { print("already contains");return }
                 newList.append(cardUID)
                 matchedData = ["matchedUsers" : newList]
             }

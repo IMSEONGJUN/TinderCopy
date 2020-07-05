@@ -100,4 +100,8 @@ extension UIViewController {
             switchToHomeViewAfterLogin()
         }
     }
+    
+    func saveMessageContentsToFirestore() {
+        
+    }
 }

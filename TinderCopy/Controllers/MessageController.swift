@@ -156,7 +156,14 @@ extension MessageController: UICollectionViewDataSource {
     }
 }
 
-
+extension MessageController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //push Conversation VC
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MatchedUserCell else { return }
+        
+        
+    }
+}
 
 // MARK: - UITableViewDataSource, Delegate
 
