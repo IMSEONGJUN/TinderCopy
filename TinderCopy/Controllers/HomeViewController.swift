@@ -130,6 +130,8 @@ class HomeViewController: UIViewController {
             
             var previousCardView: CardView?
             
+            let group = DispatchGroup()
+            group.enter()
             snapshot?.documents.forEach({
                 let userDictionary = $0.data()
                 let user = User(userDictionary: userDictionary)
@@ -144,11 +146,17 @@ class HomeViewController: UIViewController {
                     self.topCardView = cardView
                 }
             })
+            group.leave()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                loadingCoverView.removeFromSuperview()
+            group.notify(queue: .main) {
                 hud.dismiss()
+                loadingCoverView.removeFromSuperview()
             }
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+//                loadingCoverView.removeFromSuperview()
+//                hud.dismiss()
+//            }
         }
     }
     
