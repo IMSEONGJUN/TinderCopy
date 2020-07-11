@@ -23,7 +23,6 @@ class RegistraionViewModel {
         let isFormValid = fullName?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false
             && bindableImage.value != nil
         bindableIsFormValid.value = isFormValid
-
     }
     
     func performRegistration(completion: @escaping (Error?) -> ()) {

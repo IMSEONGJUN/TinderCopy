@@ -32,6 +32,7 @@
 		CEA3355324064F70002AFECE /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3355224064F70002AFECE /* Advertiser.swift */; };
 		CEA3355524076B05002AFECE /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3355424076B05002AFECE /* RegistrationViewController.swift */; };
 		CEA335582407702D002AFECE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA335572407702D002AFECE /* CustomTextField.swift */; };
+		CEB17AE524B9FC0800FB7B7E /* ConversationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB17AE424B9FC0800FB7B7E /* ConversationController.swift */; };
 		CEB95A5124151F6900E6198B /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB95A5024151F6900E6198B /* SettingController.swift */; };
 		CEB95A5624153F3200E6198B /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB95A5524153F3200E6198B /* SettingCell.swift */; };
 		CEC4B835242DD18100A97B64 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC4B834242DD18100A97B64 /* LoginViewModel.swift */; };
@@ -73,6 +74,7 @@
 		CEA3355224064F70002AFECE /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		CEA3355424076B05002AFECE /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		CEA335572407702D002AFECE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		CEB17AE424B9FC0800FB7B7E /* ConversationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationController.swift; sourceTree = "<group>"; };
 		CEB95A5024151F6900E6198B /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		CEB95A5524153F3200E6198B /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		CEC4B834242DD18100A97B64 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				CE8DC79C24211A2B0090D075 /* LoginController.swift */,
 				CEFFD99F242F85860061A090 /* UserDetailController.swift */,
 				CE0C5CD2248557B700530196 /* MessageController.swift */,
+				CEB17AE424B9FC0800FB7B7E /* ConversationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				CEB95A5624153F3200E6198B /* SettingCell.swift in Sources */,
 				CEA335582407702D002AFECE /* CustomTextField.swift in Sources */,
 				CECDDDD9240D5712007560F2 /* RegistrationViewModel.swift in Sources */,
+				CEB17AE524B9FC0800FB7B7E /* ConversationController.swift in Sources */,
 				CE0C5CD5248807CD00530196 /* MessageVCNaviBar.swift in Sources */,
 				CEE1550123F0486F00BA2993 /* AppDelegate.swift in Sources */,
 				CEE1550323F0486F00BA2993 /* SceneDelegate.swift in Sources */,

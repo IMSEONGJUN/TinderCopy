@@ -140,7 +140,6 @@ class MessageController: UIViewController {
 
 
 // MARK: - UICollectionViewDataSource, Delegate
-
 extension MessageController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.matchedUserList.value?.count ?? 0
@@ -160,13 +159,14 @@ extension MessageController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //push Conversation VC
         guard let cell = collectionView.cellForItem(at: indexPath) as? MatchedUserCell else { return }
-        
-        
+        let conversationVC = ConversationController()
+        conversationVC.matchedUser = cell.matchedUser
+        navigationController?.pushViewController(conversationVC, animated: true)
     }
 }
 
-// MARK: - UITableViewDataSource, Delegate
 
+// MARK: - UITableViewDataSource, Delegate
 extension MessageController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return viewModel.chattingList.value?.count ?? 0
@@ -183,7 +183,6 @@ extension MessageController: UITableViewDataSource {
 
 
 // MARK: - Custom Delegates
-
 extension MessageController: MessageVCNaviBarDelegate {
     func didTapBackButton() {
         navigationController?.popViewController(animated: true)
