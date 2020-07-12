@@ -18,6 +18,7 @@ class ConversationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        configureNaviBar()
     }
     
     private func configureTableView() {
@@ -28,6 +29,10 @@ class ConversationController: UIViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
         tableView.dataSource = self
+    }
+    
+    private func configureNaviBar() {
+        navigationItem.title = matchedUser?.name
     }
 }
 
@@ -41,6 +46,10 @@ extension ConversationController: UITableViewDataSource {
         cell.textLabel?.text = "TEST CELL"
         return cell
     }
-    
-    
+}
+
+extension ConversationController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }

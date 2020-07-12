@@ -10,6 +10,7 @@ import UIKit
 
 class MessageController: UIViewController {
 
+    // MARK: - Properties
     static let tableViewRowHeight: CGFloat = 120
     
     let viewModel = MessageViewModel()
@@ -37,6 +38,7 @@ class MessageController: UIViewController {
     
     let tableView = UITableView()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -54,6 +56,7 @@ class MessageController: UIViewController {
         print("MessageVC deinit!!")
     }
     
+    // MARK: - Initial SetUp
     private func configureCustomNaviBar() {
         view.addSubview(customNaviBar)
         customNaviBar
@@ -81,6 +84,7 @@ class MessageController: UIViewController {
         let availableWidth: CGFloat = collectionWidth - ((itemSpacing * (itemsInLine - 1)) + (horizontalSectionInset * 2))
         let itemWidth = availableWidth / itemsInLine
         let itemHeight = itemWidth + 40
+        
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 0
         layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
@@ -127,6 +131,7 @@ class MessageController: UIViewController {
             .bottom()
     }
     
+    // MARK: - Data Binding
     private func viewModelBinding() {
         viewModel.matchedUserList.bind {[unowned self] (_) in
             self.collectionView.reloadData()
@@ -155,6 +160,8 @@ extension MessageController: UICollectionViewDataSource {
     }
 }
 
+
+// MARK: - UICollectionViewDelegateFlowLayout
 extension MessageController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //push Conversation VC
