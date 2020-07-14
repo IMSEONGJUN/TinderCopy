@@ -52,6 +52,11 @@ class MessageController: UIViewController {
         viewModelBinding()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     deinit {
         print("MessageVC deinit!!")
     }
@@ -98,6 +103,7 @@ class MessageController: UIViewController {
         collectionView.backgroundColor = .yellow
         collectionView.alwaysBounceHorizontal = true
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(MatchedUserCell.self, forCellWithReuseIdentifier: MatchedUserCell.identifier)
         view.addSubview(collectionView)
         

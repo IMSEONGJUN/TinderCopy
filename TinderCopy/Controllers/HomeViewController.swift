@@ -60,6 +60,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
         statusBar = UIApplication.statusBar
         statusBar.backgroundColor = .clear
         UIApplication.shared.windows.filter{$0.isKeyWindow}.first?.addSubview(statusBar)

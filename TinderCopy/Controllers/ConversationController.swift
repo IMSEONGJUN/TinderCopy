@@ -17,6 +17,7 @@ class ConversationController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = false
         configureTableView()
         configureNaviBar()
     }
@@ -26,13 +27,16 @@ class ConversationController: UIViewController {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+        tableView.backgroundColor = #colorLiteral(red: 0.8029056787, green: 0.8030222058, blue: 0.8028803468, alpha: 1)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
         tableView.dataSource = self
+        tableView.delegate = self
+        tableView.separatorStyle = .none
     }
     
     private func configureNaviBar() {
-        navigationItem.title = matchedUser?.name
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = matchedUser?.name ?? "TEST"
     }
 }
 
