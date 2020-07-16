@@ -1,10 +1,14 @@
 # TinderCopy
-## Images
+- **Reactive Programming Practice using MVVM, Data binding, command pattern.**
 
+## Images
+![Main](https://github.com/IMSEONGJUN/TinderCopy/blob/master/images/New%20Project%20(3).png)
+
+## Video
+https://youtu.be/zi8DtXtTrqg
 
 ## Features
-- Reactive Programming Practice using MVVM Pattern
-- Using Google FireStore
+- Using Google FireStore for Data CRUD
 - User Registration and Login feature
 - User Profile Management
 - User-to-User Match Capabilities
