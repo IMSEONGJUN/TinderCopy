@@ -19,7 +19,7 @@ class LoginViewModel {
     
     private func checkIsFormValid() {
 //        let isFormValid = email?.isEmpty == false && password?.isEmpty == false
-        let isFormValid = isValidEmailAddress(email: email ?? "") && password?.count ?? 0 > 6
+        let isFormValid = isValidEmailAddress(email: email ?? "") && password?.count ?? 0 >= 6
         self.bindableIsFormValid.value = isFormValid
     }
     

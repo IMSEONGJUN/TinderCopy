@@ -46,6 +46,12 @@ class MatchedUserCell: UICollectionViewCell {
     func configureUI() {
         contentView.backgroundColor = .white
         [imageView, nameLabel].forEach({ contentView.addSubview($0) })
+        
+//        imageView.frame = CGRect(x: contentView.frame.origin.x, y: contentView.frame.origin.y,
+//                                 width: contentView.frame.width, height: contentView.frame.width)
+//        imageView.layer.cornerRadius = imageView.frame.width / 2
+//        imageView.clipsToBounds = true
+        
         imageView.layout
                  .top()
                  .leading()
@@ -68,6 +74,7 @@ class MatchedUserCell: UICollectionViewCell {
         super.layoutSubviews()
 //        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         imageView.layer.cornerRadius = contentView.frame.width / 2
+//        imageView.layer.cornerRadius = imageView.frame.width / 2
         imageView.clipsToBounds = true
         print(#function)
     }
