@@ -139,11 +139,11 @@ class MessageController: UIViewController {
     
     // MARK: - Data Binding
     private func viewModelBinding() {
-        viewModel.matchedUserList.bind {[unowned self] (_) in
+        viewModel.matchedUserList.bind {[unowned self] in
             self.collectionView.reloadData()
         }
         
-        viewModel.chattingList.bind { [unowned self] (_) in
+        viewModel.chattingList.bind { [unowned self] in
             self.tableView.reloadData()
         }
     }

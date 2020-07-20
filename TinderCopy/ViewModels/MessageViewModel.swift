@@ -13,9 +13,9 @@ class MessageViewModel {
     
     // MARK: - Properties
     
-    var matchedUserList = Bindable<[CardViewModel]>()
+    var matchedUserList = BindableNoArg<[CardViewModel]>()
 
-    var chattingList = Bindable<[CardViewModel]>()
+    var chattingList = BindableNoArg<[CardViewModel]>()
 
     
     // MARK: - Custom Methods / Logic
