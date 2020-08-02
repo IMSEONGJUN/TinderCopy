@@ -100,7 +100,7 @@ class MessageController: UIViewController {
     
     private func configureMatchedUsersCollectionView(itemHeight: CGFloat) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .yellow
+        collectionView.backgroundColor = .white
         collectionView.alwaysBounceHorizontal = true
         collectionView.dataSource = self
         collectionView.delegate = self

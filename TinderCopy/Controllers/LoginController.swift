@@ -62,7 +62,6 @@ class LoginController: UIViewController {
     
     
     // MARK: - Life Cycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -79,11 +78,9 @@ class LoginController: UIViewController {
     
     
     // MARK: - Initial Setup
-    
     private func setLoginViewModelObserver() {
         loginViewModel.bindableIsFormValid.bind { [unowned self] (isFormValid) in
             guard let isFormValid = isFormValid else { return }
-        
             self.loginButton.isEnabled = isFormValid
             if isFormValid {
                 self.loginButton.backgroundColor = #colorLiteral(red: 0.8048933744, green: 0.128269881, blue: 0.3397378325, alpha: 1)
@@ -141,7 +138,6 @@ class LoginController: UIViewController {
     
     
     // MARK: - Action Handler
-    
     @objc private func didTapGotoRegistrationButton() {
         navigationController?.popViewController(animated: true)
     }
