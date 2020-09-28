@@ -1,6 +1,7 @@
 # TinderCopy<img src = "https://github.com/IMSEONGJUN/TinderCopy/blob/master/TinderCopy/Assets.xcassets/AppIcon.appiconset/Icon-120.png?raw=true" width = 50 align = right>
 - **Reactive Programming Practice using MVVM, Data binding, command pattern.**
-
+## Period
+- 2020.03.02 ~ 2020.06.30
 ## Images
 ![Main](https://github.com/IMSEONGJUN/TinderCopy/blob/master/images/New%20Project%20(3).png)
 
