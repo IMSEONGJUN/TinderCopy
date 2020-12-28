@@ -153,11 +153,6 @@ class HomeViewController: UIViewController {
                 hud.dismiss()
                 loadingCoverView.removeFromSuperview()
             }
-            
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-//                loadingCoverView.removeFromSuperview()
-//                hud.dismiss()
-//            }
         }
     }
     

@@ -29,7 +29,6 @@ class ConversationCell: UITableViewCell {
         label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.numberOfLines = 2
-//        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -69,8 +68,9 @@ class ConversationCell: UITableViewCell {
         let tableViewRowHeight: CGFloat = MessageController.tableViewRowHeight
         let imageViewRatioToCell: CGFloat = 0.8
         profileImageView.layout
-        .centerY()
-        .leading(constant: padding)
+                        .centerY()
+                        .leading(constant: padding)
+        
         profileImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8).isActive = true
         profileImageView.widthAnchor.constraint(equalTo: profileImageView.heightAnchor).isActive = true
         
