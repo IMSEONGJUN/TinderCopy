@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MessageVCNaviBarDelegate: class {
+protocol MessageVCNaviBarDelegate: AnyObject {
     func didTapBackButton()
 }
 

@@ -15,7 +15,6 @@ protocol CardViewDelegate: class {
 
 class CardView: UIView {
 
-    
     // MARK: - Properties
     
     var nextCardView: CardView?
@@ -76,15 +75,6 @@ class CardView: UIView {
                                                 self.cardViewModel?.photos.append(images)
                                                 completion()
         }
-//        URLSession.shared.dataTask(with: url) { (data, res, err) in
-//            guard err == nil else { print("log3"); return }
-//            guard let data = data else { print("log4"); return }
-//            guard let image = UIImage(data: data) else { print("log5"); return }
-//
-//            self.cardViewModel?.photos.append(image)
-//            completion()
-//        }
-//        .resume()
     }
     
     private func reConfigureCardView(cardViewModel: CardViewModel) {

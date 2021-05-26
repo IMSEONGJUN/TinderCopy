@@ -95,7 +95,7 @@ class PhotoController: UIViewController {
     
     let imageView = UIImageView()
     
-    init(imageUrl: String){
+    init(imageUrl: String) {
         if let url = URL(string: imageUrl) {
             imageView.sd_setImage(with: url)
         } else {
